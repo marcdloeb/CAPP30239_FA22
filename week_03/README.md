@@ -20,7 +20,7 @@ This data consists of over 56,000 points, spread over a more than 90 year period
 
 ## Source
 
-This data is self generated. I created it as part of my undergraduate BA thesis in Geography. The data was mined from digitized historic documents contained in Campus Publications, the University of Chicago's online archive of its community oriented publications.
+This data is self generated. I created it as part of my undergraduate BA thesis in Geography. The data was mined from digitized historic documents contained in [Campus Publications] (https://campub.lib.uchicago.edu/), the University of Chicago's online archive of its community oriented publications.
 
 The documents contained in Campus Publications
 
