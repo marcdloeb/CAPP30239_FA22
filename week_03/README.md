@@ -4,15 +4,11 @@
 
 This repository contains the files used during the course of the third week of the Autumn 2022 CAPP Data Visualization course.
 
-Some pertain to classwork. 
+## Directories
 
-- covid.csv
-- index.html
-- script.js
-
-Were all used as part of class excercises.
-
-The csvs housed in the street_address_data and census_data directories are the data for my final project. The They are described further below.
+- in_class: Contains the data and files used as part of class work during third week
+- bar_chart_hw: Contains my third week homework submission
+- street_address_data and census_data: Contains the data for my final project. The They are described further below.
 
 # Final Project Data Description
 
