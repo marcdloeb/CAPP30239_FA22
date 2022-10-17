@@ -6,9 +6,9 @@ This repository contains the files used during the course of the third week of t
 
 Some pertain to classwork. 
 
-*covid.csv
-*index.html
-*script.js
+- covid.csv
+- index.html
+- script.js
 
 Were all used as part of class excercises.
 
