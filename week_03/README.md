@@ -38,5 +38,5 @@ Any concerns about the data
 
 ## Supplemental Data
 
-
+I intend to supplement my street address data with historic census data (most of all on race) taken from (IPUMS NHGIS)[https://www.nhgis.org/].
 
