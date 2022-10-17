@@ -16,8 +16,17 @@ The csvs housed in the street_address_data directory are the data for my final p
 
 # Final Project Data Description
 
-# Source
+This data consists of over 56,000 points, spread over a more than 90 year period, stretching from the 1890s to the 1980s. Each one corresponds to a street address that appears in a University of Chicago campus publication, the majority from the Maroon, the University's student paper. Most of these addresses appear as part of advertisements, usually for apartments or businesses, looking for customers among the students and faculty. As a consequence, they serve as a running record of the geographic extent of the university community, which can be compared to other variables, like race or University policies.
+
+## Source
+
+This data is self generated. I created it as part of my undergraduate BA thesis in Geography. The data was mined from digitized historic documents contained in Campus Publications, the University of Chicago's online archive of its community oriented publications.
+
+The documents contained in Campus Publications
+
 Data source: Title, Agency, Location, Link
+
+
 Description of data
 Why you are interested in this topic
 Thoughts on how you would hope to use this data
