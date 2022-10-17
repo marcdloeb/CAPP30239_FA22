@@ -24,7 +24,7 @@ This data consists of over 56,000 points, spread over a more than 90 year period
 
 This data is self generated, and directly derived from primary sources. I created it as part of my undergraduate BA thesis in Geography. The data was mined from digitized historic documents contained in [Campus Publications](https://campub.lib.uchicago.edu/), the University of Chicago's online archive of its community oriented publications.
 
-The documents contained in Campus Publications were originally printed. However, now that they have been digitized, they are key-word searchable. I decided to take advantage of this functionality, by writing a script that would loop through every street address on a "South" or "East" labeled street (ie 1005 E 60th Street, or 5900 South Ellis Ave) and keyword search them in Campus Publications. These addresses were themselves taken from the Chicago Open Data Portal, which maintains a (document)[https://data.cityofchicago.org/Transportation/Chicago-Street-Names/i6bp-fvbx/data] with the name of every street in Chicago and their address number ranges. In all, given the multiple permutations of each address (1005 E 60th, 1005 East 60th Street, etc.) my script made over 5 million keyword searches. The effort was such that I was allowed to run the script on the Midway2 federated supercomputer.
+The documents contained in Campus Publications were originally printed. However, now that they have been digitized, they are key-word searchable. I decided to take advantage of this functionality, by writing a script that would loop through every street address on a "South" or "East" labeled street (ie 1005 E 60th Street, or 5900 South Ellis Ave) and keyword search them in Campus Publications. These addresses were themselves taken from the Chicago Open Data Portal, which maintains a [document](https://data.cityofchicago.org/Transportation/Chicago-Street-Names/i6bp-fvbx/data) with the name of every street in Chicago and their address number ranges. In all, given the multiple permutations of each address (1005 E 60th, 1005 East 60th Street, etc.) my script made over 5 million keyword searches. The effort was such that I was allowed to run the script on the Midway2 federated supercomputer.
 
 ## Interest
 
@@ -38,5 +38,5 @@ Any concerns about the data
 
 ## Supplemental Data
 
-I intend to supplement my street address data with historic census data (most of all on race) taken from (IPUMS NHGIS)[https://www.nhgis.org/].
+I intend to supplement my street address data with historic census data (most of all on race) taken from [IPUMS NHGIS](https://www.nhgis.org/).
 
