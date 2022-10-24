@@ -2,6 +2,8 @@ This folder contains the code and data for the Line Chart Exercise.
 
 This homework continued our introduction to the fundemental data visualizations in Java Script and D3, familiarizing us with the line and area chart types
 
+I chose a pink fill, yellow cross-lines and a blue stroke, because of the color contrast between them. And because I think that pink (fuscia in particular) is a striking color that goes underutilized in data visualization.
+
 Contents
 area.html: The HTML document that frames the area chart svg, does some CSS styling, and links to the D3 library
 
