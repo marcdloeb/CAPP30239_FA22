@@ -12,3 +12,5 @@ This week contains no subdirectories. However, the week_01 README contains a dat
 - [week_03](https://github.com/marcdloeb/CAPP30239_FA22/tree/main/week_03)
 
 - [week_04](https://github.com/marcdloeb/CAPP30239_FA22/tree/main/week_04)
+
+- [final_project](https://github.com/marcdloeb/CAPP30239_FA22/tree/main/final_project)
