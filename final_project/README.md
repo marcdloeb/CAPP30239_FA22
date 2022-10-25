@@ -1,3 +1,5 @@
+Readme in progress
+
 This folder contains the data that is going to be used as part of my final project. Two data gathering tasks remain, one essential the other aspirational.
 
 The essential (but tedious) task is to convert historic census tract shapefiles into geojsons.
