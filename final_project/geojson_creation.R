@@ -16,6 +16,7 @@ tract_1920 <- tract_1920 %>%
          state = STATE,
          county = COUNTY)
   
+#clean, everything adds up
 race_1920 <-read.csv("data/sources/source_csvs/1920_tract.csv") %>% 
   select(-STATE, -STATEA, -COUNTY, -COUNTYA, -AREANAME, -PRETRACTA, -TRACTA, -POSTTRCTA) %>%
   rename(total_pop = A94001,
@@ -24,7 +25,7 @@ race_1920 <-read.csv("data/sources/source_csvs/1920_tract.csv") %>%
          nat_white_mix_par = BAT003,
          for_white = BAT004,
          black = BAT005,
-         other_colored = BAT006,
+         other = BAT006,
          year = YEAR) %>%
   mutate(white = nat_white_nat_par
          +nat_white_for_par
@@ -32,7 +33,6 @@ race_1920 <-read.csv("data/sources/source_csvs/1920_tract.csv") %>%
          +for_white, 
          white_per = 100 * white/total_pop,
          black_per = 100 * black/total_pop)
-         #total_per = white_per + black_per)
 
 #joining tracts and race data via census tract code
 tract_1920 <- left_join(tract_1920, race_1920, by = "GISJOIN")
@@ -55,7 +55,7 @@ tract_1930 <- tract_1930 %>%
   rename(land_area = Shape_Area,
          state = STATE,
          county = COUNTY)
-
+#	G17003100318 has less than total pop
 race_1930 <-read.csv("data/sources/source_csvs/1930_tract.csv") %>% 
   select(-STATE, -STATEA, -COUNTY, -COUNTYA, -AREANAME, -PRETRACTA, -TRACTA, -POSTTRCTA) %>%
   rename(total_pop = BHI001,
@@ -69,8 +69,9 @@ race_1930 <-read.csv("data/sources/source_csvs/1930_tract.csv") %>%
          +nat_white_formix_par
          +for_white, 
          white_per = 100 * white/total_pop,
-         black_per = 100 * black/total_pop,
-         total_per = white_per + black_per)
+         black_per = 100 * black/total_pop)
+         #total_count = white + black + other,
+         #total_per = total_count/total_pop)
 
 tract_1930 <- left_join(tract_1930, race_1930, by = "GISJOIN")
 #plot(tract_1930 %>% select(black_per))
@@ -92,6 +93,7 @@ tract_1940 <- tract_1940 %>%
          state = STATE,
          county = COUNTY)
 
+#clean, everything adds up properly
 race_1940 <-read.csv("data/sources/source_csvs/1940_tract.csv") %>%
   filter(STATEA == "17", COUNTYA == "31") %>%
   select(-STATE, -STATEA, -COUNTY, -COUNTYA, -AREANAME, -PRETRACTA, -TRACTA, -POSTTRCTA) %>%
@@ -124,6 +126,7 @@ tract_1950 <- tract_1950 %>%
   rename(land_area = Shape_Area,
          county = COUNTY)
 
+#clean
 race_1950 <-read.csv("data/sources/source_csvs/1950_tract.csv") %>% 
   filter(STATEA == "17", COUNTYA == "31") %>%
   select(-STATE, -STATEA, -COUNTY, -COUNTYA, -AREANAME, -PRETRACTA, -TRACTA, -POSTTRCTA) %>%
@@ -133,9 +136,9 @@ race_1950 <-read.csv("data/sources/source_csvs/1950_tract.csv") %>%
          other_nonwhite = B0J003,
          year = YEAR) %>%
   mutate(white_per = 100 * white/total_pop,
-         black_per = 100 * black/total_pop,
-         total_per = white_per + black_per)
-         #total_check = total_pop - white - black - other_nonwhite)
+         black_per = 100 * black/total_pop)
+         #total_count =  white + black + other_nonwhite,
+         #total_per = total_count/total_pop)
 
 tract_1950 <- left_join(tract_1950, race_1950, by = "GISJOIN")
 #plot(tract_1950 %>% select(black_per))
@@ -156,17 +159,31 @@ tract_1960 <- tract_1960 %>%
          state = STATE,
          county = COUNTY)
 
+#lots of problems
+# race_1960 <-read.csv("data/sources/source_csvs/1960_tract.csv") %>%
+#   filter(STATEA == "17", COUNTYA == "31") %>%
+#   rename(total_pop = CA4001,
+#          white = B7B001,
+#          black = B7B002,
+#          other = B7B003,
+#          year = YEAR) %>%
+#   select(GISJOIN, total_pop, white, black, other, year) %>%
+#   mutate(white_per = 100 * white/total_pop,
+#          black_per = 100 * black/total_pop,
+#          total_count = white + black + other,
+#          total_per = total_count/total_pop)
+
+#calculating total population from the columns themselves
 race_1960 <-read.csv("data/sources/source_csvs/1960_tract.csv") %>%
   filter(STATEA == "17", COUNTYA == "31") %>%
-  rename(total_pop = CA4001,
-         white = B7B001,
+  rename(white = B7B001,
          black = B7B002,
          other = B7B003,
          year = YEAR) %>%
-  select(GISJOIN, total_pop, white, black, other, year) %>%
-  mutate(white_per = 100 * white/total_pop,
+  select(GISJOIN, white, black, other, year) %>%
+  mutate(total_pop = white + black + other,
+         white_per = 100 * white/total_pop,
          black_per = 100 * black/total_pop)
-         #tot_per = white_per + black_per)
 
 tract_1960 <- left_join(tract_1960, race_1960, by = "GISJOIN")
 #plot(tract_1960 %>% select(black_per))
@@ -189,6 +206,7 @@ tract_1970 <- tract_1970 %>%
   rename(land_area = Shape_Area,
          county = COUNTY)
 
+#there are no tracts where the black population exceeds 100%
 race_1970 <-read.csv("data/sources/source_csvs/1970_tract.csv") %>%
   filter(STATEA == "17", COUNTYA == "31") %>%
   rename(total_pop = CY7001,
@@ -196,6 +214,7 @@ race_1970 <-read.csv("data/sources/source_csvs/1970_tract.csv") %>%
          year = YEAR) %>%
   select(GISJOIN, total_pop, black, year) %>%
   mutate(black_per = 100 * black/total_pop)
+         #pop_diff = total_pop - black)
 
 tract_1970 <- left_join(tract_1970, race_1970, by = "GISJOIN")
 #plot(tract_1970 %>% select(black_per))
@@ -218,7 +237,7 @@ tract_1980 <- tract_1980 %>%
   rename(land_area = Shape_Area,
          county = COUNTY)
 
-
+#clean
 race_1980 <-read.csv("data/sources/source_csvs/1980_tract.csv") %>%
   filter(STATEA == "17", COUNTYA == "31") %>%
   rename(total_pop = C6W001,
@@ -231,7 +250,8 @@ race_1980 <-read.csv("data/sources/source_csvs/1980_tract.csv") %>%
   select(GISJOIN, total_pop, white, black, native, asian, other, year) %>%
   mutate(white_per = 100 * white/total_pop,
          black_per = 100 * black/total_pop)
-         #tot_per = white_per + black_per)
+         #total_count = white + black + native + asian + other,
+         #total_per = total_count/total_pop)
 
 tract_1980 <- left_join(tract_1980, race_1980, by = "GISJOIN")
 #plot(tract_1980 %>% select(black_per))
