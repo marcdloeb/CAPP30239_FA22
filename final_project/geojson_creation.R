@@ -289,19 +289,20 @@ str_addr_sf_clean <- st_as_sf(street_addr_clean, coords = c("lon", "lat"))
 #internet said that this was supposed to be "EPSG:3857"! Took me like an hour to trial and error
 st_crs(str_addr_sf_clean) = "EPSG:4326"
 str_addr_sf_clean <- st_transform(str_addr_sf_clean, crs = "EPSG:3857")
-st_write(street_addr_sf, "data/working_data/all_cleaned_street_addr.geojson")
+st_write(str_addr_sf_clean , "data/working_data/all_cleaned_street_addr.geojson")
 
 ###limiting to just the Maroon articles in the area of study
-
-chicago_polys <-st_read("data/working_data/chicago_polys.geojson")
-study_area <- chicago_polys[chicago_polys$name == "study_area",]
-neighborhoods <- chicago_polys[chicago_polys$name != "study_area",]
+#str_addr_sf_clean <- st_read("data/working_data/all_cleaned_street_addr.geojson")
 
 str_addr_sf_maroon <- str_addr_sf_clean %>% 
   filter(publication == "Daily Maroon") %>%
   #no edition data for Maroon anyways
   select(-edition)
-st_write(str_addr_sf_maroon, "data/working_data/maroon_street_addr.geojson")
+#st_write(str_addr_sf_maroon, "data/working_data/maroon_street_addr.geojson")
+
+chicago_polys <-st_read("data/working_data/chicago_polys.geojson")
+study_area <- chicago_polys[chicago_polys$name == "study_area",]
+neighborhoods <- chicago_polys[chicago_polys$name != "study_area",]
 
 #hacky way of doing an intersection that is faster that st_intersection, and avoids the attribute join
 str_addr_sf_nb <- str_addr_sf_maroon[st_intersects(str_addr_sf_maroon, study_area) %>% lengths > 0,]
