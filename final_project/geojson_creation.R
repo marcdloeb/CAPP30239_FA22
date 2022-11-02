@@ -327,7 +327,15 @@ st_write(str_addr_sf_nb, "data/working_data/nbhood_street_addr.geojson")
 #   }
 # }
 
-### Identifying neighborhood of each census tract, by decade
+### Assigning neighborhood to each census tract
+chicago_polys <-st_read("data/working_data/chicago_polys_for_tracts.geojson")
+study_area <- chicago_polys[chicago_polys$name == "study_area",]
+neighborhoods <- chicago_polys[chicago_polys$name != "study_area",]
+
+tract_1920 <- st_read("data/working_data/1920_race_tract.geojson")
+tract_1920_nb <- st_join(tract_1920, neighborhoods %>% select(-id))
+plot(tract_1920_nb %>% select(name))
+st_write(tract_1920_nb, "data/working_data/1920_race_tract_nb.geojson")
 
 
 
