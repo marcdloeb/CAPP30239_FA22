@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "all_nb_blackper",
+"features": [
+{ "type": "Feature", "properties": { "neighborhood": "black_belt", "blackper_1920": 0.38450848059674986, "blackper_1930": 0.84747499321612041, "blackper_1940": 0.89664922770303934, "blackper_1950": 0.97394760885276754, "blackper_1960": 0.97096817647632627, "blackper_1970": 0.96312432159160188, "blackper_1980": 0.96216469642677738 }, "geometry": null },
+{ "type": "Feature", "properties": { "neighborhood": "hyde_park", "blackper_1920": 0.022143272794095128, "blackper_1930": 0.011378247895388049, "blackper_1940": 0.012227355259831299, "blackper_1950": 0.028320577255948783, "blackper_1960": 0.35174644243208281, "blackper_1970": 0.27261329034569226, "blackper_1980": 0.33215305539691603 }, "geometry": null },
+{ "type": "Feature", "properties": { "neighborhood": "north_kenwood", "blackper_1920": 0.021935682728860578, "blackper_1930": 0.025463805020007276, "blackper_1940": 0.038611194253217601, "blackper_1950": 0.40929890075211695, "blackper_1960": 0.97219841949919072, "blackper_1970": 0.98121154409610312, "blackper_1980": 0.98815789473684212 }, "geometry": null },
+{ "type": "Feature", "properties": { "neighborhood": "north_woodlawn", "blackper_1920": 0.0042940279111814226, "blackper_1930": 0.0011128186105664776, "blackper_1940": 0.00039194551957277937, "blackper_1950": 0.017348792939344122, "blackper_1960": 0.77923330386562728, "blackper_1970": 0.87483397140401598, "blackper_1980": 0.8450050200803213 }, "geometry": null },
+{ "type": "Feature", "properties": { "neighborhood": "south_kenwood", "blackper_1920": 0.013517319065052097, "blackper_1930": 0.0090303702956311162, "blackper_1940": 0.010016541077007902, "blackper_1950": 0.067655236329935128, "blackper_1960": 0.64469410371049718, "blackper_1970": 0.54695431472081213, "blackper_1980": 0.6415864378401005 }, "geometry": null },
+{ "type": "Feature", "properties": { "neighborhood": "south_shore", "blackper_1920": 0.0026579646832811388, "blackper_1930": 0.002180498096484094, "blackper_1940": 0.0031945156927668701, "blackper_1950": 0.0023303744993793474, "blackper_1960": 0.12875265339128678, "blackper_1970": 0.70701911554257657, "blackper_1980": 0.95286748160311374 }, "geometry": null },
+{ "type": "Feature", "properties": { "neighborhood": "south_woodlawn", "blackper_1920": 0.0024202331491266992, "blackper_1930": 0.00085312100099530787, "blackper_1940": 0.00055963393356816009, "blackper_1950": 0.18731988472622479, "blackper_1960": 0.90871841566127931, "blackper_1970": 0.98165872580849178, "blackper_1980": 0.98499034031802646 }, "geometry": null }
+]
+}

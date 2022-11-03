@@ -327,6 +327,10 @@ st_write(str_addr_sf_nb, "data/working_data/nbhood_street_addr.geojson")
 #   }
 # }
 
+### pivoting data so that neighbrhood is on the y axis and year is on the x
+str_addr_sf_nb <- st_read("data/working_data/nbhood_street_addr.geojson")
+
+
 ### Assigning neighborhood to each census tract
 chicago_polys <-st_read("data/working_data/chicago_polys_for_tracts.geojson")
 study_area <- chicago_polys[chicago_polys$name == "study_area",]
@@ -334,9 +338,118 @@ neighborhoods <- chicago_polys[chicago_polys$name != "study_area",]
 
 tract_1920 <- st_read("data/working_data/1920_race_tract.geojson")
 tract_1920_nb <- st_join(tract_1920, neighborhoods %>% select(-id))
-plot(tract_1920_nb %>% select(name))
+tract_1920_nb <- tract_1920_nb %>% 
+  rename(neighborhood = name) %>% 
+  filter(!is.na(neighborhood))
+plot(tract_1920_nb %>% select(neighborhood))
 st_write(tract_1920_nb, "data/working_data/1920_race_tract_nb.geojson")
 
+tract_1930 <- st_read("data/working_data/1930_race_tract.geojson")
+tract_1930_nb <- st_join(tract_1930, neighborhoods %>% select(-id))
+tract_1930_nb <- tract_1930_nb %>% 
+  rename(neighborhood = name) %>% 
+  filter(!is.na(neighborhood))
+plot(tract_1930_nb %>% select(neighborhood))
+st_write(tract_1930_nb, "data/working_data/1930_race_tract_nb.geojson")
 
+tract_1940 <- st_read("data/working_data/1940_race_tract.geojson")
+tract_1940_nb <- st_join(tract_1940, neighborhoods %>% select(-id))
+tract_1940_nb <- tract_1940_nb %>% 
+  rename(neighborhood = name) %>% 
+  filter(!is.na(neighborhood))
+plot(tract_1940_nb %>% select(neighborhood))
+st_write(tract_1940_nb, "data/working_data/1940_race_tract_nb.geojson")
 
+tract_1950 <- st_read("data/working_data/1950_race_tract.geojson")
+tract_1950_nb <- st_join(tract_1950, neighborhoods %>% select(-id))
+tract_1950_nb <- tract_1950_nb %>% 
+  rename(neighborhood = name) %>% 
+  filter(!is.na(neighborhood))
+plot(tract_1950_nb %>% select(neighborhood))
+st_write(tract_1950_nb, "data/working_data/1950_race_tract_nb.geojson")
 
+tract_1960 <- st_read("data/working_data/1960_race_tract.geojson")
+tract_1960_nb <- st_join(tract_1960, neighborhoods %>% select(-id))
+tract_1960_nb <- tract_1960_nb %>% 
+  rename(neighborhood = name) %>% 
+  filter(!is.na(neighborhood))
+plot(tract_1960_nb %>% select(neighborhood))
+st_write(tract_1960_nb, "data/working_data/1960_race_tract_nb.geojson")
+
+tract_1970 <- st_read("data/working_data/1970_race_tract.geojson")
+tract_1970_nb <- st_join(tract_1970, neighborhoods %>% select(-id))
+tract_1970_nb <- tract_1970_nb %>% 
+  rename(neighborhood = name) %>% 
+  filter(!is.na(neighborhood))
+plot(tract_1970_nb %>% select(neighborhood))
+st_write(tract_1970_nb, "data/working_data/1970_race_tract_nb.geojson")
+
+tract_1980 <- st_read("data/working_data/1980_race_tract.geojson")
+tract_1980_nb <- st_join(tract_1980, neighborhoods %>% select(-id))
+tract_1980_nb <- tract_1980_nb %>% 
+  rename(neighborhood = name) %>% 
+  filter(!is.na(neighborhood))
+plot(tract_1980_nb %>% select(neighborhood))
+st_write(tract_1980_nb, "data/working_data/1980_race_tract_nb.geojson")
+
+###finding average for each neighborhood
+
+tract_1920_nb <- st_read("data/working_data/1920_race_tract_nb.geojson")
+tract_1920_grouped <- tract_1920_nb %>%
+  group_by(neighborhood) %>%
+  summarize(black_per = sum(black)/sum(total_pop))
+plot(tract_1920_grouped %>%select(black_per))
+st_write(tract_1920_grouped, "data/working_data/1920_race_tract_grouped.geojson")
+
+tract_1930_nb <- st_read("data/working_data/1930_race_tract_nb.geojson")
+tract_1930_grouped <- tract_1930_nb %>%
+  group_by(neighborhood) %>%
+  summarize(black_per = sum(black)/sum(total_pop))
+plot(tract_1930_grouped %>%select(black_per))
+st_write(tract_1930_grouped, "data/working_data/1930_race_tract_grouped.geojson")
+
+tract_1940_nb <- st_read("data/working_data/1940_race_tract_nb.geojson")
+tract_1940_grouped <- tract_1940_nb %>%
+  group_by(neighborhood) %>%
+  summarize(black_per = sum(black)/sum(total_pop))
+plot(tract_1940_grouped %>%select(black_per))
+st_write(tract_1940_grouped, "data/working_data/1940_race_tract_grouped.geojson")
+
+tract_1950_nb <- st_read("data/working_data/1950_race_tract_nb.geojson")
+tract_1950_grouped <- tract_1950_nb %>%
+  group_by(neighborhood) %>%
+  summarize(black_per = sum(black)/sum(total_pop))
+plot(tract_1950_grouped %>%select(black_per))
+st_write(tract_1950_grouped, "data/working_data/1950_race_tract_grouped.geojson")
+
+tract_1960_nb <- st_read("data/working_data/1960_race_tract_nb.geojson")
+tract_1960_grouped <- tract_1960_nb %>%
+  group_by(neighborhood) %>%
+  summarize(black_per = sum(black)/sum(total_pop))
+plot(tract_1960_grouped %>%select(black_per))
+st_write(tract_1960_grouped, "data/working_data/1960_race_tract_grouped.geojson")
+
+tract_1970_nb <- st_read("data/working_data/1970_race_tract_nb.geojson")
+tract_1970_grouped <- tract_1970_nb %>%
+  group_by(neighborhood) %>%
+  summarize(black_per = sum(black)/sum(total_pop))
+plot(tract_1970_grouped %>%select(black_per))
+st_write(tract_1970_grouped, "data/working_data/1970_race_tract_grouped.geojson")
+
+tract_1980_nb <- st_read("data/working_data/1980_race_tract_nb.geojson")
+tract_1980_grouped <- tract_1980_nb %>%
+  group_by(neighborhood) %>%
+  summarize(black_per = sum(black)/sum(total_pop))
+plot(tract_1980_grouped %>%select(black_per))
+st_write(tract_1980_grouped, "data/working_data/1980_race_tract_grouped.geojson")
+
+all_nb_blackper <- data.frame(neighborhood = tract_1920_grouped$neighborhood,
+                     blackper_1920 = tract_1920_grouped$black_per,
+                     blackper_1930 = tract_1930_grouped$black_per,
+                     blackper_1940 = tract_1940_grouped$black_per,
+                     blackper_1950 = tract_1950_grouped$black_per,
+                     blackper_1960 = tract_1960_grouped$black_per,
+                     blackper_1970 = tract_1970_grouped$black_per,
+                     blackper_1980 = tract_1980_grouped$black_per)
+
+st_write(all_nb_blackper, "data/working_data/all_nb_blackper.geojson")
