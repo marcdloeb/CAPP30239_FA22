@@ -307,7 +307,7 @@ neighborhoods <- chicago_polys[chicago_polys$name != "study_area",]
 #hacky way of doing an intersection that is faster that st_intersection, and avoids the attribute join
 str_addr_sf_nb <- str_addr_sf_maroon[st_intersects(str_addr_sf_maroon, study_area) %>% lengths > 0,]
 str_addr_sf_nb <- st_join(str_addr_sf_nb, neighborhoods %>% select(-id))
-str_addr_sf_nb <- str_addr_sf_nb %>% rename(nbhood = name)
+str_addr_sf_nb <- str_addr_sf_nb %>% rename(neighborhood = name)
 st_write(str_addr_sf_nb, "data/working_data/nbhood_street_addr.geojson")
 
 ### Address searches with slight semantic differences catch the same peice of text
@@ -329,6 +329,8 @@ st_write(str_addr_sf_nb, "data/working_data/nbhood_street_addr.geojson")
 
 ### pivoting data so that neighbrhood is on the y axis and year is on the x
 str_addr_sf_nb <- st_read("data/working_data/nbhood_street_addr.geojson")
+str_addr_sf_nb <- str_addr_sf_nb %>% rename(neighborhood = nbhood)
+str_addr_sf_nb_grouped <- str_addr_sf_nb_grouped %>% 
 
 
 ### Assigning neighborhood to each census tract
