@@ -1,0 +1,72 @@
+[[
+      {
+        "neighborhood": "black_belt",
+    "blackper_1920": 0.3845,
+    "blackper_1930": 0.8475,
+    "blackper_1940": 0.8966,
+    "blackper_1950": 0.9739,
+    "blackper_1960": 0.971,
+    "blackper_1970": 0.9631,
+    "blackper_1980": 0.9622
+  },
+  {
+        "neighborhood": "hyde_park",
+    "blackper_1920": 0.0221,
+    "blackper_1930": 0.0114,
+    "blackper_1940": 0.0122,
+    "blackper_1950": 0.0283,
+    "blackper_1960": 0.3517,
+    "blackper_1970": 0.2726,
+    "blackper_1980": 0.3322
+  },
+  {
+        "neighborhood": "north_kenwood",
+    "blackper_1920": 0.0219,
+    "blackper_1930": 0.0255,
+    "blackper_1940": 0.0386,
+    "blackper_1950": 0.4093,
+    "blackper_1960": 0.9722,
+    "blackper_1970": 0.9812,
+    "blackper_1980": 0.9882
+  },
+  {
+        "neighborhood": "north_woodlawn",
+    "blackper_1920": 0.0043,
+    "blackper_1930": 0.0011,
+    "blackper_1940": 0.0004,
+    "blackper_1950": 0.0173,
+    "blackper_1960": 0.7792,
+    "blackper_1970": 0.8748,
+    "blackper_1980": 0.845
+  },
+  {
+        "neighborhood": "south_kenwood",
+    "blackper_1920": 0.0135,
+    "blackper_1930": 0.009,
+    "blackper_1940": 0.01,
+    "blackper_1950": 0.0677,
+    "blackper_1960": 0.6447,
+    "blackper_1970": 0.547,
+    "blackper_1980": 0.6416
+  },
+  {
+        "neighborhood": "south_shore",
+    "blackper_1920": 0.0027,
+    "blackper_1930": 0.0022,
+    "blackper_1940": 0.0032,
+    "blackper_1950": 0.0023,
+    "blackper_1960": 0.1288,
+    "blackper_1970": 0.707,
+    "blackper_1980": 0.9529
+  },
+  {
+        "neighborhood": "south_woodlawn",
+    "blackper_1920": 0.0024,
+    "blackper_1930": 0.0009,
+    "blackper_1940": 0.0006,
+    "blackper_1950": 0.1873,
+    "blackper_1960": 0.9087,
+    "blackper_1970": 0.9817,
+    "blackper_1980": 0.985
+  }
+]]

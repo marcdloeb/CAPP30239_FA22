@@ -1,5 +1,6 @@
 library(sf)
 library(tidyverse)
+library(jsonlite)
 
 ###1920s
 tract_1920 <-st_read("data/sources/source_shapefiles/us_tract_1920/US_tract_1920_conflated.shp")
@@ -293,22 +294,22 @@ st_write(str_addr_sf_clean , "data/working_data/all_cleaned_street_addr.geojson"
 
 ###limiting to just the Maroon articles in the area of study
 #str_addr_sf_clean <- st_read("data/working_data/all_cleaned_street_addr.geojson")
-
 str_addr_sf_maroon <- str_addr_sf_clean %>% 
   filter(publication == "Daily Maroon") %>%
   #no edition data for Maroon anyways
   select(-edition)
 #st_write(str_addr_sf_maroon, "data/working_data/maroon_street_addr.geojson")
 
-chicago_polys <-st_read("data/working_data/chicago_polys.geojson")
+chicago_polys <-st_read("data/working_data/chicago_polys_for_addr.geojson")
 study_area <- chicago_polys[chicago_polys$name == "study_area",]
 neighborhoods <- chicago_polys[chicago_polys$name != "study_area",]
 
+### adding the neighborhood that each street address is in to the data
 #hacky way of doing an intersection that is faster that st_intersection, and avoids the attribute join
 str_addr_sf_nb <- str_addr_sf_maroon[st_intersects(str_addr_sf_maroon, study_area) %>% lengths > 0,]
 str_addr_sf_nb <- st_join(str_addr_sf_nb, neighborhoods %>% select(-id))
 str_addr_sf_nb <- str_addr_sf_nb %>% rename(neighborhood = name)
-st_write(str_addr_sf_nb, "data/working_data/nbhood_street_addr.geojson")
+#st_write(str_addr_sf_nb, "data/working_data/nbhood_street_addr.geojson")
 
 ### Address searches with slight semantic differences catch the same peice of text
 ### eg "6311 COTTAGE GROVE" and "6311 South COTTAGE GROVE"
@@ -327,10 +328,45 @@ st_write(str_addr_sf_nb, "data/working_data/nbhood_street_addr.geojson")
 #   }
 # }
 
-### pivoting data so that neighbrhood is on the y axis and year is on the x
 str_addr_sf_nb <- st_read("data/working_data/nbhood_street_addr.geojson")
-str_addr_sf_nb <- str_addr_sf_nb %>% rename(neighborhood = nbhood)
-str_addr_sf_nb_grouped <- str_addr_sf_nb_grouped %>% 
+### counting absolute number of addresses in each neighborhood
+str_addr_sf_nb$neighborhood[is.na(str_addr_sf_nb$neighborhood)] = "other"
+
+### count by neighborhood
+str_addr_sf_nb_counts <- str_addr_sf_nb %>% 
+  #filter(!is.na(neighborhood)) %>%
+  group_by(neighborhood) %>% 
+  summarize(count = sum(quantity))
+st_write(str_addr_sf_nb_counts, "data/working_data/nbhood_street_addr_counts.geojson")
+str_addr_nb_counts <- str_addr_sf_nb_counts %>%
+  st_drop_geometry() %>%
+  column_to_rownames("neighborhood")
+write.csv(str_addr_nb_counts, "data/working_data/nbhood_street_addr_counts.csv")
+  
+### finding count by year
+str_addr_sf_nbyear_counts <- str_addr_sf_nb %>% 
+  #filter(!is.na(neighborhood)) %>%
+  group_by(neighborhood, year) %>% 
+  summarize(count = sum(quantity))
+st_write(str_addr_sf_nbyear_counts, "data/working_data/nbhood_year_street_addr_counts.geojson")
+
+### pivoting data so that neighborhood is on the y axis and year is on the x
+str_addr_nbyear_counts_pivot <- str_addr_sf_nbyear_counts %>% 
+  st_drop_geometry() %>%
+  pivot_wider(names_from = year,values_from = count) %>%
+  column_to_rownames("neighborhood")
+  
+str_addr_nbyear_counts_pivot <- str_addr_nbyear_counts_pivot[,order(names(str_addr_nbyear_counts_pivot))]
+#str_addr_nbyear_counts_pivot <- str_addr_nbyear_counts_pivot %>% select(neighborhood, everything())
+str_addr_nbyear_counts_pivot <- str_addr_nbyear_counts_pivot %>% mutate_all(~replace_na(., 0))
+#1972 is mostly missing its data, removing the column
+str_addr_nbyear_counts_pivot <- str_addr_nbyear_counts_pivot %>% select(-"1972")
+write.csv(str_addr_nbyear_counts_pivot, "data/chart_data/nbhood_year_street_addr_counts.csv")
+
+### finding percentage of total in each neighborhood in each year
+# https://stackoverflow.com/questions/9447801/dividing-columns-by-colsums-in-r
+str_addr_nbyear_prop <- 100 * sweep(str_addr_nbyear_counts_pivot,2,colSums(str_addr_nbyear_counts_pivot),`/`)
+write.csv(str_addr_nbyear_prop, "data/chart_data/nbhood_year_street_addr_perc.csv")
 
 
 ### Assigning neighborhood to each census tract
@@ -400,50 +436,50 @@ tract_1920_nb <- st_read("data/working_data/1920_race_tract_nb.geojson")
 tract_1920_grouped <- tract_1920_nb %>%
   group_by(neighborhood) %>%
   summarize(black_per = sum(black)/sum(total_pop))
-plot(tract_1920_grouped %>%select(black_per))
-st_write(tract_1920_grouped, "data/working_data/1920_race_tract_grouped.geojson")
+#plot(tract_1920_grouped %>%select(black_per))
+#st_write(tract_1920_grouped, "data/working_data/1920_race_tract_grouped.geojson")
 
 tract_1930_nb <- st_read("data/working_data/1930_race_tract_nb.geojson")
 tract_1930_grouped <- tract_1930_nb %>%
   group_by(neighborhood) %>%
   summarize(black_per = sum(black)/sum(total_pop))
-plot(tract_1930_grouped %>%select(black_per))
-st_write(tract_1930_grouped, "data/working_data/1930_race_tract_grouped.geojson")
+#plot(tract_1930_grouped %>%select(black_per))
+#st_write(tract_1930_grouped, "data/working_data/1930_race_tract_grouped.geojson")
 
 tract_1940_nb <- st_read("data/working_data/1940_race_tract_nb.geojson")
 tract_1940_grouped <- tract_1940_nb %>%
   group_by(neighborhood) %>%
   summarize(black_per = sum(black)/sum(total_pop))
-plot(tract_1940_grouped %>%select(black_per))
-st_write(tract_1940_grouped, "data/working_data/1940_race_tract_grouped.geojson")
+#plot(tract_1940_grouped %>%select(black_per))
+#st_write(tract_1940_grouped, "data/working_data/1940_race_tract_grouped.geojson")
 
 tract_1950_nb <- st_read("data/working_data/1950_race_tract_nb.geojson")
 tract_1950_grouped <- tract_1950_nb %>%
   group_by(neighborhood) %>%
   summarize(black_per = sum(black)/sum(total_pop))
-plot(tract_1950_grouped %>%select(black_per))
-st_write(tract_1950_grouped, "data/working_data/1950_race_tract_grouped.geojson")
+#plot(tract_1950_grouped %>%select(black_per))
+#st_write(tract_1950_grouped, "data/working_data/1950_race_tract_grouped.geojson")
 
 tract_1960_nb <- st_read("data/working_data/1960_race_tract_nb.geojson")
 tract_1960_grouped <- tract_1960_nb %>%
   group_by(neighborhood) %>%
   summarize(black_per = sum(black)/sum(total_pop))
-plot(tract_1960_grouped %>%select(black_per))
-st_write(tract_1960_grouped, "data/working_data/1960_race_tract_grouped.geojson")
+#plot(tract_1960_grouped %>%select(black_per))
+#st_write(tract_1960_grouped, "data/working_data/1960_race_tract_grouped.geojson")
 
 tract_1970_nb <- st_read("data/working_data/1970_race_tract_nb.geojson")
 tract_1970_grouped <- tract_1970_nb %>%
   group_by(neighborhood) %>%
   summarize(black_per = sum(black)/sum(total_pop))
-plot(tract_1970_grouped %>%select(black_per))
-st_write(tract_1970_grouped, "data/working_data/1970_race_tract_grouped.geojson")
+#plot(tract_1970_grouped %>%select(black_per))
+#st_write(tract_1970_grouped, "data/working_data/1970_race_tract_grouped.geojson")
 
 tract_1980_nb <- st_read("data/working_data/1980_race_tract_nb.geojson")
 tract_1980_grouped <- tract_1980_nb %>%
   group_by(neighborhood) %>%
   summarize(black_per = sum(black)/sum(total_pop))
-plot(tract_1980_grouped %>%select(black_per))
-st_write(tract_1980_grouped, "data/working_data/1980_race_tract_grouped.geojson")
+#plot(tract_1980_grouped %>%select(black_per))
+#st_write(tract_1980_grouped, "data/working_data/1980_race_tract_grouped.geojson")
 
 all_nb_blackper <- data.frame(neighborhood = tract_1920_grouped$neighborhood,
                      blackper_1920 = tract_1920_grouped$black_per,
@@ -454,4 +490,8 @@ all_nb_blackper <- data.frame(neighborhood = tract_1920_grouped$neighborhood,
                      blackper_1970 = tract_1970_grouped$black_per,
                      blackper_1980 = tract_1980_grouped$black_per)
 
-st_write(all_nb_blackper, "data/working_data/all_nb_blackper.geojson")
+write.csv(all_nb_blackper, "data/chart_data/all_nb_blackper.csv", row.names = FALSE)
+all_nb_blackper <- read.csv("data/chart_data/all_nb_blackper.csv")
+
+all_nb_blackper_json <- toJSON(x = all_nb_blackper, dataframe = 'rows', pretty = T)
+write_json(all_nb_blackper_json, "data/chart_data/all_nb_blackper.json")
