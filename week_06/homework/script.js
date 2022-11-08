@@ -115,7 +115,7 @@ d3.json("a3cleanedonly2015.json").then(data => {
           width = 800,
           margin = ({ top: 25, right: 30, bottom: 35, left: 50 });
 
-    let svg = d3.select("#chart")
+    let svg1 = d3.select("#chart")
         .append("svg")
         .attr("viewBox", [0, 0, width, height]); 
     
@@ -128,30 +128,121 @@ d3.json("a3cleanedonly2015.json").then(data => {
         .domain([0, d3.max(newData, d => d.count)]).nice() // state data totals
         .range([height - margin.bottom, margin.top]); 
     
-    svg.append("g")
+    svg1.append("g")
         .attr("transform", `translate(0,${height - margin.bottom + 5})`)
         .call(d3.axisBottom(x));
     
-    svg.append("g")
+    svg1.append("g")
         .attr("transform", `translate(${margin.left - 5},0)`)
         .call(d3.axisLeft(y));
 
-    let bar = svg.selectAll(".bar")
+    let bar = svg1.selectAll(".bar")
         .append("g")
         .data(newData)
         .join("g")
         .attr("class", "bar");
 
     bar.append("rect") 
-        .attr("fill", "gold")
+        .attr("fill", "lightyellow")
         .attr("x", d => x(d.state)) // state
-        .attr("width", x.bandwidth()) 
+        .attr("width", x.bandwidth())
+        .attr("y", height-margin.bottom)
+        .attr("height", 0)
+        .transition() //adding an animation!
+        .duration(1000)
         .attr("y", d => y(d.count)) // totals
-        .attr("height", d => y(0) - y(d.count)); // totals
+        .attr("height", d => y(0) - y(d.count)) // totals
+        .attr("fill", "gold"); //color transition
     
     bar.append('text') 
         .text(d => d.count) // totals
         .attr('x', d => x(d.state) + (x.bandwidth()/2)) //state
+        .attr('y', d => y(d.count) - 5) // totals
+        .attr('text-anchor', 'middle')
+        .style('fill', 'black');
+
+    // second chart test
+
+    let svg2 = d3.select("#chart2")
+    .append("svg")
+    .attr("viewBox", [0, 0, width, height]); 
+
+    let x2 = d3.scaleBand()
+        .domain(newData.map(d => d.state)) // state data
+        .range([margin.left, width - margin.right]) 
+        .padding(0.1);
+
+    let y2 = d3.scaleLinear()
+        .domain([0, d3.max(newData, d => d.count)]).nice() // state data totals
+        .range([height - margin.bottom, margin.top]); 
+
+    svg2.append("g")
+        .attr("transform", `translate(0,${height - margin.bottom + 5})`)
+        .call(d3.axisBottom(x2));
+
+    svg2.append("g")
+        .attr("transform", `translate(${margin.left - 5},0)`)
+        .call(d3.axisLeft(y2));
+
+    let bar2 = svg2.selectAll(".bar")
+        .append("g")
+        .data(newData)
+        .join("g")
+        .attr("class", "bar");
+
+    bar2.append("rect") 
+        .attr("fill", "pink")
+        .attr("x", d => x(d.state)) // state
+        .attr("width", x2.bandwidth()) 
+        .attr("y", d => y(d.count)) // totals
+        .attr("height", d => y(0) - y(d.count)); // totals
+
+    bar2.append('text') 
+        .text(d => d.count) // totals
+        .attr('x', d => x(d.state) + (x2.bandwidth()/2)) //state
+        .attr('y', d => y(d.count) - 5) // totals
+        .attr('text-anchor', 'middle')
+        .style('fill', 'black');
+    
+    // third chart test
+
+    let svg3 = d3.select("#chart3")
+    .append("svg")
+    .attr("viewBox", [0, 0, width, height]); 
+
+    let x3 = d3.scaleBand()
+        .domain(newData.map(d => d.state)) // state data
+        .range([margin.left, width - margin.right]) 
+        .padding(0.1);
+
+    let y3 = d3.scaleLinear()
+        .domain([0, d3.max(newData, d => d.count)]).nice() // state data totals
+        .range([height - margin.bottom, margin.top]); 
+
+    svg3.append("g")
+        .attr("transform", `translate(0,${height - margin.bottom + 5})`)
+        .call(d3.axisBottom(x2));
+
+    svg3.append("g")
+        .attr("transform", `translate(${margin.left - 5},0)`)
+        .call(d3.axisLeft(y2));
+
+    let bar3 = svg3.selectAll(".bar")
+        .append("g")
+        .data(newData)
+        .join("g")
+        .attr("class", "bar");
+
+    bar3.append("rect") 
+        .attr("fill", "gold")
+        .attr("x", d => x(d.state)) // state
+        .attr("width", x3.bandwidth()) 
+        .attr("y", d => y(d.count)) // totals
+        .attr("height", d => y(0) - y(d.count)); // totals
+
+    bar3.append('text') 
+        .text(d => d.count) // totals
+        .attr('x', d => x(d.state) + (x3.bandwidth()/2)) //state
         .attr('y', d => y(d.count) - 5) // totals
         .attr('text-anchor', 'middle')
         .style('fill', 'black');

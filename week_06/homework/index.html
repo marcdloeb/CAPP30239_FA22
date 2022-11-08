@@ -25,17 +25,36 @@
         <!-- comment! / blah, not sure what backslash is supposed to do-->
 
         <p>
-            I spent some time exploring the data
-
-
-        </p>
-
-
+            After a period of exploration, I chose to decompose the 1500 people shot be police in 2015 by state
         <p>
             <a href="https://github.com/tiffanyfrance/CAPP30239_FA22/blob/main/week_06/a3cleanedonly2015.json" target="_blank">Data Link</a>
+        <p>
+
+            There are two reasons why I chose killings by state as my area of interest. 
+            First, I think that state police shooting rates capture regional variations in culture, values and policy that extend beyond simple demographics or crime rates
+            Though not adjusted by population size, some of these variations are aparent despite the absence of per capita figures
+            Florida has more than thrice the number of police killins as New York, despite a similar population.
+            California and Texas have totals that appear proportional to each other, but disproportionate relative to the country as a whole
+            Arkansas and Connecticut, one an extremely poor state, the other extremely wealthy, both home to roughly three million people, have disproportionately few police killings.
+        <p>
+            The first chart that I chose to make was a simple bar chart, with an animated transition when the page opens.
+            The chart type is not perfectly suited to this data. 50 bars really pushes what's comprehensible. 
+            I had to dial down the text size so that the labels were fully visible. 
+            Nevertheless, the bar served as a useful starting point for initial exploration.
+            I included a simple transition. When the document is first accessed, the bars rise to their full height and the color shifts from light yellow to gold
         </p>
-    <div id="chart"></div>
-    <div id="chart2"></div>
+        <div id="chart"></div>
+        <p>
+            My second chart is a donut chart. I hoped that it would serve to better depict the proportion of all killings by police in each state.
+        </p>
+        <div id="chart2"></div>
+        <p>
+            My third chart is a choropleth map, taken from Observable, which colors each state according to their number of killings
+        <p>
+            <a href="https://observablehq.com/@d3/us-state-choropleth" target="_blank">Observable Link</a>
+        </p>
+
+    <div id="chart3"></div>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="script.js"></script>
 </body>
