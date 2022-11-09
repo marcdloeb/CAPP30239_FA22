@@ -98,8 +98,8 @@ race_1930 <-read.csv("data/sources/source_csvs/1930_tract.csv") %>%
          #total_per = total_count/total_pop)
 
 tract_1930 <- left_join(tract_1930, race_1930, by = "GISJOIN")
-#plot(tract_1930 %>% select(black_per))
-st_write(tract_1930, "data/working_data/1930_race_tract.geojson")
+plot(tract_1930 %>% select(black_per))
+#st_write(tract_1930, "data/working_data/1930_race_tract.geojson")
 ```
 
 1940s tracts
@@ -381,26 +381,43 @@ str_addr_sf_nb <- st_join(str_addr_sf_nb, neighborhoods %>% select(-id))
 str_addr_sf_nb <- str_addr_sf_nb %>% rename(neighborhood = name)
 #wrong!
 str_addr_sf_nb$neighborhood[is.na(str_addr_sf_nb$neighborhood)] = "other_within_study_area"
-#complete data, writing to map file
+
+
+```
+
+adding decades
+```{r}
+#adding decades
+str_addr_sf_nb <- str_addr_sf_nb %>%   
+  mutate(decade = ifelse(year <= 1914, "1902-1914",
+                  ifelse(year <= 1925, "1915-1925",
+                  ifelse(year <= 1935, "1926-1935",
+                  ifelse(year <= 1945, "1936-1945",
+                  ifelse(year <= 1955, "1946-1955",       
+                  ifelse(year <= 1965, "1956-1965",
+                  ifelse(year <= 1975, "1966-1975",
+                  ifelse(year <= 1986, "1976-1986","Other")
+  ))))))))
+
 st_write(str_addr_sf_nb, "data/map_data/nbhood_street_addr.geojson")
 ```
 
 Finding the absolute number of addresses in each neighborhood
 ```{r}
-str_addr_sf_nb <- st_read("data/working_data/nbhood_street_addr.geojson")
+str_addr_sf_nb <- st_read("data/map_data/nbhood_street_addr.geojson")
 
 ### count by neighborhood
 str_addr_sf_nb_counts <- str_addr_sf_nb %>% 
   #filter(!is.na(neighborhood)) %>%
   group_by(neighborhood) %>% 
   summarize(count = sum(quantity))
-st_write(str_addr_sf_nb_counts, "data/working_data/nbhood_street_addr_counts.geojson")
+#st_write(str_addr_sf_nb_counts, "data/working_data/nbhood_street_addr_counts.geojson")
 
 #csv version
 str_addr_nb_counts <- str_addr_sf_nb_counts %>%
   st_drop_geometry() %>%
   column_to_rownames("neighborhood")
-write.csv(str_addr_nb_counts, "data/working_data/nbhood_street_addr_counts.csv")
+#write.csv(str_addr_nb_counts, "data/working_data/nbhood_street_addr_counts.csv")
 
 ```
 
@@ -411,16 +428,14 @@ str_addr_sf_nbyear_counts <- str_addr_sf_nb %>%
   #filter(!is.na(neighborhood)) %>%
   group_by(neighborhood, year) %>% 
   summarize(count = sum(quantity))
-st_write(str_addr_sf_nbyear_counts, "data/working_data/nbhood_year_street_addr_counts.geojson")
+#st_write(str_addr_sf_nbyear_counts, "data/working_data/nbhood_year_street_addr_counts.geojson")
 
 ### pivoting data so that neighborhood is on the y axis and year is on the x
 str_addr_nbyear_counts_pivot <- str_addr_sf_nbyear_counts %>% 
   st_drop_geometry() %>%
-  pivot_wider(names_from = year,values_from = count) %>%
-  column_to_rownames("neighborhood")
+  pivot_wider(names_from = year,values_from = count)
 
 str_addr_nbyear_counts_pivot <- str_addr_nbyear_counts_pivot[,order(names(str_addr_nbyear_counts_pivot))]
-#str_addr_nbyear_counts_pivot <- str_addr_nbyear_counts_pivot %>% select(neighborhood, everything())
 str_addr_nbyear_counts_pivot <- str_addr_nbyear_counts_pivot %>% mutate_all(~replace_na(., 0))
 #1972 is mostly missing its data, removing the column
 str_addr_nbyear_counts_pivot <- str_addr_nbyear_counts_pivot %>% select(-"1972")
@@ -432,9 +447,39 @@ Street address proportion in each neighborhood each year
 ### finding percentage of total in each neighborhood in each year
 # https://stackoverflow.com/questions/9447801/dividing-columns-by-colsums-in-r
 str_addr_nbyear_prop <- 100 * sweep(str_addr_nbyear_counts_pivot,2,colSums(str_addr_nbyear_counts_pivot),`/`)
-write.csv(str_addr_nbyear_prop, "data/chart_data/nbhood_year_street_addr_perc.csv")
+#write.csv(str_addr_nbyear_prop, "data/chart_data/nbhood_year_street_addr_perc.csv")
 
 ```
+
+Street address counts per decades by neighborhood
+```{r}
+str_addr_sf_nbyear_counts <- st_read("data/working_data/nbhood_year_street_addr_counts.geojson")
+str_addr_sf_nb_decade <- str_addr_sf_nbyear_counts %>% 
+  mutate(decade = ifelse(year <= 1914, "1902-1914",
+                  ifelse(year <= 1925, "1915-1925",
+                  ifelse(year <= 1935, "1926-1935",
+                  ifelse(year <= 1945, "1936-1945",
+                  ifelse(year <= 1955, "1946-1955",       
+                  ifelse(year <= 1965, "1956-1965",
+                  ifelse(year <= 1975, "1966-1975",
+                  ifelse(year <= 1986, "1976-1986","Other")
+  ))))))))
+
+str_addr_sf_nb_decade_grouped <- str_addr_sf_nb_decade %>% 
+  #filter(!is.na(neighborhood)) %>%
+  group_by(neighborhood, decade) %>% 
+  summarize(count = sum(count))
+#st_write(str_addr_sf_nb_decade_grouped, "")
+
+str_addr_nb_decade_grouped <- str_addr_sf_nb_decade_grouped %>% st_drop_geometry()
+write.csv(str_addr_nb_decade_grouped, "data/chart_data/nbhood_decade_street_addr_counts.csv")
+```
+
+
+Street address proportions per decades by neighborhood
+
+
+
 
 limiting tracts to the study area, and assigning neighborhood labels
 ```{r}
@@ -599,7 +644,6 @@ all_nb_blackper <- data.frame(neighborhood = tract_1920_grouped$neighborhood,
                      blackper_1970 = tract_1970_grouped$black_per,
                      blackper_1980 = tract_1980_grouped$black_per)
 
-all_nb_blackper <- all_nb_blackper %>% column_to_rownames("neighborhood")
 write.csv(all_nb_blackper, "data/chart_data/all_nb_blackper.csv")
 ```
 
@@ -609,4 +653,6 @@ all_nb_blackper <- read.csv("data/chart_data/all_nb_blackper.csv")
 all_nb_blackper_json <- toJSON(x = all_nb_blackper, dataframe = 'rows', pretty = T)
 write_json(all_nb_blackper_json, "data/chart_data/all_nb_blackper.json")
 ```
+
+
 
