@@ -25,3 +25,4 @@ My final project has two main data sources: historical census data (from the 192
     - neighborhood_polys
       - This subdirectory contains the polygons used to assign neighborhood names to street address points and census tracts, to enable later aggregation
   - working_data
+    - This directory contains intermediate data, middle stages of transformation of source data into chart_data and map_data
