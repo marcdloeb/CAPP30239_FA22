@@ -11,7 +11,9 @@ My final project has two main data sources: historical census data (from the 192
 - data
   - This directory contains both the source data and cleaned data to be used to create my maps and charts. It contains the following subdirectories
   - chart_data
+    - This directory contains neighborhood level data on street addresses and race that will serve as the basis for charts
   - map_data
+    - This directory contains GeoJSONs for race by census tract, and street address points. This data will serve as the basis for maps
   - sources
     - This directory contains the raw data that is manipulated into chart_data and map_data
     - census_csvs
@@ -19,6 +21,7 @@ My final project has two main data sources: historical census data (from the 192
     - census_shapefiles
       - This subdirectory contains the Census tract shapefiles. This folder only exists locally, because many of the shapefiles exceed github's 100mb cap
     - street_addresses
-      - This subdirectory contains the CSV recording more than 56,000 street addresses that appear in 
+      - This subdirectory contains the CSV recording more than 56,000 street addresses that appear in 20th century University of Chicago print publications
     - neighborhood_polys
+      - This subdirectory contains the polygons used to assign neighborhood names to street address points and census tracts, to enable later aggregation
   - working_data
