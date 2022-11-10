@@ -1,6 +1,6 @@
 This directory contains the classwork from week #4 of CAPP 30239 Data Visualization, Autumn 2022. 
 
-It contains two subdirectories:
+It contains three subdirectories:
 
 - line_chart_hw
   - This directory contains the code used to complete the line chart homework assigned this week
