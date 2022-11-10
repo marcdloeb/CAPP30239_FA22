@@ -1,6 +1,6 @@
 This directory holds the file associated with the second week of CAPP 30239 Data Visualization, Fall 2022, taught by Tiffany France.
 
-It contains two subdirectories.
+It contains two subdirectories:
 
 - data_humanism_pics
   
