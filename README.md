@@ -35,3 +35,5 @@ In addition, I have created a directory to contain my final project
 - [final_project](https://github.com/marcdloeb/CAPP30239_FA22/tree/main/final_project)
 
 I have also created a directory to contain files associated with additional D3 and HTML practice 
+
+- [prac](https://github.com/marcdloeb/CAPP30239_FA22/tree/main/prac)
