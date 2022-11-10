@@ -7,3 +7,6 @@ It contains two subdirectories:
   
 - in_class
   - This subdirectory contains HMTL and JavaScript files from in-class exercises
+
+- project_2
+  - This subdirection contains the images and text used for our second project, in which we were tasked to analyze three charts taken from a major publication
