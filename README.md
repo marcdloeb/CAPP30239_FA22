@@ -6,13 +6,19 @@ This repo is organized on a week-by-week basis. The seven weeks of class work pr
 
 - [week_01](https://github.com/marcdloeb/CAPP30239_FA22/tree/main/week_01)
 
-This week contains no subdirectories. However, the week_01 README contains my data selfie homework
+This directory contains no subdirectories. However, the week_01 README contains my data selfie homework
 
 - [week_02](https://github.com/marcdloeb/CAPP30239_FA22/tree/main/week_02)
 
+This directory contains subdirectories dedicated to the week's homework assignment and class work
+
 - [week_03](https://github.com/marcdloeb/CAPP30239_FA22/tree/main/week_03)
 
+This directory contain subdirectories dedicated to the week's homework assignment and class work, in addition to a pair of directories containing proposed data for my final project
+
 - [week_04](https://github.com/marcdloeb/CAPP30239_FA22/tree/main/week_04)
+
+
 
 - [week_05](https://github.com/marcdloeb/CAPP30239_FA22/tree/main/week_05)
 
