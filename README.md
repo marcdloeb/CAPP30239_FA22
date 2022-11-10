@@ -26,6 +26,8 @@ This directory contains three subdirectories dedicated to the week's class work,
 
 - [week_06](https://github.com/marcdloeb/CAPP30239_FA22/tree/main/week_06)
 
+This directory contains a subdirectory dedicated week's class work, in addition to a directory containing the three charts homework
+
 - [week_07](https://github.com/marcdloeb/CAPP30239_FA22/tree/main/week_07)
 
 In addition, I have created a directory to contain my final project
