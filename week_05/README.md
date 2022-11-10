@@ -1,5 +1,5 @@
 
-This directory contains the classwork from week #4 of CAPP 30239 Data Visualization, Autumn 2022. 
+This directory contains the classwork from week #5 of CAPP 30239 Data Visualization, Autumn 2022. 
 
 It contains four subdirectories:
 
