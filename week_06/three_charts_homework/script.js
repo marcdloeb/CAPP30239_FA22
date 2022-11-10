@@ -1,6 +1,6 @@
 /* Bar chart representing total killed by state */
 
-d3.json("a3cleanedonly2015.json").then(data => {
+d3.json("data/a3cleanedonly2015.json").then(data => {
     
     console.log(data);
     
@@ -180,14 +180,14 @@ d3.json("a3cleanedonly2015.json").then(data => {
     const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);//arc generator
     const arcLabel = d3.arc().innerRadius(labelRadius).outerRadius(labelRadius);
 
-    const svg = d3.select("#chart")
+    const svg2 = d3.select("#chart2")
         .append("svg")
         .attr("width", width)
         .attr("height", height)
         .attr("viewBox", [-width / 2, -height / 2, width, height])
         .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
 
-    svg.append("g")
+    svg2.append("g")
         .attr("stroke", "white")
         .attr("stroke-width", 2)
         .attr("stroke-linejoin", "round")
@@ -197,7 +197,7 @@ d3.json("a3cleanedonly2015.json").then(data => {
         .attr("fill", (d, i) => d3.schemeSet3[i])//color scheme
         .attr("d", arc);
 
-    svg.append("g")
+    svg2.append("g")
         .attr("font-size", 8)
         .attr("text-anchor", "middle")
         .selectAll("text")
@@ -214,7 +214,7 @@ d3.json("a3cleanedonly2015.json").then(data => {
         .attr("font-weight", (d, i) => i ? null : "bold")
         .text(d => d);
 
-    svg.append("text")
+    svg2.append("text")
         .attr("font-size", 30)
         .attr("font-weight", "bold")
         .attr("text-anchor", "middle")
@@ -225,77 +225,75 @@ d3.json("a3cleanedonly2015.json").then(data => {
 
     // third chart 
 
+    const svg3 = d3.select("#chart3")
+    .append("svg")
+    .attr("viewBox", [0, 0, width, height]);
+
+});
+
+d3.csv("data/a3states_race2015_v1.csv").then( data => {
+
+    const height = 600,
+    width = 800,
+    margin = ({ top: 25, right: 30, bottom: 35, left: 50 })
+
+    const svg3 = d3.select("#chart3")
+    .append("svg")
+    .attr("viewBox", [0, 0, width, height]);
+
+    console.log(data)
+
+    let x = d3.scaleBand(data.map(d => (d.State)),[margin.left, width - margin.right])//domain and range in the ()
+    .padding([0.2]);
+
+    let y = d3.scaleLinear([0,700],[height - margin.bottom, margin.top]);
+
+    svg3.append("g")
+    .attr("transform", `translate(0,${height - margin.bottom})`)
+    .call(d3.axisBottom(x))
+
+    svg3.append("g")
+    .attr("transform", `translate(${margin.left},0)`)
+    .call(d3.axisLeft(y).tickSize(-width + margin.left + margin.right))
+
+    const subgroups = data.columns.slice(1);//getting rid of first group
+    console.log(subgroups)
+
+    const color = d3.scaleOrdinal(subgroups,["#23171b","#2f9df5","#4df884","#dedd32","#f65f18","#900c00"]);//scale ordinal, yet another scale
+
     const stackedData = d3.stack()
-    .keys(State)(data);
+    .keys(subgroups)(data);
 
-    console.log(stackedData)
+    svg3.append("g")
+    .selectAll("g")
+    .data(stackedData)
+    .join("g")
+    .attr("fill", d => color(d.key))
+    .selectAll("rect")
+    .data(d => d)
+    .join("rect")
+    .attr("x", d => x(d.data.State))
+    .attr("y", d => y(d[1]))
+    .attr("height", d => y(d[0]) - y(d[1]))
+    .attr("width",x.bandwidth());
 
-    // for (let d of data) {
-    //     d.Num = +d.Num;
-    //     d.Date = timeParse(d.Date);
-    // }
+    let legendGroup = svg3//adding a legend
+    .selectAll(".legend-group")
+    .data(subgroups)
+    .join("g")
+    .attr("class", "legend-group");
 
-    // for(var d of data) {
-    //     let nd = newData.find(nd => nd.state == d["State"]);
-    //     nd.count += 1;
-    // }
-    // console.log(newData)
+    legendGroup
+    .append("circle")
+    .attr("cx", (d, i) => (10 + (i * 75)))
+    .attr("cy",10)
+    .attr("r", 3)
+    .attr("fill", (d, i) => color(i));
 
-
-
-    // let x3 = d3.scaleTime()
-    // //domain = data to include
-    // //Months
-    // .domain(d3.extent(data, d => d.Date))
-    // .range([margin.left, width - margin.right]);
-    
-    // //setting y axis to interest rates
-    // let y3 = d3.scaleLinear()
-    //     .domain([0, d3.max(data, d => d.Num)])
-    //     .range([height - margin.bottom, margin.top]);
-    
-    // //adding bottom ticks
-    //     svg.append("g")
-    //     .attr("transform", `translate(0,${height - margin.bottom})`)
-    //     .call(d3.axisBottom(x).tickSizeOuter(0));
-    
-    // //adding top ticks
-    // svg.append("g")
-    //     .attr("transform", `translate(${margin.left},0)`)
-    //     .call(d3.axisLeft(y).tickFormat(d => d + "%").tickSizeOuter(0).tickSize(-width));
-
-    // //labing the x axis
-    // svg.append("text")
-    //     .attr("class", "x-label")
-    //     .attr("text-anchor", "end")
-    //     .attr("x", width - margin.right)
-    //     .attr("y", height)
-    //     .attr("dx", "0.5em")
-    //     .attr("dy", "-0.5em") 
-    //     .text("Month");
-    
-    // //labling the y axis
-    // svg.append("text")
-    //     .attr("class", "y-label")
-    //     .attr("text-anchor", "end")
-    //     .attr("x", -margin.top/2)
-    //     .attr("dx", "-0.5em")
-    //     .attr("y", 10)
-    //     .attr("transform", "rotate(-90)")
-    //     .text("Interest rate");
-
-    // //creating the line and shaddded area
-    // let area = d3.area()
-    //     .x(d => x(d.Month))
-    //     .y0(y(0))
-    //     .y1(d => y(d.Num));
-
-    // //coloring the area
-    // svg.append("path")
-    //     .datum(data)
-    //     .attr("d", area)
-    //     //pink fill and light blue stroke
-    //     .attr("fill", "lightpink")
-    //     .attr("stroke", "lightblue")
+    legendGroup
+    .append("text")
+    .attr("x", (d, i) => (20 + (i * 75)))
+    .attr("y",15)
+    .text((d, i) => subgroups[i]);
 
 });

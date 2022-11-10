@@ -1,6 +1,6 @@
 import pandas as pd
 
-a3 = pd.read_json('a3cleanedonly2015.json')
+a3 = pd.read_json('data/a3cleanedonly2015.json')
 pd.unique(a3.Armed)
 pd.unique(a3.State)
 
@@ -30,6 +30,9 @@ a3_state_race = a3_state_race[a3_state_race.Race != ""]
 a3_state_race = a3_state_race.astype({'State': 'string', "Race": "string"})
 a3_state_race = a3_state_race.rename(columns={"UID": "Count"})
 a3_state_race.to_json('data/a3states_race2015_v1.json', orient = "index")
+
+a3_state_race = a3_state_race.pivot(index='State', columns='Race', values='Count').fillna(0)
+a3_state_race.to_csv('data/a3states_race2015_v1.csv')
 
 # state race alternative structure
 a3_state_race_alt = a3[a3.Race != ""]

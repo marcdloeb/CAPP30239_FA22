@@ -1,5 +1,6 @@
 d3.json('budget-all.json').then((data) => {
   for (let d of data) {
+    console.log(d)
     createRing(d);
   }
 });
