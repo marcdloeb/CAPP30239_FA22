@@ -303,7 +303,7 @@ The street address point dataset that I created for my BA thesis includes more t
 converting csv to sf object
 ```{r}
 ###Street Address Points
-street_addr <-read.csv("data/working_data/street_addr.csv")
+street_addr <-read.csv("data/sources/street_addresses/street_addr.csv")
 #removing trailing whitespace
 street_addr$publication <- trimws(street_addr$publication, which = c("both"))
 street_addr$edition <- trimws(street_addr$edition, which = c("both"))
