@@ -16,9 +16,11 @@ Promise.all([
   d3.csv("test_data/unemployment2020.csv"),
   d3.json("libs/counties-albers-10m.json"),
   d3.json("data/map_topos/race_tracts_albers.json"),
-]).then(([data, us, race_tracts]) => {//"data comes from the csv, us comes from the topojson"
+  d3.json("data/working_data/race_1920_tract_3857_id.geojson")
+]).then(([data, us, race_tracts, race_1920_tracts]) => {//"data comes from the csv, us comes from the topojson"
   console.log(race_tracts)
   console.log(us)
+  console.log(race_1920_tracts)
   
   // const dataById = {};
 
@@ -33,33 +35,61 @@ Promise.all([
   //  us.objects.states.geometries = us.objects.states.geometries.filter(d => d.properties.name === "Arizona");
 
   //const tracts_1920_geojson
-  const tracts_1920 = topojson.feature(race_tracts, race_tracts.objects.race_1920_tract_albers)
+  const tracts_1920 = topojson.feature(race_tracts, race_tracts.objects.race_1920_tract_albers);
   const counties = topojson.feature(us, us.objects.counties);
-  console.log(counties.features)
-  console.log(tracts_1920.features)
+  //const tracts_1920_id = geojson.feature(race_1920_tracts)
+  console.log(counties.features);
+  console.log(tracts_1920.features);
+
 
   // //Quantize evenly breakups domain into range buckets
   // const color = d3.scaleQuantize() //breaks up dominate into buckets
   //   .domain([0, 10]).nice() //breaking up into 1% buckets
   //   .range(d3.schemeBlues[9]);
 
-  const path = d3.geoPath();
+
+  const mesh = topojson.mesh(race_tracts, race_tracts.objects.race_1920_tract_albers);
+  const projection = d3.geoIdentity()
+    .angle(180)
+    .reflectX(180)
+    .fitSize([width, height], mesh);
+  const path = d3.geoPath().projection(projection);
 
   ///////// code chunk that doesn't work for tracts //////
-  // svg.append("g")
-  // .selectAll("path")
-  // .data(tracts_1920.features)
-  // .join("path")
-  // .attr("fill", "blue")
-  // .attr("d", path)
-
-///////////identical code with counties swapped in that does work////////
   svg.append("g")
   .selectAll("path")
-  .data(counties.features)
+  .data(tracts_1920.features)
   .join("path")
   .attr("fill", "blue")
   .attr("d", path)
+  .attr("stroke", "black");
+
+  console.log("path",path)
+
+  const tract_data = race_tracts.objects.race_1920_tract_albers.geometries
+  console.log(tract_data)
+
+  for (let d of tract_data){
+    console.log(d.properties.black_per)
+    console.log(d.id)
+
+  }
+
+      // for(var d of data) {
+    //      let nd = newData.find(nd => nd.race == d["Race"]);
+    //      nd.count += 1;
+    // }
+    // console.log(newData)
+
+
+
+///////////identical code with counties swapped in that does work////////
+  // svg.append("g")
+  // .selectAll("path")
+  // .data(counties.features)
+  // .join("path")
+  // .attr("fill", "blue")
+  // .attr("d", path)
 
 
   // svg.append("g")

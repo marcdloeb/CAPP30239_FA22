@@ -25,10 +25,10 @@ Census was inconsistent in 1920s-40s about how to count foreign born whites and 
 ```{r}
 ###1920s
 tract_1920 <-st_read("data/sources/census_shapefiles/us_tract_1920/US_tract_1920_conflated.shp")
-#st_crs(tract_1920)
+st_crs(tract_1920)
 #"ESRI 102003, USA_Contiguous_Albers_Equal_Area_Conic
-#reprojecting to EPSG:3857, Web Mercator, which is what MapBox uses
-#tract_1920 <- st_transform(tract_1920, crs = "EPSG:3857")
+# Switching it to 3857, mercator
+tract_1920 <- st_transform(tract_1920, crs = "EPSG:3857")
 
 #Selecting Cook County Tracts Only
 tract_1920 <- tract_1920 %>% 
@@ -60,12 +60,11 @@ race_1920 <-read.csv("data/sources/census_csvs/1920_tract.csv") %>%
 tract_1920 <- left_join(tract_1920, race_1920, by = "GISJOIN")
 tract_1920 <- tract_1920 %>% 
   mutate(id = as.numeric(substring(GISJOIN, 2)))
-  #column_to_rownames("id") ##### if I set the new id column to be the row names, then the geosjon breaks
 
 #tract_1920 <- rowid_to_column(tract_1920, "id")
-
+st_crs(tract_1920)
 plot(tract_1920 %>% select(black_per))
-st_write(tract_1920, "data/working_data/race_1920_tract_albers.geojson")
+st_write(tract_1920, "data/working_data/race_1920_tract.geojson")
 ```
 
 1930s tracts
@@ -75,7 +74,7 @@ tract_1930 <-st_read("data/sources/census_shapefiles/us_tract_1930/US_tract_1930
 #st_crs(tract_1930)
 #"ESRI 102003, USA_Contiguous_Albers_Equal_Area_Conic
 #reprojecting to EPSG:3857, Web Mercator
-#tract_1930 <- st_transform(tract_1930, crs = "EPSG:3857")
+tract_1930 <- st_transform(tract_1930, crs = "EPSG:3857")
 
 #selecting cook county tracts only
 tract_1930 <- tract_1930 %>% 
@@ -107,13 +106,13 @@ tract_1930 <- tract_1930 %>%
   mutate(id = as.numeric(substring(GISJOIN, 2)))
 
 plot(tract_1930 %>% select(black_per))
-st_write(tract_1930, "data/working_data/race_1930_tract_albers.geojson")
+st_write(tract_1930, "data/working_data/race_1930_tract.geojson")
 ```
 
 1940s tracts
 ```{r}
 ###1940s
-tract_1940 <-st_read("data/sources/source_shapefiles/us_tract_1940/US_tract_1940_conflated.shp")
+tract_1940 <-st_read("data/sources/census_shapefiles/us_tract_1940/US_tract_1940_conflated.shp")
 st_crs(tract_1940)
 #"ESRI 102003, USA_Contiguous_Albers_Equal_Area_Conic
 #reprojecting to EPSG:3857, Web Mercator
@@ -128,7 +127,7 @@ tract_1940 <- tract_1940 %>%
          county = COUNTY)
 
 #clean, everything adds up properly
-race_1940 <-read.csv("data/sources/source_csvs/1940_tract.csv") %>%
+race_1940 <-read.csv("data/sources/census_csvs/1940_tract.csv") %>%
   filter(STATEA == "17", COUNTYA == "31") %>%
   select(-STATE, -STATEA, -COUNTY, -COUNTYA, -AREANAME, -PRETRACTA, -TRACTA, -POSTTRCTA) %>%
   rename(total_pop = BUB001,
@@ -140,14 +139,16 @@ race_1940 <-read.csv("data/sources/source_csvs/1940_tract.csv") %>%
          black_per = 100 * black/total_pop)
 
 tract_1940 <- left_join(tract_1940, race_1940, by = "GISJOIN")
-#plot(tract_1940 %>% select(black_per))
-st_write(tract_1940, "data/working_data/1940_race_tract.geojson")
+tract_1940 <- tract_1940 %>% 
+  mutate(id = as.numeric(substring(GISJOIN, 2)))
+plot(tract_1940 %>% select(black_per))
+st_write(tract_1940, "data/working_data/race_1940_tract.geojson")
 ```
 
 1950s tracts
 ```{r}
 ###1950s
-tract_1950 <-st_read("data/sources/source_shapefiles/us_tract_1950/US_tract_1950_conflated.shp")
+tract_1950 <-st_read("data/sources/census_shapefiles/us_tract_1950/US_tract_1950_conflated.shp")
 st_crs(tract_1950)
 #"ESRI 102003, USA_Contiguous_Albers_Equal_Area_Conic
 #reprojecting to EPSG:3857, Web Mercator
@@ -164,7 +165,7 @@ tract_1950 <- tract_1950 %>%
          county = COUNTY)
 
 #clean
-race_1950 <-read.csv("data/sources/source_csvs/1950_tract.csv") %>% 
+race_1950 <-read.csv("data/sources/census_csvs/1950_tract.csv") %>% 
   filter(STATEA == "17", COUNTYA == "31") %>%
   select(-STATE, -STATEA, -COUNTY, -COUNTYA, -AREANAME, -PRETRACTA, -TRACTA, -POSTTRCTA) %>%
   rename(total_pop = BZ8001,
@@ -178,14 +179,16 @@ race_1950 <-read.csv("data/sources/source_csvs/1950_tract.csv") %>%
          #total_per = total_count/total_pop)
 
 tract_1950 <- left_join(tract_1950, race_1950, by = "GISJOIN")
-#plot(tract_1950 %>% select(black_per))
-st_write(tract_1950, "data/working_data/1950_race_tract.geojson")
+tract_1950 <- tract_1950 %>% 
+  mutate(id = as.numeric(substring(GISJOIN, 2)))
+plot(tract_1950 %>% select(black_per))
+st_write(tract_1950, "data/working_data/race_1950_tract.geojson")
 ```
 
 1960s tracts
 ```{r}
 ###1960s
-tract_1960 <-st_read("data/sources/source_shapefiles/us_tract_1960/US_tract_1960_conflated.shp")
+tract_1960 <-st_read("data/sources/census_shapefiles/us_tract_1960/US_tract_1960_conflated.shp")
 st_crs(tract_1960)
 #"ESRI 102003, USA_Contiguous_Albers_Equal_Area_Conic
 #reprojecting to EPSG:3857, Web Mercator
@@ -214,7 +217,7 @@ tract_1960 <- tract_1960 %>%
 #          total_per = total_count/total_pop)
 
 #calculating total population from the columns themselves
-race_1960 <-read.csv("data/sources/source_csvs/1960_tract.csv") %>%
+race_1960 <-read.csv("data/sources/census_csvs/1960_tract.csv") %>%
   filter(STATEA == "17", COUNTYA == "31") %>%
   rename(white = B7B001,
          black = B7B002,
@@ -226,14 +229,16 @@ race_1960 <-read.csv("data/sources/source_csvs/1960_tract.csv") %>%
          black_per = 100 * black/total_pop)
 
 tract_1960 <- left_join(tract_1960, race_1960, by = "GISJOIN")
-#plot(tract_1960 %>% select(black_per))
-st_write(tract_1960, "data/working_data/1960_race_tract.geojson")
+tract_1960 <- tract_1960 %>% 
+  mutate(id = as.numeric(substring(GISJOIN, 2)))
+plot(tract_1960 %>% select(black_per))
+st_write(tract_1960, "data/working_data/race_1960_tract.geojson")
 ```
 
 1970s tracts
 ```{r}
 ###1970s
-tract_1970 <-st_read("data/sources/source_shapefiles/us_tract_1970/US_tract_1970_conflated.shp")
+tract_1970 <-st_read("data/sources/census_shapefiles/us_tract_1970/US_tract_1970_conflated.shp")
 st_crs(tract_1970)
 #"ESRI 102003, USA_Contiguous_Albers_Equal_Area_Conic
 #reprojecting to EPSG:3857, Web Mercator
@@ -250,7 +255,7 @@ tract_1970 <- tract_1970 %>%
          county = COUNTY)
 
 #there are no tracts where the black population exceeds 100%
-race_1970 <-read.csv("data/sources/source_csvs/1970_tract.csv") %>%
+race_1970 <-read.csv("data/sources/census_csvs/1970_tract.csv") %>%
   filter(STATEA == "17", COUNTYA == "31") %>%
   rename(total_pop = CY7001,
          black = CY8001,
@@ -260,14 +265,16 @@ race_1970 <-read.csv("data/sources/source_csvs/1970_tract.csv") %>%
          #pop_diff = total_pop - black)
 
 tract_1970 <- left_join(tract_1970, race_1970, by = "GISJOIN")
-#plot(tract_1970 %>% select(black_per))
-st_write(tract_1970, "data/working_data/1970_race_tract.geojson")
+tract_1970 <- tract_1970 %>% 
+  mutate(id = as.numeric(substring(GISJOIN, 2)))
+plot(tract_1970 %>% select(black_per))
+st_write(tract_1970, "data/working_data/race_1970_tract.geojson")
 ```
 
 1980s tracts
 ```{r}
 ###1980s
-tract_1980 <-st_read("data/sources/source_shapefiles/us_tract_1980/US_tract_1980_conflated.shp")
+tract_1980 <-st_read("data/sources/census_shapefiles/us_tract_1980/US_tract_1980_conflated.shp")
 st_crs(tract_1980)
 #"ESRI 102003, USA_Contiguous_Albers_Equal_Area_Conic
 #reprojecting to EPSG:3857, Web Mercator
@@ -284,7 +291,7 @@ tract_1980 <- tract_1980 %>%
          county = COUNTY)
 
 #clean
-race_1980 <-read.csv("data/sources/source_csvs/1980_tract.csv") %>%
+race_1980 <-read.csv("data/sources/census_csvs/1980_tract.csv") %>%
   filter(STATEA == "17", COUNTYA == "31") %>%
   rename(total_pop = C6W001,
          white = C6X001,
@@ -300,8 +307,10 @@ race_1980 <-read.csv("data/sources/source_csvs/1980_tract.csv") %>%
          #total_per = total_count/total_pop)
 
 tract_1980 <- left_join(tract_1980, race_1980, by = "GISJOIN")
-#plot(tract_1980 %>% select(black_per))
-st_write(tract_1980, "data/working_data/1980_race_tract.geojson")
+tract_1980 <- tract_1980 %>% 
+  mutate(id = as.numeric(substring(GISJOIN, 2)))
+plot(tract_1980 %>% select(black_per))
+st_write(tract_1980, "data/working_data/race_1980_tract.geojson")
 ```
 
 
@@ -369,6 +378,8 @@ str_addr_sf_maroon <- str_addr_sf_clean %>%
   select(-edition)
 #st_write(str_addr_sf_maroon, "data/working_data/maroon_street_addr.geojson")
 ```
+
+
 
 Step 3: Assigning neighborhood labels to street address points and census tract polygons
 
@@ -573,6 +584,10 @@ tract_1980_study_area$neighborhood[is.na(tract_1980_study_area$neighborhood)] = 
 plot(tract_1980_study_area %>% select(neighborhood))
 st_write(tract_1980_study_area, "data/map_data/1980_race_tract_nb.geojson")
 ```
+
+
+
+
 
 Step 4: Find Black population share of each neighborhood
 
