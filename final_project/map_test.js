@@ -16,9 +16,7 @@ Promise.all([
   d3.csv("test_data/unemployment2020.csv"),
   d3.json("libs/counties-albers-10m.json"),
   d3.json("data/map_topos/race_tracts_albers.json"),
-  d3.json("data/map_data/race_1920_tract_nb.geojson")
-]).then(([data, us, race_tracts, race_geoj]) => {//"data comes from the csv, us comes from the topojson"
-  console.log(race_geoj)
+]).then(([data, us, race_tracts]) => {//"data comes from the csv, us comes from the topojson"
   console.log(race_tracts)
   console.log(us)
   
