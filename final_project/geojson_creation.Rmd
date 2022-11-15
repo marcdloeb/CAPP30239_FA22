@@ -24,11 +24,11 @@ Census was inconsistent in 1920s-40s about how to count foreign born whites and 
 1920 tracts
 ```{r}
 ###1920s
-tract_1920 <-st_read("data/sources/source_shapefiles/us_tract_1920/US_tract_1920_conflated.shp")
+tract_1920 <-st_read("data/sources/census_shapefiles/us_tract_1920/US_tract_1920_conflated.shp")
 #st_crs(tract_1920)
 #"ESRI 102003, USA_Contiguous_Albers_Equal_Area_Conic
 #reprojecting to EPSG:3857, Web Mercator, which is what MapBox uses
-tract_1920 <- st_transform(tract_1920, crs = "EPSG:3857")
+#tract_1920 <- st_transform(tract_1920, crs = "EPSG:3857")
 
 #Selecting Cook County Tracts Only
 tract_1920 <- tract_1920 %>% 
@@ -37,9 +37,9 @@ tract_1920 <- tract_1920 %>%
   rename(land_area = Shape_Area,
          state = STATE,
          county = COUNTY)
-  
+
 #clean, everything adds up
-race_1920 <-read.csv("data/sources/source_csvs/1920_tract.csv") %>% 
+race_1920 <-read.csv("data/sources/census_csvs/1920_tract.csv") %>% 
   select(-STATE, -STATEA, -COUNTY, -COUNTYA, -AREANAME, -PRETRACTA, -TRACTA, -POSTTRCTA) %>%
   rename(total_pop = A94001,
          nat_white_nat_par = BAT001,
@@ -58,19 +58,24 @@ race_1920 <-read.csv("data/sources/source_csvs/1920_tract.csv") %>%
 
 #joining tracts and race data via census tract code
 tract_1920 <- left_join(tract_1920, race_1920, by = "GISJOIN")
+tract_1920 <- tract_1920 %>% 
+  mutate(id = as.numeric(substring(GISJOIN, 2)))
+  #column_to_rownames("id") ##### if I set the new id column to be the row names, then the geosjon breaks
 
-#plot(tract_1920 %>% select(black_per))
-st_write(tract_1920, "data/working_data/1920_race_tract.geojson")
+#tract_1920 <- rowid_to_column(tract_1920, "id")
+
+plot(tract_1920 %>% select(black_per))
+st_write(tract_1920, "data/working_data/race_1920_tract_albers.geojson")
 ```
 
 1930s tracts
 ```{r}
 ###1930s
-tract_1930 <-st_read("data/sources/source_shapefiles/us_tract_1930/US_tract_1930_conflated.shp")
+tract_1930 <-st_read("data/sources/census_shapefiles/us_tract_1930/US_tract_1930_conflated.shp")
 #st_crs(tract_1930)
 #"ESRI 102003, USA_Contiguous_Albers_Equal_Area_Conic
 #reprojecting to EPSG:3857, Web Mercator
-tract_1930 <- st_transform(tract_1930, crs = "EPSG:3857")
+#tract_1930 <- st_transform(tract_1930, crs = "EPSG:3857")
 
 #selecting cook county tracts only
 tract_1930 <- tract_1930 %>% 
@@ -80,7 +85,7 @@ tract_1930 <- tract_1930 %>%
          state = STATE,
          county = COUNTY)
 #	G17003100318 has less than total pop
-race_1930 <-read.csv("data/sources/source_csvs/1930_tract.csv") %>% 
+race_1930 <-read.csv("data/sources/census_csvs/1930_tract.csv") %>% 
   select(-STATE, -STATEA, -COUNTY, -COUNTYA, -AREANAME, -PRETRACTA, -TRACTA, -POSTTRCTA) %>%
   rename(total_pop = BHI001,
          nat_white_nat_par = BIQ001,
@@ -98,8 +103,11 @@ race_1930 <-read.csv("data/sources/source_csvs/1930_tract.csv") %>%
          #total_per = total_count/total_pop)
 
 tract_1930 <- left_join(tract_1930, race_1930, by = "GISJOIN")
+tract_1930 <- tract_1930 %>% 
+  mutate(id = as.numeric(substring(GISJOIN, 2)))
+
 plot(tract_1930 %>% select(black_per))
-#st_write(tract_1930, "data/working_data/1930_race_tract.geojson")
+st_write(tract_1930, "data/working_data/race_1930_tract_albers.geojson")
 ```
 
 1940s tracts

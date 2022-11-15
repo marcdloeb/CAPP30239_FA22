@@ -30,6 +30,10 @@ Promise.all([
     .range(['#aaa', '#bbb', '#ccc', '#ddd', '#eee', '#f7f7f7', '#d8daeb', '#b2abd2', '#8073ac']);
     // .range(d3.schemePuOr[9]); // Alternative color scheme https://observablehq.com/@d3/color-schemes
 
+  // Average umemployment rate is now 3.7%,
+  // knowing this we could build a diverging scale.
+  // 3.7% will be middle, low high on either side
+
   const path = d3.geoPath();
 
   d3.select("#legend")
