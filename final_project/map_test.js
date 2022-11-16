@@ -15,12 +15,31 @@ const svg = d3.select("#chart")
 Promise.all([
   d3.csv("test_data/unemployment2020.csv"),
   d3.json("libs/counties-albers-10m.json"),
-  d3.json("data/map_topos/race_tracts_albers.json"),
-  d3.json("data/working_data/race_1920_tract_3857_id.geojson")
-]).then(([data, us, race_tracts, race_1920_tracts]) => {//"data comes from the csv, us comes from the topojson"
-  console.log(race_tracts)
-  console.log(us)
-  console.log(race_1920_tracts)
+  d3.json("data/map_topos/race_tracts_id.json"),
+  d3.json("data/map_topos/nbhood_street_addr.json")
+]).then(([data, us, race_tracts, str_addr]) => {//"data comes from the csv, us comes from the topojson"
+  console.log(race_tracts);
+  console.log(us);
+  console.log(str_addr);
+
+  const tracts_1920 = topojson.feature(race_tracts, race_tracts.objects.race_1920_tract_id);
+  const counties = topojson.feature(us, us.objects.counties);
+  const addr = topojson.feature(str_addr, str_addr.objects.nbhood_street_addr);
+  console.log("counties features");
+  console.log(counties.features);
+  console.log("1920 tract features");
+  console.log(tracts_1920.features);
+  console.log("street addresses")
+  console.log(addr)
+
+
+  const dataById = {}
+  for (let d of tracts_1920.features){
+    //console.log(d.properties.black_per)
+    //console.log(d.id)
+    dataById[d.id] = d.properties
+  }
+  console.log("databyid",dataById)
   
   // const dataById = {};
 
@@ -30,50 +49,44 @@ Promise.all([
   //   dataById[d.id] = d;
   // }
 
-  // console.log(dataById)
-
-  //  us.objects.states.geometries = us.objects.states.geometries.filter(d => d.properties.name === "Arizona");
-
-  //const tracts_1920_geojson
-  const tracts_1920 = topojson.feature(race_tracts, race_tracts.objects.race_1920_tract_albers);
-  const counties = topojson.feature(us, us.objects.counties);
-  //const tracts_1920_id = geojson.feature(race_1920_tracts)
-  console.log(counties.features);
-  console.log(tracts_1920.features);
-
-
   // //Quantize evenly breakups domain into range buckets
-  // const color = d3.scaleQuantize() //breaks up dominate into buckets
-  //   .domain([0, 10]).nice() //breaking up into 1% buckets
-  //   .range(d3.schemeBlues[9]);
+  const color = d3.scaleQuantize() //breaks up dominate into buckets
+    .domain([0, 100])
+    .range(["#ffffff","#e1edf8","#cadef0","#abcfe6","#82badb","#59a1cf","#3787c0","#1c6aaf","#0b4d94","#08306b"]);
 
-
-  const mesh = topojson.mesh(race_tracts, race_tracts.objects.race_1920_tract_albers);
+  const mesh = topojson.mesh(race_tracts, race_tracts.objects.race_1920_tract_id);
+  // const projection = d3.geoMercator()
+  //   .fitSize([width, height], mesh);
   const projection = d3.geoIdentity()
-    .angle(180)
+    .angle(179)
     .reflectX(180)
     .fitSize([width, height], mesh);
   const path = d3.geoPath().projection(projection);
-
-  ///////// code chunk that doesn't work for tracts //////
+  
   svg.append("g")
-  .selectAll("path")
-  .data(tracts_1920.features)
-  .join("path")
-  .attr("fill", "blue")
-  .attr("d", path)
-  .attr("stroke", "black");
+    .selectAll("path")
+    .data(tracts_1920.features)
+    .join("path")
+    .attr("fill", "white")
+    .attr("fill", d => (d.id in dataById) ? color(dataById[d.id].black_per) : 'white')
+    .attr("d", path)
+    .attr("stroke", "black")
+    .attr("stroke-width", 0.2);
 
   console.log("path",path)
 
-  const tract_data = race_tracts.objects.race_1920_tract_albers.geometries
-  console.log(tract_data)
+  svg.append("g")
+    .selectAll("path")
+    .data(addr.features)
+    .join("path")
+    .attr("fill", "black")
+    .attr("d", path)
+    .attr("stroke", "black")
+    .attr("stroke-width", 0.2);
 
-  for (let d of tract_data){
-    console.log(d.properties.black_per)
-    console.log(d.id)
+  
 
-  }
+
 
       // for(var d of data) {
     //      let nd = newData.find(nd => nd.race == d["Race"]);

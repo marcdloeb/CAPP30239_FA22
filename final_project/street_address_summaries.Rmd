@@ -1,0 +1,206 @@
+---
+title: "street_address_summaries"
+author: "Marc David Loeb"
+date: '2022-11-16'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(sf)
+library(tidyverse)
+```
+
+Step 2: Cleaning and filtering street address points
+The street address point dataset that I created for my BA thesis includes more than 56,000 points, spread across much of the South Side. To limit the extent and improve the consistency of the data, I limit the street address to those that appear in the Daily Maroon, and are contained within a "study area" on the Southeast Side.
+
+converting csv to sf object
+```{r}
+###Street Address Points
+street_addr <-read.csv("data/sources/street_addresses/street_addr.csv")
+#removing trailing whitespace
+street_addr$publication <- trimws(street_addr$publication, which = c("both"))
+street_addr$edition <- trimws(street_addr$edition, which = c("both"))
+street_addr <- street_addr %>%
+  rename(html_source = search_and_address,
+         full_addr = full) %>%
+  select(-old_search, -old_addr, -addr, -city_state)
+
+street_addr_sf <- st_as_sf(street_addr, coords = c("lon", "lat"))
+st_crs(street_addr_sf) = "EPSG:4326"
+street_addr_sf <- st_transform(street_addr_sf, crs = "EPSG:3857")
+st_write(street_addr_sf, "data/working_points/all_uncleaned_street_addr.geojson")
+```
+
+Removing duplicates
+need to search multiple permutations of the same address eg "6311 COTTAGE GROVE" and "6311 South COTTAGE GROVE" means that duplicates occasionally exist reduces number of observations from 56608 to 56172
+```{r}
+street_addr_clean <- street_addr %>% 
+  group_by(full_addr, publication, edition, day, month, year, geoaddress, lat, lon) %>% 
+  summarise(quantity = max(quantity))
+street_addr_clean <- street_addr_clean %>% ungroup()
+str_addr_sf_clean <- st_as_sf(street_addr_clean, coords = c("lon", "lat"))
+#internet said that this was supposed to be "EPSG:3857"! Took me like an hour to trial and error
+st_crs(str_addr_sf_clean) = "EPSG:4326"
+str_addr_sf_clean <- st_transform(str_addr_sf_clean, crs = "EPSG:3857")
+st_write(str_addr_sf_clean , "data/working_points/all_cleaned_street_addr.geojson")
+```
+
+Old cleaning code
+```{r}
+### Address searches with slight semantic differences catch the same peice of text
+### eg "6311 COTTAGE GROVE" and "6311 South COTTAGE GROVE"
+# street_addr_preserved_searches <- street_addr %>% 
+#   group_by(full_addr, publication, edition, day, month, year, geoaddress) %>% 
+#   summarise(quantity = max(quantity), 
+#             searches = list(unique(search)))
+# 
+# street_addr_preserved_searches %>%
+#   ungroup %>%
+#   unnest(cols = c(searches))
+# 
+# for (search_list in street_addr_preserved_searches$searches) {
+#   if (length(search_list) >1) {
+#     print(search_list)
+#   }
+# }
+```
+
+Limiting to just those from Maroon articles
+```{r}
+#str_addr_sf_clean <- st_read("data/working_data/all_cleaned_street_addr.geojson")
+str_addr_sf_maroon <- str_addr_sf_clean %>% 
+  filter(publication == "Daily Maroon") %>%
+  #no edition data for Maroon anyways
+  select(-edition)
+st_write(str_addr_sf_maroon, "data/working_points/maroon_street_addr.geojson")
+```
+
+
+
+Step 3: Assigning neighborhood labels to street address points and census tract polygons
+
+loading in neighborhood polygons
+polygons created by hand in QGIS
+```{r}
+chicago_polys <-st_read("data/neighborhood_polygons/chicago_polys_for_addr.geojson")
+study_area <- chicago_polys[chicago_polys$name == "study_area",]
+neighborhoods <- chicago_polys[chicago_polys$name != "study_area",]
+```
+
+assigning polygons to points
+```{r}
+str_addr_sf_maroon <- st_read("data/working_points/maroon_street_addr.geojson")
+#no longer doing an area filter
+#hacky way of doing an intersection that is faster that st_intersection, and avoids the attribute join
+str_addr_sf_nb <- str_addr_sf_maroon[st_intersects(str_addr_sf_maroon, study_area) %>% lengths > 0,]
+str_addr_sf_nb <- st_join(str_addr_sf_nb, neighborhoods %>% select(-id))
+str_addr_sf_nb <- str_addr_sf_nb %>% rename(neighborhood = name)
+str_addr_sf_nb$neighborhood[is.na(str_addr_sf_nb$neighborhood)] = "other"
+```
+
+adding decades
+```{r}
+#adding decades
+str_addr_sf_nb <- str_addr_sf_nb %>%   
+  mutate(decade = ifelse(year <= 1914, "1902-1914",
+                  ifelse(year <= 1925, "1915-1925",
+                  ifelse(year <= 1935, "1926-1935",
+                  ifelse(year <= 1945, "1936-1945",
+                  ifelse(year <= 1955, "1946-1955",       
+                  ifelse(year <= 1965, "1956-1965",
+                  ifelse(year <= 1975, "1966-1975",
+                  ifelse(year <= 1986, "1976-1986","Other")
+  ))))))))
+
+#adding a numeric index column
+str_addr_sf_nb$id <- 1:nrow(str_addr_sf_nb)
+
+st_write(str_addr_sf_nb, "data/map_data/nbhood_street_addr.geojson")
+```
+
+Finding the absolute number of addresses in each neighborhood
+```{r}
+str_addr_sf_nb <- st_read("data/map_data/nbhood_street_addr.geojson")
+
+### count by neighborhood
+str_addr_sf_nb_counts <- str_addr_sf_nb %>% 
+  #filter(!is.na(neighborhood)) %>%
+  group_by(neighborhood) %>% 
+  summarize(count = sum(quantity))
+#don't need the multipoint version
+#st_write(str_addr_sf_nb_counts, "data/working_data/nbhood_street_addr_counts.geojson")
+
+#csv version
+str_addr_nb_counts <- str_addr_sf_nb_counts %>%
+  st_drop_geometry()
+write.csv(str_addr_nb_counts, "data/working_points/nbhood_street_addr_counts.csv")
+
+```
+
+Finding the absolute number of addresses in each neighborhood, by decade
+```{r}
+str_addr_sf_nb <- st_read("data/map_data/nbhood_street_addr.geojson")
+
+str_addr_sf_nbdecade_counts <- str_addr_sf_nb %>% 
+  group_by(neighborhood, decade) %>% 
+  summarize(count = sum(quantity))
+#st_write(str_addr_sf_nb_decade_grouped, "")
+
+### pivoting data so that neighborhood is on the y axis and decade is on the x
+str_addr_nbdecade_counts_pivot <- str_addr_sf_nbdecade_counts %>% 
+  st_drop_geometry() %>%
+  pivot_wider(names_from = decade,values_from = count)
+
+write.csv(str_addr_sf_nbdecade_counts_pivot, "data/chart_data/nbhood_decade_street_addr_counts.csv")
+```
+
+Street address proportion in each neighborhood each decade
+```{r}
+# https://stackoverflow.com/questions/9447801/dividing-columns-by-colsums-in-r
+#hiding non-numeric column in the row names
+str_addr_nbdecade_counts_temp <- str_addr_nbdecade_counts_pivot %>% column_to_rownames("neighborhood")
+str_addr_nbdecade_prop <- 100 * sweep(str_addr_nbdecade_counts_temp,2,colSums(str_addr_nbdecade_counts_temp),`/`)
+str_addr_nbdecade_prop <- str_addr_nbdecade_prop %>% rownames_to_column("neighborhood")
+write.csv(str_addr_nbdecade_prop, "data/chart_data/nbhood_decade_street_addr_perc.csv")
+
+```
+
+Finding the absolute number of addresses in each neighborhood, by year
+```{r}
+### finding count by year
+str_addr_sf_nb <- st_read("data/map_data/nbhood_street_addr.geojson")
+
+str_addr_sf_nbyear_counts <- str_addr_sf_nb %>% 
+  #filter(!is.na(neighborhood)) %>%
+  group_by(neighborhood, year) %>% 
+  summarize(count = sum(quantity))
+#st_write(str_addr_sf_nbyear_counts, "data/working_data/nbhood_year_street_addr_counts.geojson")
+
+### pivoting data so that neighborhood is on the y axis and year is on the x
+str_addr_nbyear_counts_pivot <- str_addr_sf_nbyear_counts %>% 
+  st_drop_geometry() %>%
+  pivot_wider(names_from = year,values_from = count)
+
+str_addr_nbyear_counts_pivot <- str_addr_nbyear_counts_pivot[,order(names(str_addr_nbyear_counts_pivot))]
+str_addr_nbyear_counts_pivot <- str_addr_nbyear_counts_pivot %>% mutate_all(~replace_na(., 0))
+#moving neighborhood back to the front
+str_addr_nbyear_counts_pivot <- str_addr_nbyear_counts_pivot %>% select(neighborhood, everything())
+#1972 is mostly missing its data, removing the column
+str_addr_nbyear_counts_pivot <- str_addr_nbyear_counts_pivot %>% select(-"1972")
+write.csv(str_addr_nbyear_counts_pivot, "data/chart_data/nbhood_year_street_addr_counts.csv")
+```
+
+Street address proportion in each neighborhood each year
+```{r}
+### finding percentage of total in each neighborhood in each year
+# https://stackoverflow.com/questions/9447801/dividing-columns-by-colsums-in-r
+str_addr_nbyear_counts_temp <- str_addr_nbyear_counts_pivot %>% column_to_rownames("neighborhood")
+str_addr_nbyear_prop <- 100 * sweep(str_addr_nbyear_counts_temp,2,colSums(str_addr_nbyear_counts_temp),`/`)
+str_addr_nbyear_prop <- str_addr_nbyear_prop %>% rownames_to_column("neighborhood")
+write.csv(str_addr_nbyear_prop, "data/chart_data/nbhood_year_street_addr_perc.csv")
+
+```
