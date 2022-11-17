@@ -15,14 +15,14 @@ const svg = d3.select("#chart")
 Promise.all([
   d3.csv("test_data/unemployment2020.csv"),
   d3.json("libs/counties-albers-10m.json"),
-  d3.json("data/map_topos/race_tracts_id.json"),
-  d3.json("data/map_topos/nbhood_street_addr.json")
+  d3.json("data/map_topos/race_tracts.json"),
+  d3.json("data/map_topos/nbhood_street_addr.json"),
 ]).then(([data, us, race_tracts, str_addr]) => {//"data comes from the csv, us comes from the topojson"
   console.log(race_tracts);
   console.log(us);
   console.log(str_addr);
 
-  const tracts_1920 = topojson.feature(race_tracts, race_tracts.objects.race_1920_tract_id);
+  const tracts_1920 = topojson.feature(race_tracts, race_tracts.objects.race_1930_tract_id);
   const counties = topojson.feature(us, us.objects.counties);
   const addr = topojson.feature(str_addr, str_addr.objects.nbhood_street_addr);
   console.log("counties features");
@@ -54,7 +54,7 @@ Promise.all([
     .domain([0, 100])
     .range(["#ffffff","#e1edf8","#cadef0","#abcfe6","#82badb","#59a1cf","#3787c0","#1c6aaf","#0b4d94","#08306b"]);
 
-  const mesh = topojson.mesh(race_tracts, race_tracts.objects.race_1920_tract_id);
+  const mesh = topojson.mesh(race_tracts, race_tracts.objects.race_1930_tract_id);
   // const projection = d3.geoMercator()
   //   .fitSize([width, height], mesh);
   const projection = d3.geoIdentity()

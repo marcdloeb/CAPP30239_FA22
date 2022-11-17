@@ -155,7 +155,7 @@ str_addr_nbdecade_counts_pivot <- str_addr_sf_nbdecade_counts %>%
   st_drop_geometry() %>%
   pivot_wider(names_from = decade,values_from = count)
 
-write.csv(str_addr_sf_nbdecade_counts_pivot, "data/chart_data/nbhood_decade_street_addr_counts.csv")
+#write.csv(str_addr_sf_nbdecade_counts_pivot, "data/chart_data/nbhood_decade_street_addr_counts.csv")
 ```
 
 Street address proportion in each neighborhood each decade
@@ -168,6 +168,17 @@ str_addr_nbdecade_prop <- str_addr_nbdecade_prop %>% rownames_to_column("neighbo
 write.csv(str_addr_nbdecade_prop, "data/chart_data/nbhood_decade_street_addr_perc.csv")
 
 ```
+
+Decade pivot longer
+```{r}
+#don't read it in! the numeric columns will break!!!
+str_addr_nbdecade_prop_long <- str_addr_nbdecade_prop %>% pivot_longer(!neighborhood, names_to = "decade", values_to = "percentage")
+write.csv(str_addr_nbdecade_prop_long, "data/chart_data/nbhood_decade_street_addr_perc_long.csv")
+
+```
+
+
+
 
 Finding the absolute number of addresses in each neighborhood, by year
 ```{r}
@@ -204,3 +215,4 @@ str_addr_nbyear_prop <- str_addr_nbyear_prop %>% rownames_to_column("neighborhoo
 write.csv(str_addr_nbyear_prop, "data/chart_data/nbhood_year_street_addr_perc.csv")
 
 ```
+

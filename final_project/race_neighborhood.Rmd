@@ -186,3 +186,11 @@ all_nb_blackper <- data.frame(neighborhood = tract_1920_grouped$neighborhood,
 write.csv(all_nb_blackper, "data/chart_data/all_nb_blackper.csv")
 ```
 
+long version
+```{r}
+all_nb_blackper <- read.csv("data/chart_data/all_nb_blackper.csv")
+
+all_nb_blackper_long <- all_nb_blackper %>% select(-id) %>% pivot_longer(!neighborhood, names_to = "decade", values_to = "percentage")
+write.csv(all_nb_blackper_long, "data/chart_data/all_nb_blackper_long.csv")
+```
+

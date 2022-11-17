@@ -28,7 +28,8 @@ st_crs(tract_1920)
 # Switching it to 3857, mercator
 
 # try 3395, which is a different mercator CRS which may actually work
-tract_1920 <- st_transform(tract_1920, crs = "EPSG:3857")
+tract_1920 <- st_transform(tract_1920, crs = "EPSG:3395")
+#tract_1920 <- st_transform(tract_1920, crs = "EPSG:3857")
 
 #Selecting Cook County Tracts Only
 tract_1920 <- tract_1920 %>% 
@@ -66,7 +67,7 @@ tract_1920 <- tract_1920 %>%
   mutate_all(~replace(., is.na(.), 0))
 
 plot(tract_1920 %>% select(black_per))
-st_write(tract_1920, "data/working_tracts/race_1920_tract.geojson")
+st_write(tract_1920, "data/working_tracts/race_1920_tract_3395.geojson")
 ```
 
 1930s tracts
@@ -76,7 +77,8 @@ tract_1930 <-st_read("data/sources/census_shapefiles/us_tract_1930/US_tract_1930
 #st_crs(tract_1930)
 #"ESRI 102003, USA_Contiguous_Albers_Equal_Area_Conic
 #reprojecting to EPSG:3857, Web Mercator
-tract_1930 <- st_transform(tract_1930, crs = "EPSG:3857")
+#tract_1930 <- st_transform(tract_1930, crs = "EPSG:3857")
+tract_1930 <- st_transform(tract_1930, crs = "EPSG:3395")
 
 #selecting cook county tracts only
 tract_1930 <- tract_1930 %>% 
@@ -110,7 +112,7 @@ tract_1930 <- tract_1930 %>%
   mutate_all(~replace(., is.na(.), 0))
 
 plot(tract_1930 %>% select(black_per))
-st_write(tract_1930, "data/working_tracts/race_1930_tract.geojson")
+st_write(tract_1930, "data/working_tracts/race_1930_tract_3395.geojson")
 ```
 
 1940s tracts
