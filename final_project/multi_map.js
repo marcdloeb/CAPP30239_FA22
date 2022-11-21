@@ -7,8 +7,6 @@ const tooltip = d3.select("body")
 const height = 900,
   width = 450;
 
-let counties;
-
 Promise.all([
   d3.json("data/map_topos/race_tracts.json"),
   d3.json("data/map_topos/nbhood_street_addr_decades.json"),
