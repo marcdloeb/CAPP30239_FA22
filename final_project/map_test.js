@@ -4,8 +4,8 @@ const tooltip = d3.select("body")
   .style("position", "absolute")
   .style("visibility", "hidden");
 
-const height = 610,
-  width = 975;
+const height = 600,
+  width = 300;
 
 const svg = d3.select("#chart")
   .append("svg")

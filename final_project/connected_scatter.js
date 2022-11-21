@@ -1,10 +1,10 @@
-let height = 400, //setting variables
-    width = 600,
+let height1 = 400, //setting variables
+    width1 = 600,
     margin = ({ top: 25, right: 30, bottom: 35, left: 40 });
   
-const svg = d3.select("#chart") //selecting the chart ID from HTML, appending SVG with a view box
+const svg = d3.select("#connected_scatter") //selecting the chart ID from HTML, appending SVG with a view box
     .append("svg")
-    .attr("viewBox", [0, 0, width, height]);
+    .attr("viewBox", [0, 0, width1, height1]);
 
 d3.csv('data/chart_data/nbhood_decade_add_blackper_long.csv').then(data => {   //getting data
   
@@ -14,11 +14,11 @@ d3.csv('data/chart_data/nbhood_decade_add_blackper_long.csv').then(data => {   /
     console.log(neighborhoodGroup)
     console.log(neighborhoodGroup.get("Black Belt"))
 
-    for (let d of tracts_1920.features){
-        //console.log(d.properties.black_per)
-        //console.log(d.id)
-        dataById[d.id] = d.properties
-      }
+    // for (let d of tracts_1920.features){
+    //     //console.log(d.properties.black_per)
+    //     //console.log(d.id)
+    //     dataById[d.id] = d.properties
+    //   }
 
     const myColor = d3.scaleOrdinal()
         .domain(neighborhoodGroup)
@@ -29,24 +29,24 @@ d3.csv('data/chart_data/nbhood_decade_add_blackper_long.csv').then(data => {   /
 
     let x = d3.scaleLinear() //setting the x-scale
         .domain(d3.extent(data, d => d.black_per)).nice() //domain = data set
-        .range([margin.left, width - margin.right]);  //range = space data takes on the page
+        .range([margin.left, width1 - margin.right]);  //range = space data takes on the page
 
     let y = d3.scaleSqrt() //going the same thing on the y-scale
         //.domain(d3.extent(data, d => d.addr_share)).nice() //d3.extent does max and min
         .domain(d3.extent([0,90])).nice()
-        .range([height - margin.bottom, margin.top]);
+        .range([height1 - margin.bottom, margin.top]);
 
         console.log(d3.extent(data, d => d.addr_share))
 
     svg.append("g") //creating x-axis
-        .attr("transform", `translate(0,${height - margin.bottom})`)
+        .attr("transform", `translate(0,${height1 - margin.bottom})`)
         .attr("class", "x-axis")
-        .call(d3.axisBottom(x).tickFormat(d => (d) + "%").tickSize(-height + margin.top + margin.bottom))// tick size w/ a negative gives it the grid
+        .call(d3.axisBottom(x).tickFormat(d => (d) + "%").tickSize(-height1 + margin.top + margin.bottom))// tick size w/ a negative gives it the grid
 
     svg.append("g") //creating y-axis
         .attr("transform", `translate(${margin.left},0)`)
         .attr("class", "y-axis")
-        .call(d3.axisLeft(y).tickFormat(d => (d) + "%").tickSize(-width + margin.left + margin.right))
+        .call(d3.axisLeft(y).tickFormat(d => (d) + "%").tickSize(-width1 + margin.left + margin.right))
 
     svg.append("g")//appending an HTML element. Know it is HTML because of the quotes
         .attr("fill", "black")

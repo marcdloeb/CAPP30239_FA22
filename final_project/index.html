@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* .row {
+    .row {
       column-count: 2;
     }
 
@@ -40,26 +40,48 @@
     .chart, .chart p, .chart span {
       width: 100%;
       font-size: 10px;
-    } */
+    }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <h1>Interest Rates Reached an All-time High During the Height of the Pandemic</h1>
+    <h1>Final Charts Draft</h1>
+    <h3>Marc David Loeb</h3>
+    <h2>11-20-2022</h2>
+
+    <h1>Chart #1: Linked Scatter</h1>
     <p>
-        Unemployment Rate in the US averaged 5.74 
-        percent from 1948 until 2022. In April of 2020, unemployment rate hit a high of 14.70 percent.
-        The following data comes from the <a href="https://www.bls.gov/lau/">Bureau of Labor Statistics</a>.
+      test
+    </p>
+    <div id="connected_scatter"></div>
+
+    <h1>Chart #2: Normalized Area</h1>
+    <p>
+      test
+    </p>
+    <div id="chart2"></div>
+      
+    <h1>Chart #3: Map Series</h1>
+    <h1>Street Address Points and Percent Black, 1926-1935</h1>
+    <p>
+      This series of eight maps reflects the evolving relationship between the Black population on Chicago's Southeast Side, and the street addresses that appear in University of Chicago campus and community publications
+
+      While this series of maps is the most complete of my charts, there are several changes I hope to make. First, there area many overlapping points. I hope to instead scale the size of points based on the number of street addresses in that location during the decade.
+      Additionally, I want to zoom the maps in a bit, and cut the land area covered in the maps by about 50%. Finally, if time permits, I'm going to pull in a modern street grid, and polygons for the lake and parks. This will give people are better sense of where this actually is
     </p>
     <div id="legend"></div>
     <div id="row1" class="row"></div>
     <div id="row2" class="row"></div>
+    <div id="row3" class="row"></div>
+    <div id="row4" class="row"></div>
   </div>
 </body>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="libs/d3-color-legend.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 <script src="multi_map.js"></script>
+<script src="connected_scatter.js"></script>
+<script src="normalized_area.js"></script>
 
 </html>
