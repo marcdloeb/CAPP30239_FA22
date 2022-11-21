@@ -1,26 +1,28 @@
-const svg2 = d3.select("#normalized_area"),
-    margin2 = {top: 20, right: 20, bottom: 30, left: 50},
-    width2 = 960 - margin2.left - margin2.right,
-    height2 = 500 - margin2.top - margin2.bottom;
+let width2 = 900,
+    height2 = 450,
+    margin2 = {top: 20, right: 20, bottom: 30, left: 50}
 
-var parseDate = d3.timeParse("%Y");
 
-var x = d3.scaleTime().range([0, width2]),
-    y = d3.scaleLinear().range([height2, 0]),
-    z = d3.scaleOrdinal(d3.schemeCategory10);
+const svg2 = d3.select("#normalized_area")
+    .append("svg")
+    .attr("viewBox", [0, 0, width2, height2]);
 
-var stack = d3.stack();
+d3.csv("data/chart_data/nbhood_year_street_addr_perc_tall.csv").then(data => {
+    var parseDate = d3.timeParse("%Y");
 
-var area = d3.area()
-    .x(function(d, i) { return x(d.data.year); })
-    .y0(function(d) { return y(d[0]); })
-    .y1(function(d) { return y(d[1]); });
-
-var g = svg2.append("g")
-    .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
-
-d3.csv("data/chart_data/nbhood_year_street_addr_perc_tall.csv", type, function(error, data) {
-  if (error) throw error;
+    var x = d3.scaleTime().range([0, width2]),
+        y = d3.scaleLinear().range([height2, 0]),
+        z = d3.scaleOrdinal(d3.schemeCategory10);
+    
+    var stack = d3.stack();
+    
+    var area = d3.area()
+        .x(function(d, i) { return x(d.data.year); })
+        .y0(function(d) { return y(d[0]); })
+        .y1(function(d) { return y(d[1]); });
+    
+    var g = svg2.append("g")
+        .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
   var keys = data.columns.slice(2);
 
