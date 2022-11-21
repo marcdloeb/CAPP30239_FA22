@@ -10,22 +10,22 @@ d3.csv('data/chart_data/nbhood_decade_add_blackper_long.csv').then(data => {   /
   
     console.log(data)
 
-    // const islands = ["Torgersen", "Biscoe", "Dream"]
+    neighborhoodGroup = d3.group(data, d => d.neighborhood)
+    console.log(neighborhoodGroup)
+    console.log(neighborhoodGroup.get("Black Belt"))
 
-    // const dataReady = allGroup.map( function(grpName) { // .map allows to do something for each element of the list
-    //     return {
-    //       name: grpName,
-    //       values: data.map(function(d) {
-    //         return {time: d.time, value: +d[grpName]};
-    //       })
-    //     };
-    //   });
-    //   // I strongly advise to have a look to dataReady with
-    //   console.log(dataReady)
-  
-    // var Color = d3.scaleOrdinal()
-    //   .domain(d3.unique(data, d => d.neighborhoods))
-    //   .range(d3.schemeSet2);
+    for (let d of tracts_1920.features){
+        //console.log(d.properties.black_per)
+        //console.log(d.id)
+        dataById[d.id] = d.properties
+      }
+
+    const myColor = d3.scaleOrdinal()
+        .domain(neighborhoodGroup)
+        .range(d3.schemeSet2);
+
+    console.log(myColor)
+
 
     let x = d3.scaleLinear() //setting the x-scale
         .domain(d3.extent(data, d => d.black_per)).nice() //domain = data set
@@ -57,6 +57,21 @@ d3.csv('data/chart_data/nbhood_decade_add_blackper_long.csv').then(data => {   /
         .attr("cy", d => y(d.addr_share))//how to position circles on y
         .attr("r", 2)
         .attr("opacity", 0.75); //making semi-transparent
+
+    // Add the lines
+    const line = d3.line()
+      .x(function(d) { return x(+d.black_per) })
+      .y(function(d) { return y(+d.addr_share) })
+    svg.selectAll("myLines")
+      .data(neighborhoodGroup)
+      .enter()
+      .append("path")
+        .attr("d", function(d){ return line(d.values) } )
+        .attr("stroke", function(d){ return myColor(d.key) })
+        .style("stroke-width", 4)
+        .style("fill", "none")
+
+    console.log(neighborhoodGroup.values)
 
   const tooltip = d3.select("body").append("div")//go to HTML, select the body tag
     .attr("class", "svg-tooltip")

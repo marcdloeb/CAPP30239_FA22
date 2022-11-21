@@ -13,6 +13,7 @@ Promise.all([
   d3.json("data/unemployment-four-years.json"),
   d3.json("libs/counties-albers-10m.json")
 ]).then(([data, us]) => {
+  console.log(data)
   counties = topojson.feature(us, us.objects.counties);
   createChart(data, "2018", '#row1');
   createChart(data, "2019", '#row1');
