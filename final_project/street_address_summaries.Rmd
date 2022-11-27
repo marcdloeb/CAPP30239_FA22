@@ -285,3 +285,12 @@ write.csv(str_addr_nbyear_prop_tall, "data/chart_data/nbhood_year_street_addr_pe
 
 ```
 
+Year pivot even longer
+
+```{r}
+str_addr_nbyear_prop_tall <- read.csv("data/chart_data/nbhood_year_street_addr_perc_tall.csv")
+str_addr_nbyear_prop_extra_tall <- str_addr_nbyear_prop_tall %>% pivot_longer(!year, names_to = "neighborhood", values_to = "percentage")
+write.csv(str_addr_nbyear_prop_extra_tall, "data/chart_data/nbhood_year_street_addr_perc_extra_tall.csv")
+```
+
+

@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<!-- saved from url=(0097)https://www.goodmarketing.club/guide/d3-js-multiple-lines-chart-w-line-by-line-code-explanations/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>D3.js - Multiple Lines Chart w/ Line-by-Line Code Explanations</title>
+		<meta name="HandheldFriendly" content="True">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="./multiline_test_files/css2" rel="stylesheet">		<link rel="stylesheet" type="text/css" href="./multiline_test_files/screen.css">
+		<style>hr{background-image:url("data:image/svg+xml;utf8,<svg role='img' viewBox='0 0 136 24' xmlns='http://www.w3.org/2000/svg'><path d='M1.525 1.525a3.5 3.5 0 014.95 0L20 15.05 33.525 1.525a3.5 3.5 0 014.95 0L52 15.05 65.525 1.525a3.5 3.5 0 014.95 0L84 15.05 97.525 1.525a3.5 3.5 0 014.95 0L116 15.05l13.525-13.525a3.5 3.5 0 014.95 4.95l-16 16a3.5 3.5 0 01-4.95 0L100 8.95 86.475 22.475a3.5 3.5 0 01-4.95 0L68 8.95 54.475 22.475a3.5 3.5 0 01-4.95 0L36 8.95 22.475 22.475a3.5 3.5 0 01-4.95 0l-16-16a3.5 3.5 0 010-4.95z'/></svg>")}</style>
+
+		<link rel="icon" href="https://www.goodmarketing.club/favicon.png" type="image/png">
+    <link rel="canonical" href="https://www.goodmarketing.club/guide/d3-js-multiple-lines-chart-w-line-by-line-code-explanations/">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="https://www.goodmarketing.club/guide/d3-js-multiple-lines-chart-w-line-by-line-code-explanations/amp/">
+    
+    <meta property="og:site_name" content="Good Marketing Club">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="D3.js - Multiple Lines Chart w/ Line-by-Line Code Explanations">
+    <meta property="og:description" content="When I was learning D3, although there are a lot of great resources to learn from, I can rarely find detailed code explanations for me to fully understand how everything works, making it difficult to recreate a chart on my own without additional searches. So I want to fill this">
+    <meta property="og:url" content="https://www.goodmarketing.club/guide/d3-js-multiple-lines-chart-w-line-by-line-code-explanations/">
+    <meta property="og:image" content="https://www.goodmarketing.club/content/images/2021/01/Multiple-Lines-Chart-with-D3.png">
+    <meta property="article:published_time" content="2020-12-15T03:52:00.000Z">
+    <meta property="article:modified_time" content="2021-07-04T14:20:42.000Z">
+    <meta property="article:tag" content="guide">
+    <meta property="article:tag" content="d3.js">
+    <meta property="article:tag" content="visualization">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="D3.js - Multiple Lines Chart w/ Line-by-Line Code Explanations">
+    <meta name="twitter:description" content="When I was learning D3, although there are a lot of great resources to learn from, I can rarely find detailed code explanations for me to fully understand how everything works, making it difficult to recreate a chart on my own without additional searches. So I want to fill this">
+    <meta name="twitter:url" content="https://www.goodmarketing.club/guide/d3-js-multiple-lines-chart-w-line-by-line-code-explanations/">
+    <meta name="twitter:image" content="https://www.goodmarketing.club/content/images/2021/01/Multiple-Lines-Chart-with-D3.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Chi">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="guide, d3.js, visualization">
+    <meta name="twitter:site" content="@chiandhuang">
+    <meta property="og:image:width" content="576">
+    <meta property="og:image:height" content="362">
+    
+    <script type="text/javascript" async="" src="./multiline_test_files/analytics.js"></script><script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Good Marketing Club",
+        "url": "https://www.goodmarketing.club/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.goodmarketing.club/content/images/2021/01/Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Untitled--2--1.png"
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Chi",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://www.goodmarketing.club/content/images/2021/01/IMG_4628.JPG",
+            "width": 2000,
+            "height": 2481
+        },
+        "url": "https://www.goodmarketing.club/404/",
+        "sameAs": []
+    },
+    "headline": "D3.js - Multiple Lines Chart w/ Line-by-Line Code Explanations",
+    "url": "https://www.goodmarketing.club/guide/d3-js-multiple-lines-chart-w-line-by-line-code-explanations/",
+    "datePublished": "2020-12-15T03:52:00.000Z",
+    "dateModified": "2021-07-04T14:20:42.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.goodmarketing.club/content/images/2021/01/Multiple-Lines-Chart-with-D3.png",
+        "width": 576,
+        "height": 362
+    },
+    "keywords": "guide, d3.js, visualization",
+    "description": "When I was learning D3, although there are a lot of great resources\n[https://www.goodmarketing.club/guide/d3-js-books-code-editor-and-other-resources-to-help-you-learn/] \nto learn from, I can rarely find detailed code explanations for me to fully\nunderstand how everything works, making it difficult to recreate a chart on my\nown without additional searches. So I want to fill this whitespace with a series\nof D3 (v4) line-by-line code explanations for each chart I create, sharing with\nyou what I’ve",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.goodmarketing.club/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 4.48">
+    <link rel="alternate" type="application/rss+xml" title="Good Marketing Club" href="https://www.goodmarketing.club/guide/d3-js-multiple-lines-chart-w-line-by-line-code-explanations/">
+    <script defer="" src="./multiline_test_files/portal.min.js" data-ghost="https://www.goodmarketing.club/" crossorigin="anonymous"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
+.gh-post-upgrade-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.gh-post-upgrade-cta-content {
+    border-radius: 8px;
+    padding: 40px 4vw;
+}
+
+.gh-post-upgrade-cta h2 {
+    color: #ffffff;
+    font-size: 28px;
+    letter-spacing: -0.2px;
+    margin: 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta p {
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta small {
+    font-size: 16px;
+    letter-spacing: -0.2px;
+}
+
+.gh-post-upgrade-cta a {
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a.gh-btn {
+    display: block;
+    background: #ffffff;
+    text-decoration: none;
+    margin: 28px 0 0;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.gh-post-upgrade-cta a.gh-btn:hover {
+    opacity: 0.92;
+}</style><script async="" src="./multiline_test_files/saved_resource"></script>
+    <script defer="" src="./multiline_test_files/cards.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./multiline_test_files/cards.min.css">
+    <!--pinterest-->
+<meta name="p:domain_verify" content="c98f06804c699537f73b9b74f0945fa3">
+
+<!-- popup smart-->
+
+<script type="text/javascript" src="./multiline_test_files/361230" async=""></script>
+
+<link rel="stylesheet" href="./multiline_test_files/prism-okaidia.min.css" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ==" crossorigin="anonymous">
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="./multiline_test_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-186041168-1');
+</script>
+
+<!-- AdSense -->
+<script data-ad-client="ca-pub-1290293847788094" async="" src="./multiline_test_files/f.txt"></script>
+
+
+<style>
+:root {
+      --color-details: #fcbf49;
+     --height-logo-header: 160px;
+  	 --height-logo-footer: 180px;
+  	 --height-logo-signin: 180px;
+   	--height-logo-mobile: 130px;
+}
+    
+
+
+img#home {
+    margin-right: 40px;
+    margin-left: 40px;
+}
+    
+.footer-copyright {
+    text-align: center;
+}
+
+.post-content {
+    font-size: 20px;
+    max-width: 900px;
+   
+}
+    
+.post-content figcaption {
+    font-size: 15px;
+    }
+     
+</style>
+
+<script type="text/javascript" src="./multiline_test_files/361230" async=""></script>
+
+    <style>
+    iframe{
+    width:1200px;
+    height:760px;
+    border-width:0px;
+        overflow:hidden;
+    }
+    .post-content {
+    max-width: 1100px;
+}
+</style><style>:root {--ghost-accent-color: #fcbf49;}</style>
+	<style>
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsInNvdXJjZVJvb3QiOiIifQ== */</style><style>
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsInNvdXJjZVJvb3QiOiIifQ== */</style><script src="./multiline_test_files/361230(1)"></script><style id="lightense-images-css">
+:root {
+  --lightense-z-index: 999999;
+  --lightense-backdrop: rgba(255, 255, 255, .98);
+  --lightense-backdrop-safari: rgba(255, 255, 255, 0.6859999999999999);
+  --lightense-duration: 300ms;
+  --lightense-timing-func: cubic-bezier(.2, 0, .1, 1);
+}
+
+.lightense-backdrop {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: calc(var(--lightense-z-index) - 1);
+  padding: 0;
+  margin: 0;
+  transition: opacity var(--lightense-duration) ease;
+  cursor: zoom-out;
+  opacity: 0;
+  background-color: var(--lightense-backdrop);
+  visibility: hidden;
+}
+
+@supports (-webkit-backdrop-filter: blur(30px)) {
+  .lightense-backdrop {
+    background-color: var(--lightense-backdrop-safari);
+    -webkit-backdrop-filter: blur(30px);
+  }
+}
+
+@supports (backdrop-filter: blur(30px)) {
+  .lightense-backdrop {
+    background-color: var(--lightense-backdrop-safari);
+    backdrop-filter: blur(30px);
+  }
+}
+
+.lightense-wrap {
+  position: relative;
+  transition: transform var(--lightense-duration) var(--lightense-timing-func);
+  z-index: var(--lightense-z-index);
+  pointer-events: none;
+}
+
+.lightense-target {
+  cursor: zoom-in;
+  transition: transform var(--lightense-duration) var(--lightense-timing-func);
+  pointer-events: auto;
+}
+
+.lightense-open {
+  cursor: zoom-out;
+}
+
+.lightense-transitioning {
+  pointer-events: none;
+}</style></head>
+	<body class="post-template tag-guide tag-d3-js tag-visualization tag-hash-post-card-lavender global-hash-auto-dark-version global-hash-post-card-aqua global-hash-post-card-avocado global-hash-post-card-cream global-hash-post-card-lavender global-hash-post-card-peach global-hash-post-card-pearl global-hash-post-card-pool global-hash-post-card-rose global-hash-post-card-sand global-hash-post-card-seafoam global-hash-post-card-sky global-hash-post-card-turquoise">
+		<div class="global-wrap">
+			<div class="global-content">
+				<header class="header-section">
+	<div class="header-wrap">
+		<div class="header-logo is-image">
+			<a href="https://www.goodmarketing.club/" class="is-image"><img src="./multiline_test_files/Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Untitled--2--1.png" alt="Good Marketing Club"></a>
+		</div>
+		<div class="header-nav">
+			<input id="toggle" class="header-checkbox" type="checkbox">
+			<label class="header-toggle" for="toggle">
+				<span>
+					<span class="bar"></span>
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</span>
+			</label>
+			<nav>
+				<ul>
+<li><a href="https://www.goodmarketing.club/start-here/">Start Here</a></li>
+<li><a href="https://www.goodmarketing.club/marketing-example/">Marketing Examples</a></li>
+<li><a href="https://www.goodmarketing.club/guide/">Guides</a></li>
+<li class="is-dropdown">
+	<svg role="img" viewBox="0 0 20 4" xmlns="http://www.w3.org/2000/svg"><path d="M2 4A2 2 0 102.001.001 2 2 0 002 4zm8 0a2 2 0 10.001-3.999A2 2 0 0010 4zm8 0a2 2 0 10.001-3.999A2 2 0 0018 4z"></path></svg>	<ul>
+		<li><a href="https://www.goodmarketing.club/visualization/">DataViz</a></li>
+		<li><a href="https://www.goodmarketing.club/essay/">Essays</a></li>
+		<li><a href="https://www.goodmarketing.club/members-only/">Members-Only</a></li>
+		<li><a href="https://www.goodmarketing.club/tool/">Tools</a></li>
+	</ul>
+</li>
+</ul>
+				<ul>
+					<li id="search-open" class="header-search"><span>Search</span><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16.281 19.26c-1.675 1.022-3.855 1.695-5.784 1.693C4.7 20.952 0 16.261 0 10.476S4.7 0 10.497 0s10.497 4.69 10.497 10.476c0 2-.633 4.034-1.618 5.644l3.902 3.893c.465.465.743 1.1.721 1.753-.04 1.121-.78 2-2.034 2.105-.663.056-1.313-.25-1.782-.717l-3.902-3.894zm-5.748-2.54c3.426-.02 6.238-2.841 6.238-6.265 0-3.435-2.834-6.264-6.275-6.264-3.443 0-6.278 2.829-6.278 6.264s2.835 6.262 6.278 6.262l.037.002z"></path></svg></li>
+					<li class="signin"><a href="https://www.goodmarketing.club/signin/">Sign in</a></li>
+<li class="signup"><a href="https://www.goodmarketing.club/signup/" class="global-button">Subscribe</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>				<main class="global-main">
+					<progress class="post-progress" value="0.1683370476395805"></progress>
+<article class="post-section">
+	<div class="post-header item is-hero">
+	<div class="item-container">
+		<div class="item-image global-image">
+			<img srcset="/content/images/size/w400/2021/01/Multiple-Lines-Chart-with-D3.png 400w, 
+			 /content/images/size/w800/2021/01/Multiple-Lines-Chart-with-D3.png 800w,
+			 /content/images/size/w1200/2021/01/Multiple-Lines-Chart-with-D3.png 1200w,
+			 /content/images/size/w1600/2021/01/Multiple-Lines-Chart-with-D3.png 1600w" sizes="(max-width:480px) 350px, (max-width:1440px) 800px, 1200px" src="./multiline_test_files/Multiple-Lines-Chart-with-D3.png" alt="D3.js - Multiple Lines Chart w/ Line-by-Line Code Explanations">		</div>
+		<div class="item-content">
+			<div class="item-tags global-tags">
+								<a href="https://www.goodmarketing.club/tag/guide/">guide</a><a href="https://www.goodmarketing.club/tag/d3-js/">d3.js</a><a href="https://www.goodmarketing.club/tag/visualization/">visualization</a>
+			</div>
+			<h1 class="item-title">D3.js - Multiple Lines Chart w/ Line-by-Line Code Explanations</h1>
+			<div class="item-meta global-meta">
+				<div class="item-profile-image">
+					<a href="https://www.goodmarketing.club/404/" class="global-image">
+						<img src="./multiline_test_files/IMG_4628.JPG" alt="Chi">					</a>
+				</div>
+				<div class="item-authors">
+					<a href="https://www.goodmarketing.club/404/">Chi</a>
+					<div class="item-time">
+						<time datetime="2020-12-14">December 14, 2020</time> ∙ 6 minutes read
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>	<div class="post-content">
+		<p><em><em>When I was learning D3, although there are <a href="https://www.goodmarketing.club/guide/d3-js-books-code-editor-and-other-resources-to-help-you-learn/">a lot of great resources</a> to learn from, I can rarely find detailed code explanations for me to fully understand how everything works, making it difficult to recreate a chart on my own without additional searches. So I want to fill this whitespace with a series of D3 (v4) line-by-line code explanations for each chart I create, sharing with you what I’ve figured out.</em></em></p><p>In this post, I am going to take you through how to build a multiple lines chart with D3, with axis, legend, source, and title added in as well.</p><!--kg-card-begin: html--><iframe src="./multiline_test_files/9.MultipleLineChart.html"></iframe>
+<!--kg-card-end: html--><h3 id="set-up-the-canvas">Set Up the Canvas</h3><!--kg-card-begin: html--><script src="./multiline_test_files/884ef5d45f3466a16835b1e103a0c1e4.js"></script><link rel="stylesheet" href="./multiline_test_files/gist-embed-73138c5999f2.css"><div id="gist106917590" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-multiplelineschart-d3-part1-html" class="file my-2">
+    
+    <div itemprop="text" class="Box-body p-0 blob-wrapper data type-html  ">
+
+        
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template"></template>
+<template class="js-line-alert-template"></template>
+
+  <table data-hpc="" class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip="" data-tagsearch-lang="HTML" data-tagsearch-path="MultipleLinesChart-D3-Part1.html">
+        <tbody><tr>
+          <td id="file-multiplelineschart-d3-part1-html-L1" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="1"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-kos">&lt;</span><span class="pl-ent">head</span><span class="pl-kos">&gt;</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L2" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="2"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC2" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L3" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="3"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-c">&lt;!-- Load d3 source scripts --&gt;</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L4" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="4"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC4" class="blob-code blob-code-inner js-file-line">  <span class="pl-kos">&lt;</span><span class="pl-ent">script</span> <span class="pl-c1">src</span>="<span class="pl-s">https://d3js.org/d3.v4.min.js</span>" <span class="pl-c1">type</span>="<span class="pl-s">text/JavaScript</span>"<span class="pl-kos">&gt;</span><span class="pl-kos">&lt;/</span><span class="pl-ent">script</span><span class="pl-kos">&gt;</span> </td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L5" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="5"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC5" class="blob-code blob-code-inner js-file-line">  <span class="pl-kos">&lt;</span><span class="pl-ent">script</span> <span class="pl-c1">src</span>="<span class="pl-s">https://d3js.org/colorbrewer.v1.min.js</span>"<span class="pl-kos">&gt;</span><span class="pl-kos">&lt;/</span><span class="pl-ent">script</span><span class="pl-kos">&gt;</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L6" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="6"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC6" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L7" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="7"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC7" class="blob-code blob-code-inner js-file-line"><span class="pl-c">&lt;!-- style section--&gt;</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L8" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="8"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC8" class="blob-code blob-code-inner js-file-line">  <span class="pl-kos">&lt;</span><span class="pl-ent">style</span><span class="pl-kos">&gt;</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L9" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="9"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC9" class="blob-code blob-code-inner js-file-line">     .<span class="pl-c1">axis</span> <span class="pl-ent">path</span>{</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L10" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="10"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC10" class="blob-code blob-code-inner js-file-line">         <span class="pl-c1">stroke</span><span class="pl-kos">:</span>black;</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L11" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="11"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC11" class="blob-code blob-code-inner js-file-line">         <span class="pl-c1">stroke-width</span><span class="pl-kos">:</span><span class="pl-c1">2<span class="pl-smi">px</span></span> ;</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L12" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="12"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC12" class="blob-code blob-code-inner js-file-line">     }   </td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L13" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="13"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC13" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L14" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="14"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC14" class="blob-code blob-code-inner js-file-line">     .<span class="pl-c1">axis</span> <span class="pl-ent">line</span>{</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L15" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="15"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC15" class="blob-code blob-code-inner js-file-line">         <span class="pl-c1">stroke</span><span class="pl-kos">:</span> black;</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L16" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="16"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC16" class="blob-code blob-code-inner js-file-line">         <span class="pl-c1">stroke-width</span><span class="pl-kos">:</span> <span class="pl-c1">1.5<span class="pl-smi">px</span></span>;</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L17" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="17"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC17" class="blob-code blob-code-inner js-file-line">     } </td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L18" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="18"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC18" class="blob-code blob-code-inner js-file-line">  </td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L19" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="19"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC19" class="blob-code blob-code-inner js-file-line">     .<span class="pl-c1">axis</span> <span class="pl-ent">text</span>{</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L20" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="20"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC20" class="blob-code blob-code-inner js-file-line">         <span class="pl-c1">fill</span><span class="pl-kos">:</span> black;</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L21" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="21"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC21" class="blob-code blob-code-inner js-file-line">         <span class="pl-c1">font-weight</span><span class="pl-kos">:</span> bold;</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L22" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="22"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC22" class="blob-code blob-code-inner js-file-line">         <span class="pl-c1">font-size</span><span class="pl-kos">:</span> <span class="pl-c1">14<span class="pl-smi">px</span></span>;</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L23" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="23"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC23" class="blob-code blob-code-inner js-file-line">         <span class="pl-c1">font-family</span><span class="pl-kos">:</span><span class="pl-s">"Arial Black"</span><span class="pl-kos">,</span> Gadget<span class="pl-kos">,</span> sans-serif;</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L24" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="24"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC24" class="blob-code blob-code-inner js-file-line">     } </td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L25" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="25"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC25" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L26" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="26"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC26" class="blob-code blob-code-inner js-file-line">     .<span class="pl-c1">legend</span> <span class="pl-ent">text</span>{</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L27" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="27"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC27" class="blob-code blob-code-inner js-file-line">         <span class="pl-c1">fill</span><span class="pl-kos">:</span>  black;</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L28" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="28"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC28" class="blob-code blob-code-inner js-file-line">         <span class="pl-c1">font-family</span><span class="pl-kos">:</span><span class="pl-s">"Arial Black"</span><span class="pl-kos">,</span> Gadget<span class="pl-kos">,</span> sans-serif;</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L29" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="29"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC29" class="blob-code blob-code-inner js-file-line">     }</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L30" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="30"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC30" class="blob-code blob-code-inner js-file-line">  <span class="pl-kos">&lt;/</span><span class="pl-ent">style</span><span class="pl-kos">&gt;</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L31" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="31"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC31" class="blob-code blob-code-inner js-file-line">  </td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L32" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="32"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC32" class="blob-code blob-code-inner js-file-line"><span class="pl-kos">&lt;/</span><span class="pl-ent">head</span><span class="pl-kos">&gt;</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L33" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="33"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC33" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L34" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="34"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC34" class="blob-code blob-code-inner js-file-line"><span class="pl-kos">&lt;</span><span class="pl-ent">body</span> <span class="pl-c1">onload</span>="<span class="pl-s">lineChart()</span>"<span class="pl-kos">&gt;</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L35" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="35"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC35" class="blob-code blob-code-inner js-file-line"><span class="pl-c">&lt;!-- svg canvas--&gt;</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L36" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="36"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC36" class="blob-code blob-code-inner js-file-line">  <span class="pl-kos">&lt;</span><span class="pl-ent">svg</span> <span class="pl-c1">width</span>="<span class="pl-s">1200</span>" <span class="pl-c1">height</span>="<span class="pl-s">750</span>" <span class="pl-c1">style</span>="<span class="pl-s">background-image: url('https://etc.usf.edu/presentations/backgrounds/grid/grid_04/1304m.gif');</span>"<span class="pl-kos">&gt;</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L37" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="37"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC37" class="blob-code blob-code-inner js-file-line">  <span class="pl-kos">&lt;/</span><span class="pl-ent">svg</span><span class="pl-kos">&gt;</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part1-html-L38" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="38"></td>
+          <td id="file-multiplelineschart-d3-part1-html-LC38" class="blob-code blob-code-inner js-file-line"><span class="pl-kos">&lt;/</span><span class="pl-ent">body</span><span class="pl-kos">&gt;</span></td>
+        </tr>
+  </tbody></table>
+</div>
+
+
+    </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/Jennyandhuang/884ef5d45f3466a16835b1e103a0c1e4/raw/7f593eb38c1fa5648ff10e6b864dc75c104cd39b/MultipleLinesChart-D3-Part1.html" style="float:right">view raw</a>
+        <a href="https://gist.github.com/Jennyandhuang/884ef5d45f3466a16835b1e103a0c1e4#file-multiplelineschart-d3-part1-html">
+          MultipleLinesChart-D3-Part1.html
+        </a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<!--kg-card-end: html--><p>To set up the canvas for D3 graphs, in your HTML file :</p><ul><li><strong><strong>Line 4:</strong></strong> Load D3 directly from d3js.org — so you don’t need to install locally.</li><li><strong><strong>Line 5:</strong></strong> Load <a href="http://bl.ocks.org/mhkeller/10504471" rel="noopener nofollow">colorbrewer </a>— we are going to use a color palette from this package.</li><li><strong><strong>Line 8–30: </strong></strong>Style section to style different elements.</li><li><strong><strong>Line 34: </strong></strong><code><strong><strong><em><em>onload= “lineChart()”</em></em></strong></strong></code><strong><strong> </strong></strong>means we are telling the system to load the <code><strong><strong><em><em>linechart()</em></em></strong></strong></code><strong><strong> </strong></strong>function immediately to show D3 graphs after the page has been loaded.</li><li><strong><strong>Line 36–37:</strong></strong> Create a <code><strong><strong><em><em>SVG</em></em></strong></strong></code> in the size of 1200px by 750px for us to put graphic elements in later. Load the grid image from the URL to set it as the background image for the SVG canvas.</li></ul><!--kg-card-begin: html--><script async="" src="./multiline_test_files/f(1).txt" crossorigin="anonymous"></script>
+<!-- New Display Ad -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1290293847788094" data-ad-slot="1430276135" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script><!--kg-card-end: html--><h3 id="scale-values-for-x-axis-and-y-axis">Scale values for x-axis and y-axis</h3><p>Now we move on to create the D3 <code><strong><strong><em><em>linechart()</em></em></strong></strong></code><strong><strong> </strong></strong>function. In this example, our data is the seven-year ad spending data for each of the six main media channels pulled from eMarketer.com.</p><!--kg-card-begin: html--><script src="./multiline_test_files/4c3622fe1b8ea3e2768b840db337f92f.js"></script><link rel="stylesheet" href="./multiline_test_files/gist-embed-73138c5999f2.css"><div id="gist106917775" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-multiplelineschart-d3-part2-js" class="file my-2">
+    
+    <div itemprop="text" class="Box-body p-0 blob-wrapper data type-javascript  ">
+
+        
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template"></template>
+<template class="js-line-alert-template"></template>
+
+  <table data-hpc="" class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip="" data-tagsearch-lang="JavaScript" data-tagsearch-path="MultipleLinesChart-D3-Part2.js">
+        <tbody><tr>
+          <td id="file-multiplelineschart-d3-part2-js-L1" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="1"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">function</span> <span class="pl-en">lineChart</span><span class="pl-kos">(</span><span class="pl-s1">data</span><span class="pl-kos">)</span> <span class="pl-kos">{</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L2" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="2"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC2" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L3" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="3"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-c">//DataSource: eMarketer, March 2018</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L4" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="4"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC4" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> <span class="pl-s1">data</span> <span class="pl-c1">=</span> <span class="pl-kos">[</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L5" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="5"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC5" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2016</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Digital"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">72.2</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L6" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="6"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC6" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2017</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Digital"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">90.39</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L7" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="7"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC7" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2018</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Digital"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">107.3</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L8" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="8"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC8" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2019</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Digital"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">125.75</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L9" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="9"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC9" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2020</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Digital"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">142.23</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L10" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="10"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC10" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2021</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Digital"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">156.43</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L11" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="11"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC11" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2022</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Digital"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">170.48</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L12" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="12"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC12" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2016</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"TV"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">71.29</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L13" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="13"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC13" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2017</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"TV"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">70.22</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L14" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="14"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC14" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2018</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"TV"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">69.87</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L15" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="15"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC15" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2019</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"TV"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">69.17</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L16" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="16"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC16" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2020</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"TV"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">69.52</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L17" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="17"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC17" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2021</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"TV"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">68.82</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L18" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="18"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC18" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2022</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"TV"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">68.13</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L19" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="19"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC19" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2016</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Print"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">25.49</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L20" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="20"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC20" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2017</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Print"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">22.81</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L21" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="21"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC21" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2018</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Print"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">20.05</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L22" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="22"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC22" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2019</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Print"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">17.29</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L23" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="23"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC23" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2020</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Print"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">15.19</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L24" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="24"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC24" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2021</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Print"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">13.56</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L25" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="25"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC25" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2022</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Print"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">12.38</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L26" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="26"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC26" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2016</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Radio"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">14.33</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L27" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="27"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC27" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2017</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Radio"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">14.33</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L28" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="28"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC28" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2018</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Radio"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">14.41</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L29" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="29"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC29" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2019</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Radio"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">14.43</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L30" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="30"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC30" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2020</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Radio"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">14.46</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L31" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="31"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC31" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2021</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Radio"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">14.49</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L32" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="32"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC32" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2022</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Radio"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">14.52</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L33" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="33"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC33" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2016</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Out-of-home"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">7.6</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L34" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="34"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC34" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2017</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Out-of-home"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">7.75</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L35" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="35"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC35" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2018</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Out-of-home"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">7.87</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L36" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="36"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC36" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2019</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Out-of-home"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">7.95</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L37" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="37"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC37" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2020</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Out-of-home"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">8.03</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L38" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="38"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC38" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2021</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Out-of-home"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">8.11</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L39" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="39"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC39" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2022</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Out-of-home"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">8.19</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L40" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="40"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC40" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2016</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Directories"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">2.35</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L41" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="41"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC41" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2017</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Directories"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">1.83</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L42" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="42"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC42" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2018</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Directories"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">1.47</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L43" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="43"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC43" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2019</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Directories"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">1.19</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L44" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="44"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC44" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2020</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Directories"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">0.99</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L45" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="45"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC45" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2021</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Directories"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">0.84</span> <span class="pl-kos">}</span><span class="pl-kos">,</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L46" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="46"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC46" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">{</span> <span class="pl-c1">year</span>: <span class="pl-c1">2022</span><span class="pl-kos">,</span> <span class="pl-c1">media</span>: <span class="pl-s">"Directories"</span><span class="pl-kos">,</span> <span class="pl-c1">spending</span>: <span class="pl-c1">0.74</span> <span class="pl-kos">}</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L47" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="47"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC47" class="blob-code blob-code-inner js-file-line"><span class="pl-kos">]</span><span class="pl-kos">;</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L48" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="48"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC48" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L49" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="49"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC49" class="blob-code blob-code-inner js-file-line"><span class="pl-c">//set canvas margins</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L50" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="50"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC50" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">leftMargin</span><span class="pl-c1">=</span><span class="pl-c1">70</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L51" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="51"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC51" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">topMargin</span><span class="pl-c1">=</span><span class="pl-c1">30</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L52" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="52"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC52" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L53" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="53"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC53" class="blob-code blob-code-inner js-file-line"><span class="pl-c">//format the year </span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L54" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="54"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC54" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> <span class="pl-s1">parseTime</span> <span class="pl-c1">=</span> <span class="pl-s1">d3</span><span class="pl-kos">.</span><span class="pl-en">timeParse</span><span class="pl-kos">(</span><span class="pl-s">"%Y"</span><span class="pl-kos">)</span><span class="pl-kos">;</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L55" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="55"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC55" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L56" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="56"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC56" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">data</span><span class="pl-kos">.</span><span class="pl-en">forEach</span><span class="pl-kos">(</span><span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-s1">d</span><span class="pl-kos">)</span> <span class="pl-kos">{</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L57" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="57"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC57" class="blob-code blob-code-inner js-file-line">    <span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-c1">year</span> <span class="pl-c1">=</span> <span class="pl-s1">parseTime</span><span class="pl-kos">(</span><span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-c1">year</span><span class="pl-kos">)</span><span class="pl-kos">;</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L58" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="58"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC58" class="blob-code blob-code-inner js-file-line"><span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L59" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="59"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC59" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L60" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="60"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC60" class="blob-code blob-code-inner js-file-line"><span class="pl-c">//scale xAxis </span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L61" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="61"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC61" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> <span class="pl-s1">xExtent</span> <span class="pl-c1">=</span> <span class="pl-s1">d3</span><span class="pl-kos">.</span><span class="pl-en">extent</span><span class="pl-kos">(</span><span class="pl-s1">data</span><span class="pl-kos">,</span> <span class="pl-s1">d</span> <span class="pl-c1">=&gt;</span> <span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-c1">year</span><span class="pl-kos">)</span><span class="pl-kos">;</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L62" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="62"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC62" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">xScale</span> <span class="pl-c1">=</span> <span class="pl-s1">d3</span><span class="pl-kos">.</span><span class="pl-en">scaleTime</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">domain</span><span class="pl-kos">(</span><span class="pl-s1">xExtent</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">range</span><span class="pl-kos">(</span><span class="pl-kos">[</span><span class="pl-s1">leftMargin</span><span class="pl-kos">,</span> <span class="pl-c1">900</span><span class="pl-kos">]</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L63" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="63"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC63" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L64" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="64"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC64" class="blob-code blob-code-inner js-file-line"><span class="pl-c">//scale yAxis</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L65" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="65"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC65" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> <span class="pl-s1">yMax</span><span class="pl-c1">=</span><span class="pl-s1">d3</span><span class="pl-kos">.</span><span class="pl-en">max</span><span class="pl-kos">(</span><span class="pl-s1">data</span><span class="pl-kos">,</span><span class="pl-s1">d</span><span class="pl-c1">=&gt;</span><span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-c1">spending</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L66" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="66"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC66" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">yScale</span> <span class="pl-c1">=</span> <span class="pl-s1">d3</span><span class="pl-kos">.</span><span class="pl-en">scaleLinear</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">domain</span><span class="pl-kos">(</span><span class="pl-kos">[</span><span class="pl-c1">0</span><span class="pl-kos">,</span> <span class="pl-s1">yMax</span><span class="pl-c1">+</span><span class="pl-s1">topMargin</span><span class="pl-kos">]</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">range</span><span class="pl-kos">(</span><span class="pl-kos">[</span><span class="pl-c1">600</span><span class="pl-kos">,</span> <span class="pl-c1">0</span><span class="pl-kos">]</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L67" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="67"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC67" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L68" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="68"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC68" class="blob-code blob-code-inner js-file-line"><span class="pl-c">//we will draw xAxis and yAxis next</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part2-js-L69" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="69"></td>
+          <td id="file-multiplelineschart-d3-part2-js-LC69" class="blob-code blob-code-inner js-file-line"> <span class="pl-kos">}</span></td>
+        </tr>
+  </tbody></table>
+</div>
+
+
+    </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/Jennyandhuang/4c3622fe1b8ea3e2768b840db337f92f/raw/e2d4990707e5370224e7f50a43cc0459b200a104/MultipleLinesChart-D3-Part2.js" style="float:right">view raw</a>
+        <a href="https://gist.github.com/Jennyandhuang/4c3622fe1b8ea3e2768b840db337f92f#file-multiplelineschart-d3-part2-js">
+          MultipleLinesChart-D3-Part2.js
+        </a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<!--kg-card-end: html--><p><strong><strong>Line 4–47: </strong></strong>Input data.</p><p><strong><strong>Line 50–51:</strong></strong> Set the left and top margin. Because we will draw our x-axis and y-axis from the left and from the top, we want to leave some space on each side so the labels will be completely shown.</p><p><strong><strong>Line 54–58: </strong></strong>We need to tell D3 that the values in the year column are years, not integers, so we scale them correctly when drawing the x-axis. <code><strong><strong><em><em>d3.timeParse(“%Y”)</em></em></strong></strong></code><strong><strong><em><em> </em></em></strong></strong>convert the input data in the year format (<code><strong><strong><em><em>%Y</em></em></strong></strong></code>) to a format that D3 recognizes as years. Then we use the <code><strong><strong><em><em>foreach{}</em></em></strong></strong></code> function to pass each element in the year array to the function.</p><p><strong><strong>Line 61–62: </strong></strong>When drawing an axis, we need to scale the value range so it will draw correctly scale-wise on the canvas.<code><strong><strong><em><em>d3.extent</em></em></strong></strong></code>returns the range of the year. Then we use <code><strong><strong><em><em>d3.scaleTime()</em></em></strong></strong></code><strong><strong><em><em> </em></em></strong></strong>to scale the time, pass the range to <code><strong><strong><em><em>.domain() </em></em></strong></strong></code>and then scale it to the range we will draw the axis on <code><strong><strong><em><em>[leftMargin, 900]</em></em></strong></strong></code><strong><strong><em><em> .</em></em></strong></strong></p><p><strong><strong>Line 65–66: </strong></strong>We will do a similar scaling for the y-axis. But instead of using <code><strong><strong><em><em>d3.extent</em></em></strong></strong></code>, we find the maximum of the value using <code><strong><strong><em><em>d3.max</em></em></strong></strong></code>and add the top margin to make sure we are leaving enough space on top of the y-axis. Notice that for the y-axis, the range is <code><strong><strong><em><em>[600,0]</em></em></strong></strong></code>, because the y-axis is drawn from bottom (600) to top (0).</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="./multiline_test_files/image-112.png" class="kg-image lightense-target" alt="if use d3.extent for the y-axis" loading="lazy" width="436" height="139"><figcaption>if use d3.extent for the y-axis</figcaption></figure><figure class="kg-card kg-image-card kg-card-hascaption"><img src="./multiline_test_files/image-113.png" class="kg-image lightense-target" alt="Origin (0,0) of the SVG Canvas is at the top-left corner" loading="lazy" width="594" height="419"><figcaption>Origin (0,0) of the <a href="https://vanseodesign.com/web-design/svg-viewport/" rel="noopener nofollow">SVG Canvas</a> is at the top-left corner</figcaption></figure><!--kg-card-begin: html--><script async="" src="./multiline_test_files/f(1).txt" crossorigin="anonymous"></script>
+<!-- New Display Ad -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1290293847788094" data-ad-slot="1430276135" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script><!--kg-card-end: html--><h3 id="draw-x-axis-and-y-axis-with-d3">Draw x-axis and y-axis with D3</h3><!--kg-card-begin: html--><script src="./multiline_test_files/e41271b6cffed2f0622b6a877e88ee0a.js"></script><link rel="stylesheet" href="./multiline_test_files/gist-embed-73138c5999f2.css"><div id="gist106918595" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-multiplelineschart-d3-part3-js" class="file my-2">
+    
+    <div itemprop="text" class="Box-body p-0 blob-wrapper data type-javascript  ">
+
+        
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template"></template>
+<template class="js-line-alert-template"></template>
+
+  <table data-hpc="" class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip="" data-tagsearch-lang="JavaScript" data-tagsearch-path="MultipleLinesChart-D3-Part3.js">
+        <tbody><tr>
+          <td id="file-multiplelineschart-d3-part3-js-L1" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="1"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-c">//draw xAxis and xAxis label</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L2" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="2"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">xAxis</span> <span class="pl-c1">=</span> <span class="pl-s1">d3</span><span class="pl-kos">.</span><span class="pl-en">axisBottom</span><span class="pl-kos">(</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L3" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="3"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC3" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">scale</span><span class="pl-kos">(</span><span class="pl-s1">xScale</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L4" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="4"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC4" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L5" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="5"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">d3</span><span class="pl-kos">.</span><span class="pl-en">select</span><span class="pl-kos">(</span><span class="pl-s">"svg"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L6" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="6"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC6" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">append</span><span class="pl-kos">(</span><span class="pl-s">"g"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L7" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="7"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC7" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"class"</span><span class="pl-kos">,</span> <span class="pl-s">"axis"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L8" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="8"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC8" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"transform"</span><span class="pl-kos">,</span> <span class="pl-s">"translate(0,620)"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L9" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="9"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC9" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">call</span><span class="pl-kos">(</span><span class="pl-s1">xAxis</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L10" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="10"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC10" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">append</span><span class="pl-kos">(</span><span class="pl-s">"text"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L11" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="11"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC11" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"x"</span><span class="pl-kos">,</span> <span class="pl-kos">(</span><span class="pl-c1">900</span><span class="pl-c1">+</span><span class="pl-c1">70</span><span class="pl-kos">)</span><span class="pl-c1">/</span><span class="pl-c1">2</span><span class="pl-kos">)</span> <span class="pl-c">//middle of the xAxis</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L12" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="12"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC12" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"y"</span><span class="pl-kos">,</span> <span class="pl-s">"50"</span><span class="pl-kos">)</span> <span class="pl-c">// a little bit below xAxis</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L13" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="13"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC13" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">text</span><span class="pl-kos">(</span><span class="pl-s">"Year"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L14" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="14"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC14" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L15" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="15"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC15" class="blob-code blob-code-inner js-file-line"><span class="pl-c">//yAxis and yAxis label</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L16" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="16"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC16" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">yAxis</span> <span class="pl-c1">=</span> <span class="pl-s1">d3</span><span class="pl-kos">.</span><span class="pl-en">axisLeft</span><span class="pl-kos">(</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L17" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="17"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC17" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">scale</span><span class="pl-kos">(</span><span class="pl-s1">yScale</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L18" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="18"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC18" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">ticks</span><span class="pl-kos">(</span><span class="pl-c1">10</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L19" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="19"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC19" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L20" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="20"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC20" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">d3</span><span class="pl-kos">.</span><span class="pl-en">select</span><span class="pl-kos">(</span><span class="pl-s">'svg'</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L21" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="21"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC21" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">append</span><span class="pl-kos">(</span><span class="pl-s">"g"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L22" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="22"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC22" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"class"</span><span class="pl-kos">,</span> <span class="pl-s">"axis"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L23" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="23"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC23" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"transform"</span><span class="pl-kos">,</span> <span class="pl-s">`translate(<span class="pl-s1"><span class="pl-kos">${</span><span class="pl-s1">leftMargin</span><span class="pl-kos">}</span></span>,20)`</span><span class="pl-kos">)</span> <span class="pl-c">//use variable in translate</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L24" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="24"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC24" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">call</span><span class="pl-kos">(</span><span class="pl-s1">yAxis</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L25" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="25"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC25" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">append</span><span class="pl-kos">(</span><span class="pl-s">"text"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L26" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="26"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC26" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"transform"</span><span class="pl-kos">,</span> <span class="pl-s">"rotate(-90)"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L27" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="27"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC27" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"x"</span><span class="pl-kos">,</span> <span class="pl-s">"-150"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L28" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="28"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC28" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"y"</span><span class="pl-kos">,</span> <span class="pl-s">"-50"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L29" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="29"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC29" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"text-anchor"</span><span class="pl-kos">,</span> <span class="pl-s">"end"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part3-js-L30" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="30"></td>
+          <td id="file-multiplelineschart-d3-part3-js-LC30" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">text</span><span class="pl-kos">(</span><span class="pl-s">"US Media Ad Spending (Billions)"</span><span class="pl-kos">)</span></td>
+        </tr>
+  </tbody></table>
+</div>
+
+
+    </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/Jennyandhuang/e41271b6cffed2f0622b6a877e88ee0a/raw/a7b0c11b45aad0ec66f672fdc253dffcda44116e/MultipleLinesChart-D3-Part3.js" style="float:right">view raw</a>
+        <a href="https://gist.github.com/Jennyandhuang/e41271b6cffed2f0622b6a877e88ee0a#file-multiplelineschart-d3-part3-js">
+          MultipleLinesChart-D3-Part3.js
+        </a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<!--kg-card-end: html--><p><strong><strong>Line 2–3: </strong></strong>Set up the <code><strong><strong><em><em>xAxis</em></em></strong></strong></code> function we will call later.<strong><strong> </strong></strong><code><strong><strong><em><em>d3.axisBottom()</em></em></strong></strong></code><strong><strong> </strong></strong>is a function that will create a horizontal axis, ticks will be drawn from the axis towards the bottom, labels will be below the axis as well.</p><p><strong><strong>Line 5–9: </strong></strong>Draw the x-axis. It will be drawn from the origin (0,0) top-left corner, so we need to move it down using<strong><strong> </strong></strong><code><strong><strong><em><em>translate(0,620)</em></em></strong></strong></code></p><p><strong><strong>Line 10–13: </strong></strong>Append x-axis label, and position it to be at the middle-center below the x-axis —<code><strong><strong><em><em>. attr(“x”,(900+70)/2) </em></em></strong></strong></code>and <code><strong><strong><em><em>.attr(“y”, “50”)</em></em></strong></strong></code></p><p><strong><strong>Line 16–18: </strong></strong>Set up the <code><strong><strong>y<em><em>Axis</em></em></strong></strong></code> function we will call later.<strong><strong> </strong></strong><code><strong><strong><em><em>d3.axisLeft()</em></em></strong></strong></code><strong><strong> </strong></strong>is a function that will create a vertical axis, ticks will be drawn from the axis towards the left, labels will be on the left side of the axis as well. <code><strong><strong><em><em>Ticks(10) </em></em></strong></strong></code>specifies the number of ticks we want to show.</p><p><strong><strong>Line 20–24:</strong></strong> Draw the y-axis. We move it a little bit to the right so we will have the left margin left for labels, and a little bit down so it will intersect the x-axis using <code><strong><strong><em><em>.attr(“transform”,`translate(${leftMargin},20)`)</em></em></strong></strong></code> .</p><p><strong><strong>Line 25–30: </strong></strong>Append the y-axis label. By default, the text is drawn from left to right, so we need to rotate it anti-clockwise by 90 degrees<code><strong><strong><em><em>.attr(“transform”, “rotate(-90)”).</em></em></strong></strong></code><strong><strong><em><em> </em></em></strong></strong><code><strong><strong><em><em>"text-anchor”</em></em></strong></strong></code> is used to tell d3 that the (x,y) position of the text should be based on “start”, “middle” or the “end” of the text.</p><p>Your output so far should look like below.</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="./multiline_test_files/image-114.png" class="kg-image lightense-target" alt="x-axis and y-axis with D3" loading="lazy" width="576" height="415"><figcaption>x-axis and y-axis with D3</figcaption></figure><h3 id="draw-multiple-lines-with-d3">Draw multiple lines with D3<br></h3><!--kg-card-begin: html--><script src="./multiline_test_files/de71cb69dede19d9fae85e84d58e1fb0.js"></script><link rel="stylesheet" href="./multiline_test_files/gist-embed-73138c5999f2.css"><div id="gist106927863" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-multiplelineschart-d3-part4-js" class="file my-2">
+    
+    <div itemprop="text" class="Box-body p-0 blob-wrapper data type-javascript  ">
+
+        
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template"></template>
+<template class="js-line-alert-template"></template>
+
+  <table data-hpc="" class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip="" data-tagsearch-lang="JavaScript" data-tagsearch-path="MultipleLinesChart-D3-Part4.js">
+        <tbody><tr>
+          <td id="file-multiplelineschart-d3-part4-js-L1" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="1"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-c">//use .nest()function to group data so the line can be computed for each group</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L2" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="2"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> <span class="pl-s1">sumstat</span> <span class="pl-c1">=</span> <span class="pl-s1">d3</span><span class="pl-kos">.</span><span class="pl-en">nest</span><span class="pl-kos">(</span><span class="pl-kos">)</span> </td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L3" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="3"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC3" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">key</span><span class="pl-kos">(</span><span class="pl-s1">d</span> <span class="pl-c1">=&gt;</span> <span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-c1">media</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L4" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="4"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC4" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">entries</span><span class="pl-kos">(</span><span class="pl-s1">data</span><span class="pl-kos">)</span><span class="pl-kos">;</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L5" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="5"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC5" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L6" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="6"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC6" class="blob-code blob-code-inner js-file-line"><span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s1">sumstat</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L7" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="7"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC7" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L8" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="8"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-c">//set color pallete for different vairables</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L9" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="9"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> <span class="pl-s1">mediaName</span> <span class="pl-c1">=</span> <span class="pl-s1">sumstat</span><span class="pl-kos">.</span><span class="pl-en">map</span><span class="pl-kos">(</span><span class="pl-s1">d</span> <span class="pl-c1">=&gt;</span> <span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-c1">key</span><span class="pl-kos">)</span> </td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L10" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="10"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> <span class="pl-s1">color</span> <span class="pl-c1">=</span> <span class="pl-s1">d3</span><span class="pl-kos">.</span><span class="pl-en">scaleOrdinal</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">domain</span><span class="pl-kos">(</span><span class="pl-s1">mediaName</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">range</span><span class="pl-kos">(</span><span class="pl-s1">colorbrewer</span><span class="pl-kos">.</span><span class="pl-c1">Set2</span><span class="pl-kos">[</span><span class="pl-c1">6</span><span class="pl-kos">]</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L11" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="11"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC11" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L12" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="12"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-c">//select path - three types: curveBasis,curveStep, curveCardinal</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L13" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="13"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">d3</span><span class="pl-kos">.</span><span class="pl-en">select</span><span class="pl-kos">(</span><span class="pl-s">"svg"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L14" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="14"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC14" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">selectAll</span><span class="pl-kos">(</span><span class="pl-s">".line"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L15" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="15"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC15" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">append</span><span class="pl-kos">(</span><span class="pl-s">"g"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L16" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="16"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC16" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"class"</span><span class="pl-kos">,</span> <span class="pl-s">"line"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L17" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="17"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC17" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">data</span><span class="pl-kos">(</span><span class="pl-s1">sumstat</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L18" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="18"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC18" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">enter</span><span class="pl-kos">(</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L19" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="19"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC19" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">append</span><span class="pl-kos">(</span><span class="pl-s">"path"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L20" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="20"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC20" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"d"</span><span class="pl-kos">,</span> <span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-s1">d</span><span class="pl-kos">)</span> <span class="pl-kos">{</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L21" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="21"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC21" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">return</span> <span class="pl-s1">d3</span><span class="pl-kos">.</span><span class="pl-en">line</span><span class="pl-kos">(</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L22" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="22"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC22" class="blob-code blob-code-inner js-file-line">            <span class="pl-kos">.</span><span class="pl-en">x</span><span class="pl-kos">(</span><span class="pl-s1">d</span> <span class="pl-c1">=&gt;</span> <span class="pl-en">xScale</span><span class="pl-kos">(</span><span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-c1">year</span><span class="pl-kos">)</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L23" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="23"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC23" class="blob-code blob-code-inner js-file-line">            <span class="pl-kos">.</span><span class="pl-en">y</span><span class="pl-kos">(</span><span class="pl-s1">d</span> <span class="pl-c1">=&gt;</span> <span class="pl-en">yScale</span><span class="pl-kos">(</span><span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-c1">spending</span><span class="pl-kos">)</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">curve</span><span class="pl-kos">(</span><span class="pl-s1">d3</span><span class="pl-kos">.</span><span class="pl-c1">curveCardinal</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L24" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="24"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC24" class="blob-code blob-code-inner js-file-line">            <span class="pl-kos">(</span><span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-c1">values</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L25" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="25"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC25" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">}</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L26" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="26"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC26" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"fill"</span><span class="pl-kos">,</span> <span class="pl-s">"none"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L27" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="27"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC27" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"stroke"</span><span class="pl-kos">,</span> <span class="pl-s1">d</span> <span class="pl-c1">=&gt;</span> <span class="pl-s1">color</span><span class="pl-kos">(</span><span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-c1">key</span><span class="pl-kos">)</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L28" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="28"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC28" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"stroke-width"</span><span class="pl-kos">,</span> <span class="pl-c1">2</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L29" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="29"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC29" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L30" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="30"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC30" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L31" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="31"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC31" class="blob-code blob-code-inner js-file-line"><span class="pl-c">//append circle </span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L32" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="32"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC32" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">d3</span><span class="pl-kos">.</span><span class="pl-en">select</span><span class="pl-kos">(</span><span class="pl-s">"svg"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L33" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="33"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC33" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">selectAll</span><span class="pl-kos">(</span><span class="pl-s">"circle"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L34" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="34"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC34" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">append</span><span class="pl-kos">(</span><span class="pl-s">"g"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L35" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="35"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC35" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">data</span><span class="pl-kos">(</span><span class="pl-s1">data</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L36" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="36"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC36" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">enter</span><span class="pl-kos">(</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L37" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="37"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC37" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">append</span><span class="pl-kos">(</span><span class="pl-s">"circle"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L38" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="38"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC38" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"r"</span><span class="pl-kos">,</span> <span class="pl-c1">6</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L39" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="39"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC39" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"cx"</span><span class="pl-kos">,</span> <span class="pl-s1">d</span> <span class="pl-c1">=&gt;</span> <span class="pl-en">xScale</span><span class="pl-kos">(</span><span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-c1">year</span><span class="pl-kos">)</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L40" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="40"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC40" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"cy"</span><span class="pl-kos">,</span> <span class="pl-s1">d</span> <span class="pl-c1">=&gt;</span> <span class="pl-en">yScale</span><span class="pl-kos">(</span><span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-c1">spending</span><span class="pl-kos">)</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part4-js-L41" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="41"></td>
+          <td id="file-multiplelineschart-d3-part4-js-LC41" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">style</span><span class="pl-kos">(</span><span class="pl-s">"fill"</span><span class="pl-kos">,</span> <span class="pl-s1">d</span> <span class="pl-c1">=&gt;</span> <span class="pl-s1">color</span><span class="pl-kos">(</span><span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-c1">media</span><span class="pl-kos">)</span><span class="pl-kos">)</span></td>
+        </tr>
+  </tbody></table>
+</div>
+
+
+    </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/Jennyandhuang/de71cb69dede19d9fae85e84d58e1fb0/raw/efbc8be0e484b173becbc2e81ceb97e3bc36bb2e/MultipleLinesChart-D3-Part4.js" style="float:right">view raw</a>
+        <a href="https://gist.github.com/Jennyandhuang/de71cb69dede19d9fae85e84d58e1fb0#file-multiplelineschart-d3-part4-js">
+          MultipleLinesChart-D3-Part4.js
+        </a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<!--kg-card-end: html--><p><strong><strong>Line 2–4: </strong></strong>In order to draw multiple lines with each line representing one media, we need to group the data by media using the <code><strong><strong><em><em>.nest() </em></em></strong></strong></code>function. <code><strong><strong><em><em>.key(d=&gt;d.media)</em></em></strong></strong></code> tells d3 to group the <code><strong><strong><em><em>data</em></em></strong></strong></code> by media column.</p><p><strong><strong>Line 6:</strong></strong> Always a good idea to use <code><strong><strong><em><em>console.log()</em></em></strong></strong></code> to print out the data object so you can get a concrete idea of what it looks like.</p><p><strong><strong>Line 9–10: </strong></strong>We use <code><strong><strong><em><em>.map()</em></em></strong></strong></code> function to return the array of keys ( media channels) in the nested data. Then we use<code><strong><strong>scaleOrdinal()</strong></strong></code>, a function to scale ordinal data, to match each color in <code><a href="http://bl.ocks.org/mhkeller/10504471" rel="noopener nofollow"><strong><strong><em><em>colorbrewer.Set2</em></em></strong></strong></a></code> to each media channel.</p><p><strong><strong>Line 17: </strong></strong>Use the nested data <code><strong><strong><em><em>.data(sumstat)</em></em></strong></strong></code> so a line will be drawn for each group.</p><p><strong><strong>Line 19–25: </strong></strong>Draw the lines by appending <code><strong><strong><em><em>“path”</em></em></strong></strong></code>. The <code><strong><strong><em><em>attr(“d”)</em></em></strong></strong></code> defines the path to be drawn, within it, we call the <code><strong><strong><em><em>d3.line()</em></em></strong></strong></code> function that will create the d attribute of the path following the sequence of points we will define. Set x-coordinate to be the year, y-coordinate to be spending, for the curve, we use the <a href="http://bl.ocks.org/d3indepth/b6d4845973089bc1012dec1674d3aff8" rel="noopener nofollow">curveCardinal type</a> <code><strong><strong><em><em>d3.curveCardinal.</em></em></strong></strong></code></p><p><strong><strong>Line 27: </strong></strong>For the color of each line, we call the <code><strong><strong><em><em>color()</em></em></strong></strong></code><em><em> </em></em>function we created before to give each group its assigned color.</p><p><strong><strong>Line 32–41: </strong></strong>We will draw a circle for each data point to highlight that those are the discrete data points we have vs. continuous data throughout the years. To do this, we will use <code><strong><strong><em><em>data</em></em></strong></strong></code> instead of the nested data <code><strong><strong>sumstat</strong></strong></code>, because we are not drawing one circle for each group.<code><strong><strong><em><em> .attr(“r”)</em></em></strong></strong></code> defines the size of the circle, <code><strong><strong><em><em>.attr(“cx”)</em></em></strong></strong></code> defines the x-coordinate of the center of the circle, <code><strong><strong><em><em>.attr(“cy”)</em></em></strong></strong></code> defines the y-coordinate of the center of the circle. Finally, we use the <code><strong><strong><em><em>color()</em></em></strong></strong></code> function to give each circle color based on its media.</p><p>Your output so far should look like below.</p><figure class="kg-card kg-image-card"><img src="./multiline_test_files/image-115.png" class="kg-image lightense-target" alt="D3.js — Multiple Lines Chart w/ Line-by-Line Code Explanations" loading="lazy" width="576" height="405"></figure><h3 id="append-legend-source-and-title-with-d3">Append legend, source, and title with D3</h3><p>The final touches of this chart are its legend, source, and title. We will cover annotation and tooltips in our next tutorial. These are important but often-neglected elements of an effective chart (more on this here).</p><!--kg-card-begin: html--><script src="./multiline_test_files/a7800b50e507cd2bef6429e874ab9561.js"></script><link rel="stylesheet" href="./multiline_test_files/gist-embed-73138c5999f2.css"><div id="gist106927944" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-multiplelineschart-d3-part5-js" class="file my-2">
+    
+    <div itemprop="text" class="Box-body p-0 blob-wrapper data type-javascript  ">
+
+        
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template"></template>
+<template class="js-line-alert-template"></template>
+
+  <table data-hpc="" class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip="" data-tagsearch-lang="JavaScript" data-tagsearch-path="MultipleLinesChart-D3-Part5.js">
+        <tbody><tr>
+          <td id="file-multiplelineschart-d3-part5-js-L1" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="1"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-c">//append legends</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L2" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="2"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> <span class="pl-s1">legend</span> <span class="pl-c1">=</span> <span class="pl-s1">d3</span><span class="pl-kos">.</span><span class="pl-en">select</span><span class="pl-kos">(</span><span class="pl-s">"svg"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L3" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="3"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC3" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">selectAll</span><span class="pl-kos">(</span><span class="pl-s">'g.legend'</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L4" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="4"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC4" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">data</span><span class="pl-kos">(</span><span class="pl-s1">sumstat</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L5" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="5"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC5" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">enter</span><span class="pl-kos">(</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L6" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="6"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC6" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">append</span><span class="pl-kos">(</span><span class="pl-s">"g"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L7" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="7"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC7" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"class"</span><span class="pl-kos">,</span> <span class="pl-s">"legend"</span><span class="pl-kos">)</span><span class="pl-kos">;</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L8" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="8"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC8" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L9" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="9"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">legend</span><span class="pl-kos">.</span><span class="pl-en">append</span><span class="pl-kos">(</span><span class="pl-s">"circle"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L10" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="10"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC10" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"cx"</span><span class="pl-kos">,</span> <span class="pl-c1">1000</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L11" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="11"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC11" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">'cy'</span><span class="pl-kos">,</span> <span class="pl-kos">(</span><span class="pl-s1">d</span><span class="pl-kos">,</span> <span class="pl-s1">i</span><span class="pl-kos">)</span> <span class="pl-c1">=&gt;</span> <span class="pl-s1">i</span> <span class="pl-c1">*</span> <span class="pl-c1">30</span> <span class="pl-c1">+</span> <span class="pl-c1">350</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L12" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="12"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC12" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"r"</span><span class="pl-kos">,</span> <span class="pl-c1">6</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L13" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="13"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC13" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">style</span><span class="pl-kos">(</span><span class="pl-s">"fill"</span><span class="pl-kos">,</span> <span class="pl-s1">d</span> <span class="pl-c1">=&gt;</span> <span class="pl-en">color</span><span class="pl-kos">(</span><span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-c1">key</span><span class="pl-kos">)</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L14" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="14"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC14" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L15" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="15"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC15" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">legend</span><span class="pl-kos">.</span><span class="pl-en">append</span><span class="pl-kos">(</span><span class="pl-s">"text"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L16" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="16"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC16" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"x"</span><span class="pl-kos">,</span> <span class="pl-c1">1020</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L17" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="17"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC17" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"y"</span><span class="pl-kos">,</span> <span class="pl-kos">(</span><span class="pl-s1">d</span><span class="pl-kos">,</span> <span class="pl-s1">i</span><span class="pl-kos">)</span> <span class="pl-c1">=&gt;</span> <span class="pl-s1">i</span> <span class="pl-c1">*</span> <span class="pl-c1">30</span> <span class="pl-c1">+</span> <span class="pl-c1">355</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L18" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="18"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC18" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">text</span><span class="pl-kos">(</span><span class="pl-s1">d</span> <span class="pl-c1">=&gt;</span> <span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-c1">key</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L19" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="19"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC19" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L20" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="20"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC20" class="blob-code blob-code-inner js-file-line"><span class="pl-c">//append title</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L21" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="21"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC21" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">d3</span><span class="pl-kos">.</span><span class="pl-en">select</span><span class="pl-kos">(</span><span class="pl-s">"svg"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L22" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="22"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC22" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">append</span><span class="pl-kos">(</span><span class="pl-s">"text"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L23" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="23"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC23" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"x"</span><span class="pl-kos">,</span> <span class="pl-c1">485</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L24" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="24"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC24" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"y"</span><span class="pl-kos">,</span> <span class="pl-c1">30</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L25" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="25"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC25" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"text-anchor"</span><span class="pl-kos">,</span> <span class="pl-s">"middle"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L26" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="26"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC26" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">text</span><span class="pl-kos">(</span><span class="pl-s">"US Total Media Ad Spending, by Media, 2016-2022"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L27" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="27"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC27" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">style</span><span class="pl-kos">(</span><span class="pl-s">"fill"</span><span class="pl-kos">,</span> <span class="pl-s">"black"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L28" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="28"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC28" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">style</span><span class="pl-kos">(</span><span class="pl-s">"font-size"</span><span class="pl-kos">,</span> <span class="pl-c1">28</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L29" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="29"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC29" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">style</span><span class="pl-kos">(</span><span class="pl-s">"font-family"</span><span class="pl-kos">,</span> <span class="pl-s">"Arial Black"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L30" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="30"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC30" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L31" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="31"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC31" class="blob-code blob-code-inner js-file-line"><span class="pl-c">//apend source</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L32" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="32"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC32" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">d3</span><span class="pl-kos">.</span><span class="pl-en">select</span><span class="pl-kos">(</span><span class="pl-s">"svg"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L33" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="33"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC33" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">append</span><span class="pl-kos">(</span><span class="pl-s">"text"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L34" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="34"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC34" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"x"</span><span class="pl-kos">,</span> <span class="pl-c1">70</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L35" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="35"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC35" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">attr</span><span class="pl-kos">(</span><span class="pl-s">"y"</span><span class="pl-kos">,</span> <span class="pl-c1">700</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L36" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="36"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC36" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">text</span><span class="pl-kos">(</span><span class="pl-s">"Source: eMarketer, March 2018"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L37" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="37"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC37" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">style</span><span class="pl-kos">(</span><span class="pl-s">"fill"</span><span class="pl-kos">,</span> <span class="pl-s">"black"</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L38" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="38"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC38" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">style</span><span class="pl-kos">(</span><span class="pl-s">"font-size"</span><span class="pl-kos">,</span> <span class="pl-c1">14</span><span class="pl-kos">)</span></td>
+        </tr>
+        <tr>
+          <td id="file-multiplelineschart-d3-part5-js-L39" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="39"></td>
+          <td id="file-multiplelineschart-d3-part5-js-LC39" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">.</span><span class="pl-en">style</span><span class="pl-kos">(</span><span class="pl-s">"font-family"</span><span class="pl-kos">,</span> <span class="pl-s">"Arial Black"</span><span class="pl-kos">)</span></td>
+        </tr>
+  </tbody></table>
+</div>
+
+
+    </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/Jennyandhuang/a7800b50e507cd2bef6429e874ab9561/raw/ea5b30b7d2d0f8edeb8874b44fa68db2a7b60426/MultipleLinesChart-D3-Part5.js" style="float:right">view raw</a>
+        <a href="https://gist.github.com/Jennyandhuang/a7800b50e507cd2bef6429e874ab9561#file-multiplelineschart-d3-part5-js">
+          MultipleLinesChart-D3-Part5.js
+        </a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<!--kg-card-end: html--><p><strong><strong>Line 2–7:</strong></strong> Set everything up for drawing a legend by appending <code><strong><strong><em><em>g</em></em></strong></strong></code> to group all the elements, entering the nested data <code><strong><strong><em><em>sumstat </em></em></strong></strong></code>so we draw one circle for each group, assigning class <strong><strong><em><em>.attr(“class”, “legend”)</em></em></strong></strong> for styling.</p><p><strong><strong>Line 9–13: </strong></strong>We first draw the circles of the legend. We want to position them in one column, this means each circle will have the same x-coordinate <code><strong><strong><em><em>.attr(“cx”,1000)</em></em></strong></strong></code> and the y-coordinate increases by 30px from one to the next <code><strong><strong><em><em>.attr("cy",(d,i)=&gt;i*30+355)</em></em></strong></strong></code>, <code><strong><strong><em><em>i</em></em></strong></strong></code> indicates the position number in the array. Again color will be assigned using the <code><strong><strong><em><em>color()</em></em></strong></strong></code> function we created before.</p><p><strong><strong>Line 15–18:</strong></strong> We create the text labels in a similar way to the circles, set the x coordinate a bit right to the circles <code><strong><strong><em><em>.attr(“cx”,1020)</em></em></strong></strong></code></p><!--kg-card-begin: html--><script async="" src="./multiline_test_files/f(1).txt" crossorigin="anonymous"></script>
+<!-- New Display Ad -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1290293847788094" data-ad-slot="1430276135" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script><!--kg-card-end: html--><p><strong><strong>Line 21–39:</strong></strong> Finally, we add in the titles and source. For a single chart, it’s very easy to do. We just append text to the position we want. The code should be pretty self-explanatory. I recommend you using <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer" rel="noopener nofollow">live-server</a> so you can instantly see the position of the text as you change your code.</p><p>Your final output should look like below.</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="./multiline_test_files/image-116.png" class="kg-image lightense-target" alt="Multiple Lines Chart with D3.js" loading="lazy" width="576" height="362"><figcaption>Multiple Lines Chart with D3.js</figcaption></figure><hr><h3 id="this-helped-more-tutorials-here-"><a href="https://www.goodmarketing.club/guide/d3-js-tutorials-line-by-line-explanations-purchase/">This helped? More tutorials here</a>👇</h3><figure class="kg-card kg-image-card"><a href="https://www.goodmarketing.club/guide/d3-js-tutorials-line-by-line-explanations-purchase/" class="post-image-link"><img src="./multiline_test_files/Fashionable-Eyewear-Photo-Collage-1.gif" class="kg-image no-lightense" alt="" loading="lazy" width="1206" height="964"></a></figure>
+		<div class="post-share-section">
+	<div class="post-share-wrap">
+		<a href="https://twitter.com/intent/tweet?text=D3.js%20-%20Multiple%20Lines%20Chart%20w%2F%20Line-by-Line%20Code%20Explanations&amp;url=https://www.goodmarketing.club/guide/d3-js-multiple-lines-chart-w-line-by-line-code-explanations/" target="_blank" rel="noopener" aria-label="Twitter share icon"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"></path></svg></a>
+		<a href="https://www.facebook.com/sharer/sharer.php?u=https://www.goodmarketing.club/guide/d3-js-multiple-lines-chart-w-line-by-line-code-explanations/" target="_blank" rel="noopener" aria-label="Facebook share icon"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.9981 11.9991C23.9981 5.37216 18.626 0 11.9991 0C5.37216 0 0 5.37216 0 11.9991C0 17.9882 4.38789 22.9522 10.1242 23.8524V15.4676H7.07758V11.9991H10.1242V9.35553C10.1242 6.34826 11.9156 4.68714 14.6564 4.68714C15.9692 4.68714 17.3424 4.92149 17.3424 4.92149V7.87439H15.8294C14.3388 7.87439 13.8739 8.79933 13.8739 9.74824V11.9991H17.2018L16.6698 15.4676H13.8739V23.8524C19.6103 22.9522 23.9981 17.9882 23.9981 11.9991Z"></path></svg></a>
+		<a class="post-share-link" id="copy" data-clipboard-target="#copy-link" aria-label="Copy link icon"><svg role="img" viewBox="0 0 33 24" xmlns="http://www.w3.org/2000/svg"><path d="M27.3999996,13.4004128 L21.7999996,13.4004128 L21.7999996,19 L18.9999996,19 L18.9999996,13.4004128 L13.3999996,13.4004128 L13.3999996,10.6006192 L18.9999996,10.6006192 L18.9999996,5 L21.7999996,5 L21.7999996,10.6006192 L27.3999996,10.6006192 L27.3999996,13.4004128 Z M12,20.87 C7.101,20.87 3.13,16.898 3.13,12 C3.13,7.102 7.101,3.13 12,3.13 C12.091,3.13 12.181,3.139 12.272,3.142 C9.866,5.336 8.347,8.487 8.347,12 C8.347,15.512 9.866,18.662 12.271,20.857 C12.18,20.859 12.091,20.87 12,20.87 Z M20.347,0 C18.882,0 17.484,0.276 16.186,0.756 C14.882,0.271 13.473,0 12,0 C5.372,0 0,5.373 0,12 C0,18.628 5.372,24 12,24 C13.471,24 14.878,23.726 16.181,23.242 C17.481,23.724 18.88,24 20.347,24 C26.975,24 32.347,18.628 32.347,12 C32.347,5.373 26.975,0 20.347,0 Z"></path></svg></a>
+		<small class="share-link-info">The link has been copied!</small>
+	</div>
+	<input type="text" value="https://www.goodmarketing.club/guide/d3-js-multiple-lines-chart-w-line-by-line-code-explanations/" id="copy-link" aria-label="Copy link input">
+</div>	</div>
+</article>
+<aside class="nextprev-section">
+	<div class="nextprev-wrap">
+		<section class="nextprev-newer post tag-essay tag-marketing-strategy tag-hash-post-card-aqua">
+			<a href="https://www.goodmarketing.club/essay/b2b-loyalty-has-to-be-achieved-twice/" class="global-link" aria-label="B2B Loyalty Has to be Achieved Twice"></a>
+			<a href="https://www.goodmarketing.club/essay/b2b-loyalty-has-to-be-achieved-twice/" class="nextprev-image global-image">
+				<img src="./multiline_test_files/Customers-are-not-necessarily-consumer.png" alt="B2B Loyalty Has to be Achieved Twice">			</a>
+			<div>
+				<small>Newer post</small>
+				<h3><a href="https://www.goodmarketing.club/essay/b2b-loyalty-has-to-be-achieved-twice/">B2B Loyalty Has to be Achieved Twice</a></h3>
+			</div>
+		</section>
+		<section class="nextprev-older post tag-guide tag-visualization tag-hash-post-card-cream">
+			<a href="https://www.goodmarketing.club/guide/a-chart-is-worth-a-thousand-words-if-you-know-how-to-read-it/" class="global-link" aria-label="A Chart is Worth a Thousand Words - If You Know How to Read It"></a>
+			<div>
+				<small>Older post</small>
+				<h3><a href="https://www.goodmarketing.club/guide/a-chart-is-worth-a-thousand-words-if-you-know-how-to-read-it/">A Chart is Worth a Thousand Words - If You Know How to Read It</a></h3>
+			</div>
+			<a href="https://www.goodmarketing.club/guide/a-chart-is-worth-a-thousand-words-if-you-know-how-to-read-it/" class="nextprev-image global-image">
+				<img src="./multiline_test_files/How-to-Read-a-Chart-2.png" alt="A Chart is Worth a Thousand Words - If You Know How to Read It">			</a>
+		</section>
+	</div>
+</aside><div class="comments-section">
+	<div class="comments-wrap">
+		
+<div id="disqus_thread" class="disqus-lazy">
+	<script>
+	var disqus_id = "goodmarketing-club",
+		disqus_config = function () {
+		this.page.url = "https://www.goodmarketing.club/guide/d3-js-multiple-lines-chart-w-line-by-line-code-explanations/";
+		this.page.identifier = "ghost-6003adb8c729f20039bc6195"
+	};
+	</script>
+</div>
+
+	</div>
+</div>
+<div class="global-sections global-sections-items-4">
+	<h2 class="global-label global-zigzag">
+	See more
+	<svg role="img" viewBox="0 0 136 24" xmlns="http://www.w3.org/2000/svg"><path d="M1.525 1.525a3.5 3.5 0 014.95 0L20 15.05 33.525 1.525a3.5 3.5 0 014.95 0L52 15.05 65.525 1.525a3.5 3.5 0 014.95 0L84 15.05 97.525 1.525a3.5 3.5 0 014.95 0L116 15.05l13.525-13.525a3.5 3.5 0 014.95 4.95l-16 16a3.5 3.5 0 01-4.95 0L100 8.95 86.475 22.475a3.5 3.5 0 01-4.95 0L68 8.95 54.475 22.475a3.5 3.5 0 01-4.95 0L36 8.95 22.475 22.475a3.5 3.5 0 01-4.95 0l-16-16a3.5 3.5 0 010-4.95z"></path></svg></h2>
+<article class="item-section post tag-guide tag-analytics tag-marketing-strategy tag-hash-post-card-peach featured">
+	<a href="https://www.goodmarketing.club/guide/how-to-keep-track-of-top-posts-on-reddit-with-free-api/" class="global-link" aria-label="How to Keep Track of Top Posts on Reddit with Free API"></a>
+	<div class="global-image">
+		<img srcset="https://images.unsplash.com/photo-1616509091215-57bbece93654?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwxMTc3M3wwfDF8c2VhcmNofDF8fHJlZGRpdHxlbnwwfHx8fDE2NTYyMTExNzY&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=2000 300w,
+			 https://images.unsplash.com/photo-1616509091215-57bbece93654?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwxMTc3M3wwfDF8c2VhcmNofDF8fHJlZGRpdHxlbnwwfHx8fDE2NTYyMTExNzY&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=2000 400w,
+			 https://images.unsplash.com/photo-1616509091215-57bbece93654?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwxMTc3M3wwfDF8c2VhcmNofDF8fHJlZGRpdHxlbnwwfHx8fDE2NTYyMTExNzY&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=2000 600w" sizes="(max-width:480px) 150px, 200px" src="./multiline_test_files/photo-1616509091215-57bbece93654" alt="How to Keep Track of Top Posts on Reddit with Free API">	</div>
+	<div class="global-sections-content">
+		<h3><a href="https://www.goodmarketing.club/guide/how-to-keep-track-of-top-posts-on-reddit-with-free-api/">How to Keep Track of Top Posts on Reddit with Free API</a></h3>
+		<div class="global-sections-meta global-meta global-pointer">
+			<a href="https://www.goodmarketing.club/404/">Chi</a>
+		</div>
+	</div>
+</article>
+	<article class="item-section post tag-guide tag-analytics tag-experimentation tag-hash-post-card-rose featured">
+	<a href="https://www.goodmarketing.club/guide/study-notes-on-online-controlled-experiments-multivariant-testing-practical-part-2/" class="global-link" aria-label="Study Notes on Online Controlled Experiments - Part 2 (Multivariant testing, practical lessons)"></a>
+	<div class="global-image">
+		<img srcset="https://images.unsplash.com/photo-1653491889685-d68145b5abd1?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwxMTc3M3wwfDF8YWxsfDJ8fHx8fHwyfHwxNjUzNjE1MTI1&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=2000 300w,
+			 https://images.unsplash.com/photo-1653491889685-d68145b5abd1?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwxMTc3M3wwfDF8YWxsfDJ8fHx8fHwyfHwxNjUzNjE1MTI1&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=2000 400w,
+			 https://images.unsplash.com/photo-1653491889685-d68145b5abd1?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwxMTc3M3wwfDF8YWxsfDJ8fHx8fHwyfHwxNjUzNjE1MTI1&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=2000 600w" sizes="(max-width:480px) 150px, 200px" src="./multiline_test_files/photo-1653491889685-d68145b5abd1" alt="Study Notes on Online Controlled Experiments - Part 2 (Multivariant testing, practical lessons)">	</div>
+	<div class="global-sections-content">
+		<h3><a href="https://www.goodmarketing.club/guide/study-notes-on-online-controlled-experiments-multivariant-testing-practical-part-2/">Study Notes on Online Controlled Experiments - Part 2 (Multivariant testing, practical lessons)</a></h3>
+		<div class="global-sections-meta global-meta global-pointer">
+			<a href="https://www.goodmarketing.club/404/">Chi</a>
+		</div>
+	</div>
+</article>
+	<article class="item-section post tag-guide tag-analytics tag-experimentation tag-hash-post-card-seafoam featured">
+	<a href="https://www.goodmarketing.club/guide/study-notes-on-online-controlled-experiments-a-b-testing-part-1/" class="global-link" aria-label="Study Notes on Online Controlled Experiments (A/B testing) - Part 1"></a>
+	<div class="global-image">
+		<img srcset="/content/images/size/w300/2022/05/Writing-Testable-Code-3.jpeg 300w,
+			 /content/images/size/w400/2022/05/Writing-Testable-Code-3.jpeg 400w,
+			 /content/images/size/w600/2022/05/Writing-Testable-Code-3.jpeg 600w" sizes="(max-width:480px) 150px, 200px" src="./multiline_test_files/Writing-Testable-Code-3.jpeg" alt="Study Notes on Online Controlled Experiments (A/B testing) - Part 1">	</div>
+	<div class="global-sections-content">
+		<h3><a href="https://www.goodmarketing.club/guide/study-notes-on-online-controlled-experiments-a-b-testing-part-1/">Study Notes on Online Controlled Experiments (A/B testing) - Part 1</a></h3>
+		<div class="global-sections-meta global-meta global-pointer">
+			<a href="https://www.goodmarketing.club/404/">Chi</a>
+		</div>
+	</div>
+</article>
+	<article class="item-section post tag-guide tag-analytics tag-marketing-strategy no-image">
+	<a href="https://www.goodmarketing.club/guide/beauty-google-trends/" class="global-link" aria-label="Beauty Google Trends"></a>
+	<div class="global-sections-content">
+		<h3><a href="https://www.goodmarketing.club/guide/beauty-google-trends/">Beauty Google Trends</a></h3>
+		<div class="global-sections-meta global-meta global-pointer">
+			<a href="https://www.goodmarketing.club/404/">Chi</a>
+		</div>
+		<p class="global-excerpt">
+			trends.embed.renderExploreWidget("RELATED_QUERIES", {"comparisonItem":[{"keyword":"/m/014trl","geo":"US","time":"today 12-m"}],"category":0,"property":""}, {"exploreQuery"...
+		</p>
+	</div>
+</article>
+</div>
+
+					<div class="subscribe-section">
+	<div class="subscribe-wrap">
+		<h3>Access Members-Only Content for Free</h3>
+		<form data-members-form="subscribe" class="subscribe-form">
+			<input data-members-email="" type="email" name="email" placeholder="Your email address" aria-label="Your email address" required="">
+			<button class="global-button" type="submit">Subscribe</button>
+		</form>
+		<div class="subscribe-alert">
+			<small class="alert-loading global-alert">Loading...We are all in this together.</small>
+			<small class="alert-success global-alert">Please check your inbox and click the link to confirm your subscription</small>
+			<small class="alert-error global-alert">There was an error sending the email</small>
+		</div>
+	</div>
+</div>
+				</main>
+				<footer class="footer-section global-footer">
+	<div class="footer-wrap">
+		<div class="footer-data">
+			<div class="footer-logo">
+				<a href="https://www.goodmarketing.club/" class="is-image"><img src="./multiline_test_files/Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Untitled--2--1.png" alt="Good Marketing Club"></a>
+			</div>
+			<p class="footer-description">Stay Curious, Stay Inspired.</p>
+			<div class="footer-icons">
+				<a href="https://twitter.com/chiandhuang" aria-label="link Twitter"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"></path></svg></a>
+				
+
+<a href="https://www.buymeacoffee.com/VizVizChi" aria-label="link Buy me a coffee"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.898 0L5.682 2.799H3.877v2.523h.695L5.277 9.8H4.172l1.46 8.23.938-.01L7.512 24h8.918l.062-.4.88-5.58.888.01 1.46-8.231h-1.056l.705-4.477h.756V2.8h-1.918L16.99 0H6.898zm.528.805h9.043l.771 1.78H6.652l.774-1.78zm-2.75 2.797H19.32v.92H4.676v-.92zm.453 6.998h13.635l-1.176 6.62-5.649-.06-5.636.06-1.174-6.62z"></path></svg></a>
+<a href="https://www.linkedin.com/in/chi-huang/" aria-label="link Linkedin"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg></a>
+<a href="https://www.pinterest.com/goodmarketingclub" aria-label="link Pinterest"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"></path></svg></a>
+<a href="https://www.reddit.com/user/ChiandHuang" aria-label="link Reddit"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"></path></svg></a>
+			</div>
+		</div>
+		<div class="footer-nav">
+			
+
+
+
+<div class="footer-nav-column">
+	<small>Learn</small>
+	<ul>
+		<li><a href="https://www.goodmarketing.club/marketing-example/">Marketing Examples</a></li>
+		<li><a href="https://www.goodmarketing.club/guide/">Guides</a></li>
+		<li><a href="https://www.goodmarketing.club/visualization/">DataViz</a></li>
+		<li><a href="https://www.goodmarketing.club/essay/">Essays</a></li>
+	</ul>
+</div>
+
+<div class="footer-nav-column">
+	<small>Others</small>
+	<ul>
+		<li><a href="https://www.goodmarketing.club/members-only/">Members-Only</a></li>
+		<li><a href="https://www.goodmarketing.club/tool/">Tools</a></li>
+		<li><a href="https://www.goodmarketing.club/get-in-touch/">Get in Touch</a></li>
+	</ul>
+</div>
+
+
+		</div>
+	</div>
+	<div class="footer-copyright">
+		<a href="https://www.goodmarketing.club/">Good Marketing Club</a> © 2022. All Right Reserved.
+		Published with <a href="https://ghost.org/">Ghost</a> and <a href="https://partner.canva.com/c/2619607/647168/10068">Canva</a>.
+	</div>
+</footer>			</div>
+		</div>
+		<div id="notifications" class="global-notification">
+	<div class="subscribe">You’ve successfully subscribed to Good Marketing Club</div>
+	<div class="signin">Welcome back! You’ve successfully signed in.</div>
+	<div class="signup">Great! You’ve successfully signed up.</div>
+	<div class="expired">Your link has expired</div>
+	<div class="checkout-success">Success! Check your email for magic link to sign-in.</div>
+</div>
+		<div id="search" class="search-section">
+	<span id="search-close" class="search-close"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.742 12l7.483 7.483c.497.497.775 1.17.775 1.872A2.658 2.658 0 0 1 21.355 24a2.646 2.646 0 0 1-1.872-.775L12 15.742l-7.483 7.483A2.646 2.646 0 0 1 2.645 24 2.658 2.658 0 0 1 0 21.355c0-.702.278-1.375.775-1.872L8.258 12 .775 4.517A2.646 2.646 0 0 1 0 2.645 2.658 2.658 0 0 1 2.645 0c.702 0 1.375.278 1.872.775L12 8.258 19.483.775A2.646 2.646 0 0 1 21.353 0 2.658 2.658 0 0 1 24 2.647c0 .7-.278 1.373-.775 1.87L15.742 12z"></path></svg></span>
+	<div id="search-content" class="search-content">
+		<form class="search-form" onsubmit="return false">
+			<input id="search-input" type="text" placeholder="Type your keywords">
+			<div class="search-meta">
+				<span id="search-info">Please enter at least 3 characters</span>
+				<span id="search-counter" class="is-hide">
+					<span id="search-counter-results">0</span>
+					Results for your search
+				</span>
+			</div>
+		</form>
+		<div id="search-results" class="search-results"></div>
+	</div>
+	<div id="search-overlay" class="search-overlay"></div>
+</div>
+		<script src="./multiline_test_files/global.js"></script>
+		<script src="./multiline_test_files/post.js"></script>
+		<script>
+const searchUrl='https://www.goodmarketing.club',searchKey="354881cd04a9568bf0c4d42422",searchAPI=searchUrl+'/ghost/api/v3/content/posts/?key='+searchKey+'&limit=all&formats=plaintext&fields=url,title,published_at,custom_excerpt,excerpt,plaintext,visibility';
+</script>
+
+		<script>
+!function(){"use strict";const p=new URLSearchParams(window.location.search),isAction=p.has("action"),isStripe=p.has("stripe"),success=p.get("success"),action=p.get("action"),stripe=p.get("stripe"),n=document.getElementById("notifications"),a="is-subscribe",b="is-signin",c="is-signup",d="is-expired",e="is-checkout-success";p&&(isAction&&(action=="subscribe"&&success=="true"&&n.classList.add(a),action=="signin"&&success=="true"&&n.classList.add(b),action=="signup"&&success=="true"&&n.classList.add(c),success=="false"&&n.classList.add(d)),isStripe&&stripe=="success"&&n.classList.add(e),(isAction||isStripe)&&setTimeout(function(){window.history.replaceState(null,null,window.location.pathname),n.classList.remove(a,b,c,d,e)},5000))}();
+</script>
+
+		
+		<script src="./multiline_test_files/prism.min.js" integrity="sha512-YBk7HhgDZvBxmtOfUdvX0z8IH2d10Hp3aEygaMNhtF8fSOvBZ16D/1bXZTJV6ndk/L/DlXxYStP8jrF77v2MIg==" crossorigin="anonymous"></script>
+<script type="text/javascript" src="./multiline_test_files/prism-sql.min.js"></script>
+<script>
+var links = document.querySelectorAll('a');
+links.forEach((link) => {
+    var a = new RegExp('/' + window.location.host + '/');
+    if(!a.test(link.href)) {
+      	link.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            window.open(link.href, '_blank');
+        });
+    }
+});
+</script>
+	
+<div id="ghost-portal-root"></div><iframe name="__privateStripeMetricsController3660" frameborder="0" allowtransparency="true" scrolling="no" role="presentation" allow="payment *" src="./multiline_test_files/m-outer-93afeeb17bc37e711759584dbfc50d47.html" aria-hidden="true" tabindex="-1" style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe><div class="lightense-backdrop"></div></body></html>
