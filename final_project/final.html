@@ -63,24 +63,12 @@
 
     </p>
 
-    <h1>Chart #1: Linked Scatter</h1>
+    <h1>Chart #1: Line Series</h1>
     <p>
-      This is my least complete chart. It is intended to be a connected scatter plot, which will allow us to see the evolution of the Black population version the share of all street addresses in 8 different neighborhoods near the University of Chicago.
-      The scatter is working (street address proportion on the y axis, black percentage on the x) but I can't get the lines to render for some reason.
     </p>
     <div id="line_series"></div>
-
-    <h1>Chart #2: Normalized Area</h1>
-    <p>
-      This chart is broken. It works when I run it on its own, but doesn't when I try to include it with other charts. Use this link to see a working version of this chart.
-      <a href="https://marcdloeb.github.io/CAPP30239_FA22/final_project/normalized_area.html" target="_blank">Working Chart Link</a>.
-      Though, even on this "working" version, the date interpretation on my x axis is not working. It should range from 1902 to 1986. I don't know why months are appearing!
-      I'm honestly not very happy with how this one came out, and I probably will scrapt it. Hyde Park is proportionally so much larger than all the other neighborhoods, that it is difficult to read.
-      I'd apreciate feedback on how to improve this chart in particular, or what to replace it with.
-    </p>
-    <div id="connected_scatter"></div>
       
-    <h1>Chart #3: Map Series</h1>
+    <h1>Chart #2: Map Series</h1>
     <h1>Street Address Points and Percent Black, 1926-1935</h1>
     <p>
       This series of eight maps reflects the evolving relationship between the Black population on Chicago's Southeast Side, and the street addresses that appear in University of Chicago campus and community publications
@@ -93,12 +81,23 @@
     <div id="row2" class="row"></div>
     <div id="row3" class="row"></div>
     <div id="row4" class="row"></div>
+
+    <h1>Chart #3: Linked Scatter</h1>
+    <p>
+      This is my least complete chart. It is intended to be a connected scatter plot, which will allow us to see the evolution of the Black population version the share of all street addresses in 8 different neighborhoods near the University of Chicago.
+      The scatter is working (street address proportion on the y axis, black percentage on the x) but I can't get the lines to render for some reason.
+    </p>
+    <div id="connected_scatter"></div>
+
+
+
+
+
   </div>
 </body>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="libs/d3-color-legend.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
-<!-- <script src="line_series.js"></script> -->
 <script src="connected_scatter.js"></script>
 <script src="multi_map.js"></script>
 

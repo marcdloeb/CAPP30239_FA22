@@ -4,8 +4,11 @@ const tooltip = d3.select("body")
   .style("position", "absolute")
   .style("visibility", "hidden");
 
-const height = 900,
-  width = 400;
+const height = 600,
+  width = 300
+  width2 = width * 2
+  margin = ({ top: 25, right: 30, bottom: 35, left: 30 })
+  innerWidth = width2 - margin.left - margin.right;
 
 
 // Promise.all([
@@ -27,30 +30,61 @@ const height = 900,
 Promise.all([
   d3.json("data/map_topos/race_tracts.json"),
   d3.json("data/map_topos/nbhood_street_addr_decades.json"),
-  d3.csv("data/chart_data/nbhood_year_street_addr_perc_extra_tall.csv")
-]).then(([race_tracts, str_addr, str_addr_annual]) => {
-  console.log(str_addr_annual)
-  neighborhoodMapping = d3.group(str_addr_annual, d => d.neighborhood)
-  neighborhoodGroup = d3.groups(str_addr_annual, d => d.neighborhood)
-  console.log(neighborhoodGroup)
-  console.log(neighborhoodMapping)
+  d3.csv("data/chart_data/nbhood_year_street_addr_perc_extra_tall.csv"),
+  d3.csv("data/chart_data/nbhood_decade_add_blackper_long.csv")
+
+]).then(([race_tracts, str_addr, str_addr_annual, str_addr_black_per]) => {
+  
+  // series line chart data
+  // console.log(str_addr_annual)
+  // neighborhoodMapping = d3.group(str_addr_annual, d => d.neighborhood)
+  // neighborhoodGroup = d3.groups(str_addr_annual, d => d.neighborhood)
+  // console.log(neighborhoodGroup)
+  // console.log(neighborhoodMapping)
+
+  //connected scatter data
+
+  let neighborhoods = new Set(); //creating a set of neighborhoods
+
+  for (let d of str_addr_black_per) {
+    d.black_per = +d.black_per;
+    d.addr_share = +d.addr_share;
+    neighborhoods.add(d.neighborhood); //looping through to add neighborhoods
+  }
+
+  console.log("street address black per by decade")
+  console.log(str_addr_black_per)
+  console.log("list of neighborhoods")
+  console.log(neighborhoods)
+
+  multilineColor = d3.scaleOrdinal()
+    .domain(neighborhoods)
+    .range([["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b"]]);
+
+  console.log(multilineColor.domain())
+  console.log(multilineColor.range())
+  console.log(multilineColor("Black Belt"))
+
+  //setting up choropleth data
   rto = race_tracts.objects
   sao = str_addr.objects
   console.log(rto)
   console.log(sao)
-  map_addr_only(race_tracts, rto.race_1920_tract_id, str_addr, sao.nbhood_street_addr_1902_1914_id, "1902-1914", "No Census Data", '#row1'); //temp using 1920 (without race coloration) as a basemap 
-  map_addr_blackper(race_tracts, rto.race_1920_tract_id, str_addr, sao.nbhood_street_addr_1915_1925_id, "1915-1925", "1920", '#row1');
-  map_addr_blackper(race_tracts, rto.race_1930_tract_id, str_addr, sao.nbhood_street_addr_1926_1935_id, "1926-1935", "1930", '#row2');
-  map_addr_blackper(race_tracts, rto.race_1940_tract_id, str_addr, sao.nbhood_street_addr_1936_1945_id, "1936-1945", "1940", '#row2');
-  map_addr_blackper(race_tracts, rto.race_1950_tract_id, str_addr, sao.nbhood_street_addr_1946_1955_id, "1946-1955", "1950", '#row3');
-  map_addr_blackper(race_tracts, rto.race_1960_tract_id, str_addr, sao.nbhood_street_addr_1956_1965_id, "1956-1965", "1960", '#row3');
-  map_addr_blackper(race_tracts, rto.race_1970_tract_id, str_addr, sao.nbhood_street_addr_1966_1975_id, "1966-1975", "1970", '#row4');
-  map_addr_blackper(race_tracts, rto.race_1980_tract_id, str_addr, sao.nbhood_street_addr_1976_1986_id, "1976-1986", "1980", '#row4');
+
+  //call choropleth functions
+  choro_addr_only(race_tracts, rto.race_1920_tract_id, str_addr, sao.nbhood_street_addr_1902_1914_id, "1902-1914", "No Census Data", '#row1'); //temp using 1920 (without race coloration) as a basemap 
+  choro_addr_blackper(race_tracts, rto.race_1920_tract_id, str_addr, sao.nbhood_street_addr_1915_1925_id, "1915-1925", "1920", '#row1');
+  choro_addr_blackper(race_tracts, rto.race_1930_tract_id, str_addr, sao.nbhood_street_addr_1926_1935_id, "1926-1935", "1930", '#row2');
+  choro_addr_blackper(race_tracts, rto.race_1940_tract_id, str_addr, sao.nbhood_street_addr_1936_1945_id, "1936-1945", "1940", '#row2');
+  choro_addr_blackper(race_tracts, rto.race_1950_tract_id, str_addr, sao.nbhood_street_addr_1946_1955_id, "1946-1955", "1950", '#row3');
+  choro_addr_blackper(race_tracts, rto.race_1960_tract_id, str_addr, sao.nbhood_street_addr_1956_1965_id, "1956-1965", "1960", '#row3');
+  choro_addr_blackper(race_tracts, rto.race_1970_tract_id, str_addr, sao.nbhood_street_addr_1966_1975_id, "1966-1975", "1970", '#row4');
+  choro_addr_blackper(race_tracts, rto.race_1980_tract_id, str_addr, sao.nbhood_street_addr_1976_1986_id, "1976-1986", "1980", '#row4');
 });
 
 //making a function that we will run multiple times
 
-function map_addr_blackper(race_tracts, race_tracts_decade, str_addr, str_addr_decade, decade, census, elemId) {
+function choro_addr_blackper(race_tracts, race_tracts_decade, str_addr, str_addr_decade, decade, census, elemId) {
 
   const tracts = topojson.feature(race_tracts, race_tracts_decade)
   const addr = topojson.feature(str_addr, str_addr_decade)
@@ -111,7 +145,7 @@ function map_addr_blackper(race_tracts, race_tracts_decade, str_addr, str_addr_d
 }
 
 //this is identical except for a single line with the function above, is there any way that I can pass it some kind of boolean???
-function map_addr_only(race_tracts, race_tracts_decade, str_addr, str_addr_decade, decade, census, elemId) {
+function choro_addr_only(race_tracts, race_tracts_decade, str_addr, str_addr_decade, decade, census, elemId) {
 
   const tracts = topojson.feature(race_tracts, race_tracts_decade)
   const addr = topojson.feature(str_addr, str_addr_decade)
