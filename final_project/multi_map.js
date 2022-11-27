@@ -5,12 +5,35 @@ const tooltip = d3.select("body")
   .style("visibility", "hidden");
 
 const height = 900,
-  width = 450;
+  width = 400;
+
+
+// Promise.all([
+//     d3.csv("data/chart_data/nbhood_year_street_addr_perc_extra_tall.csv"),
+//     d3.csv('long-term-interest-monthly.csv')
+//   ]).then(([str_addr_annual, interest]) => {
+//     console.log(str_addr_annual)
+//     neighborhoodMapping = d3.group(str_addr_annual, d => d.neighborhood)
+//     neighborhoodGroup = d3.groups(str_addr_annual, d => d.neighborhood)
+//     console.log(neighborhoodGroup)
+//     console.log(neighborhoodMapping)
+//     console.log("hyde park data")
+//     console.log(neighborhoodMapping.get("hyde_park"))
+//     console.log("interest data")
+//     console.log(interest)
+
+
 
 Promise.all([
   d3.json("data/map_topos/race_tracts.json"),
   d3.json("data/map_topos/nbhood_street_addr_decades.json"),
-]).then(([race_tracts, str_addr]) => {
+  d3.csv("data/chart_data/nbhood_year_street_addr_perc_extra_tall.csv")
+]).then(([race_tracts, str_addr, str_addr_annual]) => {
+  console.log(str_addr_annual)
+  neighborhoodMapping = d3.group(str_addr_annual, d => d.neighborhood)
+  neighborhoodGroup = d3.groups(str_addr_annual, d => d.neighborhood)
+  console.log(neighborhoodGroup)
+  console.log(neighborhoodMapping)
   rto = race_tracts.objects
   sao = str_addr.objects
   console.log(rto)

@@ -1,5 +1,5 @@
-let height1 = 400, //setting variables
-    width1 = 600,
+let height1 = 450, //setting variables
+    width1 = 800,
     margin = ({ top: 25, right: 30, bottom: 35, left: 40 });
   
 const svg = d3.select("#connected_scatter") //selecting the chart ID from HTML, appending SVG with a view box
