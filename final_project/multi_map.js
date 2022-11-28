@@ -31,9 +31,7 @@ Promise.all([
   d3.json("data/map_topos/race_tracts.json"),
   d3.json("data/map_topos/nbhood_street_addr_decades.json"),
   d3.csv("data/chart_data/nbhood_year_street_addr_perc_extra_tall.csv"),
-  d3.csv("data/chart_data/nbhood_decade_add_blackper_long.csv")
-
-]).then(([race_tracts, str_addr, str_addr_annual, str_addr_black_per]) => {
+]).then(([race_tracts, str_addr, str_addr_annual]) => {
   
   // series line chart data
   // console.log(str_addr_annual)
@@ -41,30 +39,7 @@ Promise.all([
   // neighborhoodGroup = d3.groups(str_addr_annual, d => d.neighborhood)
   // console.log(neighborhoodGroup)
   // console.log(neighborhoodMapping)
-
-  //connected scatter data
-
-  let neighborhoods = new Set(); //creating a set of neighborhoods
-
-  for (let d of str_addr_black_per) {
-    d.black_per = +d.black_per;
-    d.addr_share = +d.addr_share;
-    neighborhoods.add(d.neighborhood); //looping through to add neighborhoods
-  }
-
-  console.log("street address black per by decade")
-  console.log(str_addr_black_per)
-  console.log("list of neighborhoods")
-  console.log(neighborhoods)
-
-  multilineColor = d3.scaleOrdinal()
-    .domain(neighborhoods)
-    .range([["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b"]]);
-
-  console.log(multilineColor.domain())
-  console.log(multilineColor.range())
-  console.log(multilineColor("Black Belt"))
-
+  
   //setting up choropleth data
   rto = race_tracts.objects
   sao = str_addr.objects

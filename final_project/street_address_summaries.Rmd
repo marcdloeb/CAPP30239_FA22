@@ -177,9 +177,11 @@ str_addr_sf_nb_counts <- str_addr_sf_nb %>%
 #csv version
 str_addr_nb_counts <- str_addr_sf_nb_counts %>%
   st_drop_geometry()
-write.csv(str_addr_nb_counts, "data/working_points/nbhood_street_addr_counts.csv")
+#write.csv(str_addr_nb_counts, "data/working_points/nbhood_street_addr_counts.csv")
 
 ```
+
+
 
 Finding the absolute number of addresses in each neighborhood, by decade
 ```{r}
@@ -232,6 +234,10 @@ str_addr_sf_nbyear_counts <- str_addr_sf_nb %>%
   group_by(neighborhood, year) %>% 
   summarize(count = sum(quantity))
 #st_write(str_addr_sf_nbyear_counts, "data/working_data/nbhood_year_street_addr_counts.geojson")
+
+
+#str_addr_nbyear_counts_extra_tall <- str_addr_sf_nbyear_counts %>% st_drop_geometry()
+#write.csv(str_addr_nbyear_counts_extra_tall, "data/chart_data/str_addr_nbyear_counts_extra_tall.csv")
 ```
 
 pivoting data so that neighborhood is on the y axis and year is on the x
@@ -263,6 +269,27 @@ str_addr_nbyear_counts_tall <- str_addr_nbyear_counts_tall[order(str_addr_nbyear
 
 write.csv(str_addr_nbyear_counts_tall, "data/chart_data/nbhood_year_street_addr_counts_tall.csv")
 ```
+
+Pivot even longer
+```{r}
+str_addr_nbyear_counts_extra_tall <- str_addr_nbyear_counts_tall %>% pivot_longer(!year, names_to = "neighborhood", values_to = "percentage")
+str_addr_nbyear_counts_extra_tall <- str_addr_nbyear_counts_extra_tall %>% rename(count = percentage)
+
+write.csv(str_addr_nbyear_counts_extra_tall, "data/chart_data/nbhood_year_street_addr_count_extra_tall.csv")
+```
+
+```{r}
+
+str_addr_nbyear_counts_extra_tall_nohp <- str_addr_nbyear_counts_extra_tall %>% filter(neighborhood %in% c("black_belt", "north_woodlawn", "south_woodlawn", "south_shore", "south_kenwood"))
+
+str_addr_nbyear_counts_extra_tall_nohp$count[str_addr_nbyear_counts_extra_tall_nohp$count == 0] = 0.01
+
+write.csv(str_addr_nbyear_counts_extra_tall_nohp, "data/chart_data/nbhood_year_street_addr_count_extra_tall_nohp.csv")
+str_addr_nbyear_counts_extra_tall_hponly <- str_addr_nbyear_counts_extra_tall %>% filter(neighborhood == "hyde_park")
+write.csv(str_addr_nbyear_counts_extra_tall_hponly, "data/chart_data/nbhood_year_street_addr_count_extra_tall_hponly.csv")
+
+```
+
 
 
 Street address proportion in each neighborhood each year
