@@ -29,8 +29,8 @@ Promise.all([
 
     multilineColor = d3.scaleOrdinal()
       .domain(neighborhoods)
-      .range(["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b"]);
-
+      .range(["#1f77b4","#731603","#f52020","#ff7f0e","#4e2d6e","#e377c2"]);
+      
     console.log(multilineColor.domain())
     console.log(multilineColor.range())
     console.log(multilineColor("Black Belt"))
