@@ -1,71 +1,85 @@
-let height = 500,
-    width = 800,
-    margin = ({ top: 25, right: 30, bottom: 35, left: 30 })
-    innerWidth = width - margin.left - margin.right;
+let height2 = 600,
+    width2 = 600,
+    margin = ({ top: 25, right: 100, bottom: 35, left: 30 })
+    innerWidth = width2 - margin.left - margin.right;
 
-const svg = d3.select("#chart")
+const svg9 = d3.select("#multi_line")
   .append("svg")
-  .attr("viewBox", [0, 0, width, height]);
+  .attr("viewBox", [0, 0, width2, height2]);
 
-d3.csv("long-term-interest-G7.csv").then(data => {
-  let timeParse = d3.timeParse("%Y-%m");
+  Promise.all([
+    d3.csv("data/chart_data/years_relative_addr_share.csv")
+  ]).then(([str_addr_relative]) => {
 
-  let countries = new Set(); //creating a set of countries
 
-  for (let d of data) {
-    d.Date = timeParse(d.Date);
-    d.Value = +d.Value;
-    countries.add(d.Location); //looping through to add countries
+  console.log(str_addr_relative)
+
+  let timeParse = d3.timeParse("%Y");
+
+  let neighborhoods = new Set(); //creating a set of neighborhoods
+
+  for (let d of str_addr_relative) {
+    d.rel_average_rolling = +d.rel_average_rolling;
+    d.year = timeParse(d.year)
+    neighborhoods.add(d.neighborhood); //looping through to add neighborhoods
   }
 
-  let x = d3.scaleTime()
-    .domain(d3.extent(data, d => d.Date))
-    .range([margin.left, width - margin.right]);
+  console.log(neighborhoods)
 
-  let y = d3.scaleLinear()
-    .domain(d3.extent(data, d => d.Value))
-    .range([height - margin.bottom, margin.top]);
+  let x2 = d3.scaleTime()
+    .domain(d3.extent(str_addr_relative, d => d.year))
+    .range([margin.left, width2 - margin.right]);
 
-  svg.append("g")
-    .attr("transform", `translate(0,${height - margin.bottom})`)
-    .call(d3.axisBottom(x));
+  let y2 = d3.scaleSqrt()
+    .domain(d3.extent([-100, 450]))
+    //.domain(d3.extent(str_addr_relative, d => d.rel_average_rolling))
+    .range([height2 - margin.bottom, margin.top]);
 
-  svg.append("g")
+  svg9.append("g")
+    .attr("transform", `translate(0,${height2 - margin.bottom})`)
+    .call(d3.axisBottom(x2));
+
+  svg9.append("g")
     .attr("transform", `translate(${margin.left},0)`)
-    .call(d3.axisLeft(y).tickSize(-innerWidth).tickFormat(d => d + "%"));
+    .call(d3.axisLeft(y2).tickSize(-innerWidth).tickFormat(d => d + "%"));
 
-  let line = d3.line()
-    .x(d => x(d.Date))
-    .y(d => y(d.Value));
+  let line2 = d3.line()
+    .x(d => x2(d.year))
+    .y(d => y2(d.rel_average_rolling))
+    .curve(d3.curveBundle);
  
-  for (let country of countries) { //going through set, creating a line for each country
-    let countryData = data.filter(d => d.Location === country);
+  for (let neighborhood of neighborhoods) { //going through set, creating a line for each neighborhood
+    let neighborhoodData = str_addr_relative.filter(d => d.neighborhood === neighborhood);
 
-    let g = svg.append("g")
-      .attr("class", "country")
+    console.log(neighborhood)
+
+    let g = svg9.append("g")
+      .attr("class", "neighborhood")
       .on('mouseover', function () {
         d3.selectAll(".highlight").classed("highlight", false);
         d3.select(this).classed("highlight", true);
       });
 
-    if (country === "USA") {
+    if (neighborhood === "South Woodlawn") {
       g.classed("highlight", true);
     }
 
     g.append("path")
-      .datum(countryData)
+      .datum(neighborhoodData)
       .attr("fill", "none")
       .attr("stroke", "#ccc")
-      .attr("d", line)
+      //.attr("stroke", multilineColor(d => d.neighborhood))
+      .attr("d", line2)
 
-    let lastEntry = countryData[countryData.length - 1]; //last piece of data to position text x and y
+    let lastEntry = neighborhoodData[neighborhoodData.length - 1]; //last piece of data to position text x and y
 
     g.append("text")  //lining up the labels
-      .text(country)
-      .attr("x", x(lastEntry.Date) + 3)
-      .attr("y", y(lastEntry.Value))
+      .text(neighborhood)
+      .attr("x", x2(lastEntry.year) + 1)
+      .attr("y", y2(lastEntry.rel_average_rolling))
       .attr("dominant-baseline", "middle")
       .attr("fill", "#999");
   }
+
   
 });

@@ -11,22 +11,6 @@ const height = 600,
   innerWidth = width2 - margin.left - margin.right;
 
 
-// Promise.all([
-//     d3.csv("data/chart_data/nbhood_year_street_addr_perc_extra_tall.csv"),
-//     d3.csv('long-term-interest-monthly.csv')
-//   ]).then(([str_addr_annual, interest]) => {
-//     console.log(str_addr_annual)
-//     neighborhoodMapping = d3.group(str_addr_annual, d => d.neighborhood)
-//     neighborhoodGroup = d3.groups(str_addr_annual, d => d.neighborhood)
-//     console.log(neighborhoodGroup)
-//     console.log(neighborhoodMapping)
-//     console.log("hyde park data")
-//     console.log(neighborhoodMapping.get("hyde_park"))
-//     console.log("interest data")
-//     console.log(interest)
-
-
-
 Promise.all([
   d3.json("data/map_topos/race_tracts.json"),
   d3.json("data/map_topos/nbhood_street_addr_decades.json"),

@@ -1,6 +1,6 @@
 let height2 = 600,
     width2 = 600,
-    margin = ({ top: 25, right: 30, bottom: 35, left: 30 })
+    margin = ({ top: 25, right: 100, bottom: 35, left: 30 })
     innerWidth = width2 - margin.left - margin.right;
 
 const svg = d3.select("#connected_scatter")
@@ -32,12 +32,12 @@ Promise.all([
 
   let x = d3.scaleLinear()
     //.domain(d3.extent(str_addr_black_per, d => d.black_per))
-    .domain(d3.extent([0,100])).nice()
+    .domain(d3.extent([-10,100])).nice()
     .range([margin.left, width2 - margin.right]);
 
   let y = d3.scaleSqrt()
     //.domain(d3.extent(str_addr_black_per, d => d.addr_share))
-    .domain(d3.extent([0,80])).nice()
+    .domain(d3.extent([0,90])).nice()
     .range([height2 - margin.bottom, margin.top]);
 
   svg.append("g")
@@ -59,15 +59,6 @@ Promise.all([
     console.log(neighborhood)
 
     let g = svg.append("g")
-    //   .attr("class", "neighborhood")
-    //   .on('mouseover', function () {
-    //     d3.selectAll(".highlight").classed("highlight", false);
-    //     d3.select(this).classed("highlight", true);
-    //   });
-
-    // if (neighborhood === "South Woodlawn") {
-    //   g.classed("highlight", true);
-    // }
 
     g.append("path")
       .datum(neighborhoodData)

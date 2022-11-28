@@ -1,14 +1,19 @@
 let height2 = 600, //setting variables
     width2 = 600,
-    margin = ({ top: 25, right: 30, bottom: 35, left: 40 });
-  
+    margin = ({ top: 25, right: 100, bottom: 35, left: 30 });
+
+const svg9 = d3.select("#multi_line")
+    .append("svg")
+    .attr("viewBox", [0, 0, width2, height2]);
+
 const svg13 = d3.select("#connected_scatter") //selecting the chart ID from HTML, appending SVG with a view box
     .append("svg")
     .attr("viewBox", [0, 0, width2, height2]);
 
 Promise.all([
-  d3.csv("data/chart_data/nbhood_decade_add_blackper_long.csv")
-]).then(([str_addr_black_per]) => {
+  d3.csv("data/chart_data/nbhood_decade_add_blackper_long.csv"),
+  d3.csv("data/chart_data/years_relative_addr_share.csv")
+]).then(([str_addr_black_per, str_addr_relative]) => {
   //getting data
   
     let neighborhoods = new Set(); //creating a set of neighborhoods
@@ -24,7 +29,7 @@ Promise.all([
 
     multilineColor = d3.scaleOrdinal()
       .domain(neighborhoods)
-      .range([["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b"]]);
+      .range(["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b"]);
 
     console.log(multilineColor.domain())
     console.log(multilineColor.range())
@@ -52,7 +57,6 @@ Promise.all([
         .attr("class", "y-axis")
         .call(d3.axisLeft(y).tickFormat(d => (d) + "%").tickSize(-width2 + margin.left + margin.right))
 
-
     let line = d3.line()
         .x(d => x(d.black_per))
         .y(d => y(d.addr_share))
@@ -62,22 +66,15 @@ Promise.all([
         let neighborhoodData = str_addr_black_per.filter(d => d.neighborhood === neighborhood);
     
         console.log(neighborhood)
+        console.log(multilineColor(neighborhood))
     
         let g = svg13.append("g")
-        //   .attr("class", "neighborhood")
-        //   .on('mouseover', function () {
-        //     d3.selectAll(".highlight").classed("highlight", false);
-        //     d3.select(this).classed("highlight", true);
-        //   });
-    
-        // if (neighborhood === "South Woodlawn") {
-        //   g.classed("highlight", true);
-        // }
-    
+
         g.append("path")
           .datum(neighborhoodData)
           .attr("fill", "none")
-          .attr("stroke", "pink")
+          //.attr("stroke", "pink")
+          .attr("stroke", (multilineColor(neighborhood)))
           //.attr("stroke", multilineColor(d => d.neighborhood))
           .attr("d", line)
     
@@ -122,5 +119,72 @@ Promise.all([
       d3.select(this).attr("fill", "black");
       tooltip.style("visibility", "hidden");
     })
+
+
+  // multiline chart 
+
+  console.log(str_addr_relative)
+
+  let timeParse = d3.timeParse("%Y");
+
+  for (let d of str_addr_relative) {
+    d.rel_average_rolling = +d.rel_average_rolling;
+    d.year = timeParse(d.year);
+  }
+
+  let x2 = d3.scaleTime()
+  .domain(d3.extent(str_addr_relative, d => d.year))
+  .range([margin.left, width2 - margin.right]);
+
+let y2 = d3.scaleLinear()
+  .domain(d3.extent([-100, 450]))
+  //.domain(d3.extent(str_addr_relative, d => d.rel_average_rolling))
+  .range([height2 - margin.bottom, margin.top]);
+
+svg9.append("g")
+  .attr("transform", `translate(0,${height2 - margin.bottom})`)
+  .call(d3.axisBottom(x2));
+
+svg9.append("g")
+  .attr("transform", `translate(${margin.left},0)`)
+  .call(d3.axisLeft(y2).tickSize(-innerWidth).tickFormat(d => d + "%"));
+
+let line2 = d3.line()
+  .x(d => x2(d.year))
+  .y(d => y2(d.rel_average_rolling))
+  .curve(d3.curveBundle);
+
+for (let neighborhood of neighborhoods) { //going through set, creating a line for each neighborhood
+  let neighborhoodData = str_addr_relative.filter(d => d.neighborhood === neighborhood);
+
+  console.log(neighborhood)
+
+  let g = svg9.append("g")
+    .attr("class", "neighborhood")
+    .on('mouseover', function () {
+      d3.selectAll(".highlight").classed("highlight", false);
+      d3.select(this).classed("highlight", true);
+    });
+
+  if (neighborhood === "South Woodlawn") {
+    g.classed("highlight", true);
+  }
+
+  g.append("path")
+    .datum(neighborhoodData)
+    .attr("fill", "none")
+    .attr("stroke", "#ccc")
+    //.attr("stroke", multilineColor(d => d.neighborhood))
+    .attr("d", line2)
+
+  let lastEntry = neighborhoodData[neighborhoodData.length - 1]; //last piece of data to position text x and y
+
+  g.append("text")  //lining up the labels
+    .text(neighborhood)
+    .attr("x", x2(lastEntry.year) + 1)
+    .attr("y", y2(lastEntry.rel_average_rolling))
+    .attr("dominant-baseline", "middle")
+    .attr("fill", "#999");
+}
     
 });
