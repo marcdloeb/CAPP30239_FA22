@@ -1,6 +1,7 @@
 let height2 = 600, //setting variables
     width2 = 600,
-    margin = ({ top: 25, right: 100, bottom: 35, left: 30 });
+    margin = ({ top: 25, right: 80, bottom: 35, left: 30 });
+    innerWidth = width2 - margin.left - margin.right;
     //look around, find where margin right is set
 
 const svg9 = d3.select("#multi_line")
@@ -192,7 +193,7 @@ Promise.all([
           d3.select(this).classed("highlight", true);
         });
 
-      if (neighborhood === "South Woodlawn") {
+      if (neighborhood === "S. Woodlawn") {
         g.classed("highlight", true);
       }
 

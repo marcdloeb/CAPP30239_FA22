@@ -6,24 +6,12 @@ const tooltip = d3.select("body")
 
 const height = 600,
   width = 300
-  width2 = width * 2
-  margin = ({ top: 25, right: 30, bottom: 35, left: 30 })
-  innerWidth = width2 - margin.left - margin.right;
-
 
 Promise.all([
   d3.json("data/map_topos/race_tracts.json"),
   d3.json("data/map_topos/nbhood_street_addr_decades.json"),
-  d3.csv("data/chart_data/nbhood_year_street_addr_perc_extra_tall.csv"),
 ]).then(([race_tracts, str_addr, str_addr_annual]) => {
-  
-  // series line chart data
-  // console.log(str_addr_annual)
-  // neighborhoodMapping = d3.group(str_addr_annual, d => d.neighborhood)
-  // neighborhoodGroup = d3.groups(str_addr_annual, d => d.neighborhood)
-  // console.log(neighborhoodGroup)
-  // console.log(neighborhoodMapping)
-  
+   
   //setting up choropleth data
   rto = race_tracts.objects
   sao = str_addr.objects
