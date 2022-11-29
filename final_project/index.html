@@ -5,10 +5,22 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Multiline visualization</title>
+  <title>MDL Final Project</title>
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700" rel="stylesheet">
   <style>
     * {
-      font-family: Arial, Helvetica, sans-serif;
+        font-family: "Lato", "Open Sans", "sans-serif";
+    }
+
+  /* h1, h2, h3 {
+  font-family: "Lato", "Open Sans", "sans-serif";
+  margin: 0px;
+  padding: 0px;
+  }  */
+
+    .row {
+      column-count: 2;
+      width: 400;
     }
 
     #container {
@@ -74,12 +86,20 @@
     <p>
 
     </p>
+    <div id="legend"></div>
+    <div id="row1" class="row"></div>
+    <div id="row2" class="row"></div>
+    <div id="row3" class="row"></div>
+    <div id="row4" class="row"></div>
     <div id="connected_scatter"></div>
     <div id="multi_line"></div>
   </div>
 </body>
 <script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="libs/d3-color-legend.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 <!-- <script src="multiline_relative.js"></script> -->
 <script src="connected_scatter_and_multiline.js"></script>
+<script src="multi_map.js"></script>
 
 </html>
