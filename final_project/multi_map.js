@@ -19,7 +19,7 @@ Promise.all([
   console.log(sao)
 
   //call choropleth functions
-  choro_addr_only(race_tracts, rto.race_1920_tract_id, str_addr, sao.nbhood_street_addr_1902_1914_id, "1902-1914", "No Census Data", '#row1'); //temp using 1920 (without race coloration) as a basemap 
+  choro_addr_only(race_tracts, rto.race_1920_tract_id, str_addr, sao.nbhood_street_addr_1902_1914_id, "1902-1914", "No Race Census Data", '#row1'); //temp using 1920 (without race coloration) as a basemap 
   choro_addr_blackper(race_tracts, rto.race_1920_tract_id, str_addr, sao.nbhood_street_addr_1915_1925_id, "1915-1925", "1920", '#row1');
   choro_addr_blackper(race_tracts, rto.race_1930_tract_id, str_addr, sao.nbhood_street_addr_1926_1935_id, "1926-1935", "1930", '#row2');
   choro_addr_blackper(race_tracts, rto.race_1940_tract_id, str_addr, sao.nbhood_street_addr_1936_1945_id, "1936-1945", "1940", '#row2');
@@ -58,11 +58,11 @@ function choro_addr_blackper(race_tracts, race_tracts_decade, str_addr, str_addr
       .angle(179)
       .reflectX(180)
       .fitSize([width, height], mesh);
-    const path = d3.geoPath().projection(projection).pointRadius(1.5);
+    const path = d3.geoPath().projection(projection).pointRadius(1.75);
 
   const svg = d3.select(elemId)
     .append("div")
-    .html(`<h3>Street Address ${decade}, Black Population ${census}</h3>`)
+    .html(`<h3>Street Address From ${decade}, Black Population ${census}</h3>`)
     .attr("class", "chart")
     .append("svg")
     .attr("viewBox", [0, 0, width, height]);
@@ -143,8 +143,8 @@ d3.select("#legend")
   .appendChild(
     Legend(
       d3.scaleOrdinal(
-        ["<10", "20", "30", "40", "50", "60", "70", "80", "90", ">90"],
+        ["0-10", "11-20", "21-30", "31-40", "41-50", "51-60", "61-70", "71-80", "81-90", "91-100"],
         ["#ffffff","#e1edf8","#cadef0","#abcfe6","#82badb","#59a1cf","#3787c0","#1c6aaf","#0b4d94","#08306b"]
       ),
-      { title: "Percent Black (%)" }
+      { title: "Percent Black (%)", width: 800, height:50 }
     ));
