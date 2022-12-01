@@ -10,21 +10,25 @@
   <style>
     * {
         font-family: "Lato", "Open Sans", "sans-serif";
+        
     }
 
-  /* h1, h2, h3 {
+  h1, h2, h3 {
   font-family: "Lato", "Open Sans", "sans-serif";
   margin: 0px;
   padding: 0px;
-  }  */
+  } 
 
     .row {
-      column-count: 2;
-      width: 300;
-    }
+        display: flex;
+      }
+
+    .row > * {
+        padding: 10px;
+      }
 
     #container {
-      max-width: 900px;
+      max-width: 800px;
       margin: 0 auto;
     }
 
@@ -34,8 +38,8 @@
     svg { width: 100%; }
 
     text {
-      font-size: 10px;
-      text-transform: uppercase;
+      font-size: 12px;
+      /* text-transform: uppercase; */
     }
 
     path.domain { display: none; }
@@ -48,8 +52,8 @@
     .neighborhood { cursor: default; }
     
     .neighborhood path {
-      stroke-width: 1.5;
-      opacity: 0.75;
+      stroke-width: 2;
+      opacity: 1;
     }
 
     .highlight path {
@@ -77,12 +81,20 @@
       visibility: hidden;
     }
 
+    #legend {
+      margin: 10px 0px 20px;
+    }
+
+    #legend svg {
+      margin: 0 auto;
+    }
+
   </style>
 </head>
 
 <body>
   <div id="container">
-    <h1>Interest Rates by Year (G7)</h1>
+    <h1>In Progress</h1>
     <p>
 
     </p>

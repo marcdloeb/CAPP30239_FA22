@@ -4,8 +4,8 @@ const tooltip = d3.select("body")
   .style("position", "absolute")
   .style("visibility", "hidden");
 
-const height = 600,
-  width = 300
+const height = 800,
+  width = 400
 
 Promise.all([
   d3.json("data/map_topos/race_tracts.json"),
@@ -143,7 +143,7 @@ d3.select("#legend")
   .appendChild(
     Legend(
       d3.scaleOrdinal(
-        ["0-10", "11-20", "21-30", "31-40", "41-50", "51-60", "61-70", "71-80", "81-90", "91-100"],
+        ["<10", "20", "30", "40", "50", "60", "70", "80", "90", ">90"],
         ["#ffffff","#e1edf8","#cadef0","#abcfe6","#82badb","#59a1cf","#3787c0","#1c6aaf","#0b4d94","#08306b"]
       ),
       { title: "Percent Black (%)" }

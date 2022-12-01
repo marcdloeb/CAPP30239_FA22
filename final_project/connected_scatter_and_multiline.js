@@ -1,6 +1,6 @@
 let height2 = 600, //setting variables
-    width2 = 600,
-    margin = ({ top: 25, right: 80, bottom: 35, left: 30 });
+    width2 = 800,
+    margin = ({ top: 25, right: 90, bottom: 35, left: 40 });
     innerWidth = width2 - margin.left - margin.right;
     //look around, find where margin right is set
 
@@ -72,18 +72,14 @@ Promise.all([
     for (let neighborhood of neighborhoods) { //going through set, creating a line for each neighborhood
         let neighborhoodData = str_addr_black_per.filter(d => d.neighborhood === neighborhood);
     
-        console.log(neighborhood)
-        console.log(multilineColor(neighborhood))
+        // console.log(neighborhood)
+        // console.log(multilineColor(neighborhood))
+
+        // console.log("neighborhood data")
+        // console.log(neighborhoodData)
     
         let g = svg13.append("g")
 
-        g.append("path")
-          .datum(neighborhoodData)
-          .attr("fill", "none")
-          //.attr("stroke", "pink")
-          .attr("stroke", (multilineColor(neighborhood)))
-          .attr("d", line)
-    
         let lastEntry = neighborhoodData[neighborhoodData.length - 1]; //last piece of data to position text x and y
     
         g.append("text")  //lining up the labels
@@ -92,6 +88,16 @@ Promise.all([
           .attr("y", y(lastEntry.addr_share))
           .attr("dominant-baseline", "middle")
           .attr("fill", "#999");
+
+
+          g.append("path")
+          .datum(neighborhoodData)
+          .attr("fill", "none")
+          //.attr("stroke", "pink")
+          .attr("stroke", (multilineColor(neighborhood)))
+          .attr("stroke-width", 2)
+          .attr("opacity", 0.75)
+          .attr("d", line)
       }
 
     console.log('Decade blackper addr data')
