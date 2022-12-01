@@ -8,20 +8,20 @@
   <title>MDL Final Project</title>
   <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700" rel="stylesheet">
   <style>
-    * {
-        font-family: "Lato", "Open Sans", "sans-serif";
-        
-    }
+	* {
+	font-family: 'Assistant', sans-serif;
+	}
 
-  h1, h2, h3 {
-  font-family: "Lato", "Open Sans", "sans-serif";
-  margin: 0px;
-  padding: 0px;
-  } 
+	h1, h2, h3 {
+	font-family: "Lato", "Open Sans", "sans-serif";
+	margin: 0px;
+	padding: 0px;
+	} 
+
 
     .row {
         display: flex;
-        width: 800px;
+        width: 1000px;
       }
 
     .row > * {
@@ -29,7 +29,7 @@
       }
 
     #container {
-      max-width: 800px;
+      max-width: 1000px;
       margin: 0 auto;
     }
 
@@ -90,28 +90,123 @@
       margin: 0 auto;
     }
 
+    .float-left {
+      float: left;
+      width: 75%;
+    }
+
+    text {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10px;
+    }
+
+    hr {
+      margin: 60px 0;
+    }
+
+    /* .chart p {
+      background: #eee;
+      padding: 5px 0px 5px 10px;
+      margin-right: 10px;
+    } */
+
+    /* #monthChart .y-axis line {
+      stroke: #ccc;
+      stroke-dasharray: 2;
+    }
+
+    #monthChart .y-axis .domain {
+      display: none;
+    } */
+
+	#connected_scatter text {
+      font-size: 12px;
+    }
+
+    #multi_line text {
+      font-size: 12px;
+    }
+
   </style>
 </head>
 
 <body>
-  <div id="container">
-    <h1>In Progress</h1>
-    <p>
+  	<div id="container">
+		<h1>Tracking the Extent of the University Community</h1>
+		<h3>Marc David Loeb, CAPP 30239 Final Project, 12-5-2022</h3>
+		<p>
+			During the second half of the 20th Century, the University of Chicago embarked on a campaign to radically reshape Hyde Park. During the years after the Second World War, the traditional geographical boundaries separating White and Black communities on Chicago's South East Side crumbled. The university perceived the “flood” of African Americans into the neighborhoods it long considered its own--Hyde Park, Kenwood, and Woodlawn--as an existential threat to the institution. Theories of urban change developed at the University itself decades earlier predicted that even a small Black community would initiate a process inevitably culminating in the reduction of a district to a run down slum. The rush of students and faculty out of the neighborhoods adjoining the university's campus created a self-fulfilling prophecy. It was believed that without radical action the university would soon be forced to follow them to the suburbs. 
+		  </p>
+	  
+		  <p>
+			To head off this fate, the university would demolish much of western and northern Hyde Park, destroying over 4,000 units of housing and displacing more than 10,000 people. Proposed in 1954 and approved by the city in 1958, it was the first urban renewal conducted by an institution of higher education. The following year Congress formally extended the right of eminent domain to colleges and universities, following a lobbying effort by a coalition of institutions that sought to emulate the University of Chicago's model.
+		  </p>
+	  
+		  <p>
+			There is no shortage of documentation and commentary on the University of Chicago's renewal of Hyde Park, and its national significance. However, this work has remained almost purely qualitative. No prior attempt has been made to quantify the precise spatial extent of the “university community”--a nebulously defined idea that nevertheless held great power among university decision makers--and how it grew and shrank in the face of demographic and policy evolutions. The street addresses contained in 20th century community print publications provide a means to do so. Those printed, for example, in the Daily Maroon--the student paper--largely appear as part of business and apartment advertisements, a running record of where students and faculty were willing to live or shop.
+	  
+		  </p>
+		<div id="legend"></div>
+		<div id="row1" class="row"></div>
+		<div id="row2" class="row"></div>
+		<div id="row3" class="row"></div>
+		<div id="row4" class="row"></div>
 
-    </p>
-    <div id="legend"></div>
-    <div id="row1" class="row"></div>
-    <div id="row2" class="row"></div>
-    <div id="row3" class="row"></div>
-    <div id="row4" class="row"></div>
-    <div id="connected_scatter"></div>
-    <div id="multi_line"></div>
+		<div class="float-container">
+			<div id="connected_scatter" class="float-left chart">
+			</div>
+			<h2>Most Victims were Male</h2>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet totam error neque itaque consectetur ab omnis, mollitia nihil voluptatibus ratione dolores repellat magni eligendi cupiditate possimus, eaque ipsa reiciendis aperiam?
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet totam error neque itaque consectetur ab omnis, mollitia nihil voluptatibus ratione dolores repellat magni eligendi cupiditate possimus, eaque ipsa reiciendis aperiam?
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet totam error neque itaque consectetur ab omnis, mollitia nihil voluptatibus ratione dolores repellat magni eligendi cupiditate possimus, eaque ipsa reiciendis aperiam?
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet totam error neque itaque consectetur ab omnis, mollitia nihil voluptatibus ratione dolores repellat magni eligendi cupiditate possimus, eaque ipsa reiciendis aperiam?
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet totam error neque itaque consectetur ab omnis, mollitia nihil voluptatibus ratione dolores repellat magni eligendi cupiditate possimus, eaque ipsa reiciendis aperiam?
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet totam error neque itaque consectetur ab omnis, mollitia nihil voluptatibus ratione dolores repellat magni eligendi cupiditate possimus, eaque ipsa reiciendis aperiam?
+			</p>
+		</div>
+
+
+		<div class="float-container">
+			<div id="multi_line" class="float-left chart">
+			</div>
+			<h2>Most Victims were Male</h2>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet totam error neque itaque consectetur ab omnis, mollitia nihil voluptatibus ratione dolores repellat magni eligendi cupiditate possimus, eaque ipsa reiciendis aperiam?
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet totam error neque itaque consectetur ab omnis, mollitia nihil voluptatibus ratione dolores repellat magni eligendi cupiditate possimus, eaque ipsa reiciendis aperiam?
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet totam error neque itaque consectetur ab omnis, mollitia nihil voluptatibus ratione dolores repellat magni eligendi cupiditate possimus, eaque ipsa reiciendis aperiam?
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet totam error neque itaque consectetur ab omnis, mollitia nihil voluptatibus ratione dolores repellat magni eligendi cupiditate possimus, eaque ipsa reiciendis aperiam?
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet totam error neque itaque consectetur ab omnis, mollitia nihil voluptatibus ratione dolores repellat magni eligendi cupiditate possimus, eaque ipsa reiciendis aperiam?
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet totam error neque itaque consectetur ab omnis, mollitia nihil voluptatibus ratione dolores repellat magni eligendi cupiditate possimus, eaque ipsa reiciendis aperiam?
+			</p>
+		</div>
+    <!-- <div id="connected_scatter"></div> -->
+    <!-- <div id="multi_line"></div> -->
   </div>
 </body>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="libs/d3-color-legend.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
-<!-- <script src="multiline_relative.js"></script> -->
 <script src="connected_scatter_and_multiline.js"></script>
 <script src="multi_map.js"></script>
 

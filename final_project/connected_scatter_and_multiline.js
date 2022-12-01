@@ -1,5 +1,5 @@
-let height2 = 600, //setting variables
-    width2 = 800,
+let height2 = 500, //setting variables
+    width2 = 750,
     margin = ({ top: 25, right: 90, bottom: 35, left: 40 });
     innerWidth = width2 - margin.left - margin.right;
     //look around, find where margin right is set
