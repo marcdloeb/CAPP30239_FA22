@@ -90,8 +90,8 @@
       margin: 0 auto;
     }
 
-    .float-left {
-      float: left;
+    .float-right {
+      float: right;
       width: 75%;
     }
 
@@ -131,7 +131,7 @@
 </head>
 
 <body>
-  	<div id="container">
+  <div id="container">
 		<h1>Tracking the Extent of the University Community</h1>
 		<h3>Marc David Loeb, CAPP 30239 Final Project, 12-5-2022</h3>
 		<p>
@@ -146,16 +146,20 @@
 			There is no shortage of documentation and commentary on the University of Chicago's renewal of Hyde Park, and its national significance. However, this work has remained almost purely qualitative. No prior attempt has been made to quantify the precise spatial extent of the “university community”--a nebulously defined idea that nevertheless held great power among university decision makers--and how it grew and shrank in the face of demographic and policy evolutions. The street addresses contained in 20th century community print publications provide a means to do so. Those printed, for example, in the Daily Maroon--the student paper--largely appear as part of business and apartment advertisements, a running record of where students and faculty were willing to live or shop.
 	  
 		  </p>
+    <hr>
+    <h1>Maps</h1>
 		<div id="legend"></div>
 		<div id="row1" class="row"></div>
 		<div id="row2" class="row"></div>
 		<div id="row3" class="row"></div>
 		<div id="row4" class="row"></div>
-
+    <div id="legend2"></div>
+    <hr>
+    <h1>Charts</h1>
 		<div class="float-container">
-			<div id="connected_scatter" class="float-left chart">
+			<div id="connected_scatter" class="float-right chart">
 			</div>
-			<h2>Most Victims were Male</h2>
+			<h2>Test</h2>
 			<p>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet totam error neque itaque consectetur ab omnis, mollitia nihil voluptatibus ratione dolores repellat magni eligendi cupiditate possimus, eaque ipsa reiciendis aperiam?
 			</p>
@@ -178,9 +182,9 @@
 
 
 		<div class="float-container">
-			<div id="multi_line" class="float-left chart">
+			<div id="multi_line" class="float-right chart">
 			</div>
-			<h2>Most Victims were Male</h2>
+			<h2>Test</h2>
 			<p>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet totam error neque itaque consectetur ab omnis, mollitia nihil voluptatibus ratione dolores repellat magni eligendi cupiditate possimus, eaque ipsa reiciendis aperiam?
 			</p>
@@ -207,7 +211,8 @@
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="libs/d3-color-legend.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
-<script src="connected_scatter_and_multiline.js"></script>
 <script src="multi_map.js"></script>
+<script src="connected_scatter_and_multiline.js"></script>
+
 
 </html>

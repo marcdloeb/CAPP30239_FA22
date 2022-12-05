@@ -1,6 +1,6 @@
 let height2 = 500, //setting variables
     width2 = 750,
-    margin = ({ top: 25, right: 90, bottom: 35, left: 40 });
+    margin = ({ top: 25, right: 90, bottom: 35, left: 60 });
     innerWidth = width2 - margin.left - margin.right;
     //look around, find where margin right is set
 
@@ -29,10 +29,11 @@ Promise.all([
       census_decades.add(d.census_decade); //looping through to add decades
     }
 
-    console.log("street address black per")
-    console.log(str_addr_black_per)
+    // console.log("street address black per")
+    // console.log(str_addr_black_per)
+    console.log("#1f77b4","#731603","#f52020","#ff7f0e","#4e2d6e","#e377c2")
     console.log(neighborhoods)
-    console.log(census_decades)
+    // console.log(census_decades)
 
     multilineColor = d3.scaleOrdinal()
       .domain(neighborhoods)
@@ -52,8 +53,6 @@ Promise.all([
         .domain(d3.extent([0,90])).nice()
         .range([height2 - margin.bottom, margin.top]);
 
-        console.log(d3.extent(str_addr_black_per, d => d.addr_share))
-
     svg13.append("g") //creating x-axis
         .attr("transform", `translate(0,${height2 - margin.bottom})`)
         .attr("class", "x-axis")
@@ -63,6 +62,24 @@ Promise.all([
         .attr("transform", `translate(${margin.left},0)`)
         .attr("class", "y-axis")
         .call(d3.axisLeft(y).tickFormat(d => (d) + "%").tickSize(-width2 + margin.left + margin.right))
+
+    svg13.append("text")
+      .attr("class", "x-label")
+      .attr("text-anchor", "end")
+      .attr("x", width2 - margin.right)
+      .attr("y", height2)
+      .attr("dx", "0.5em")
+      .attr("dy", "-0.5em") 
+      .text("Percent Black");
+    
+    svg13.append("text")
+      .attr("class", "y-label")
+      .attr("text-anchor", "end")
+      .attr("x", -margin.top/2)
+      .attr("dx", "-0.5em")
+      .attr("y", 15)
+      .attr("transform", "rotate(-90)")
+      .text("Share of All Address Points");
 
     let line = d3.line()
         .x(d => x(d.black_per))
@@ -100,10 +117,8 @@ Promise.all([
           .attr("d", line)
       }
 
-    console.log('Decade blackper addr data')
-    console.log(str_addr_black_per)
-    console.log("Decades Color")
-    console.log(DecadesColor("1920"))
+    // console.log('Decade blackper addr data')
+    // console.log(str_addr_black_per)
     //circles
     svg13.append("g")
         .attr("fill", "black")
@@ -156,7 +171,7 @@ Promise.all([
     // second chart!!!
     // multiline chart 
 
-    console.log(str_addr_relative)
+    // console.log(str_addr_relative)
 
     let timeParse = d3.timeParse("%Y");
 
@@ -182,6 +197,24 @@ Promise.all([
       .attr("transform", `translate(${margin.left},0)`)
       .call(d3.axisLeft(y2).tickSize(-innerWidth).tickFormat(d => d + "%"));
 
+    svg9.append("text")
+      .attr("class", "x-label")
+      .attr("text-anchor", "end")
+      .attr("x", width2 - margin.right)
+      .attr("y", height2)
+      .attr("dx", "0.5em")
+      .attr("dy", "-0.5em") 
+      .text("Year");
+    
+    svg9.append("text")
+      .attr("class", "y-label")
+      .attr("text-anchor", "end")
+      .attr("x", -margin.top/2)
+      .attr("dx", "-0.5em")
+      .attr("y", 15)
+      .attr("transform", "rotate(-90)")
+      .text("Number of Address Points Relative to Neighborhood Average");
+
     let line2 = d3.line()
       .x(d => x2(d.year))
       .y(d => y2(d.rel_average_rolling))
@@ -190,7 +223,7 @@ Promise.all([
     for (let neighborhood of neighborhoods) { //going through set, creating a line for each neighborhood
       let neighborhoodData = str_addr_relative.filter(d => d.neighborhood === neighborhood);
 
-      console.log(neighborhood)
+      // console.log(neighborhood)
 
       let g = svg9.append("g")
         .attr("class", "neighborhood")
