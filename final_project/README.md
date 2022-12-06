@@ -2,12 +2,10 @@ A present, this directory contains only the data that is going to be used as par
 
 My final project has two main data sources: historical census data (from the 1920 to 1980 Decennial Censuses) on race in Cook County, Illinois, and street addresses that appear in the 20th century editions of the Daily Maroon, the print student publication of the University of Chicago.
 
-- data_manip.txt
-  - A txt file that exists solely to let me write code that requires multiline editing
-
-- geojson_creation.Rmd
-  - An R Markdown file (approx 700 lines) used to transform source CSVs and Shapefiles into the JSONs and CSVs that will form the basis of my maps and charts
-
+- data_manipulation
+  - This directory contains a series of R files that were used to manipulate the point and tract data. Approximately 800 lines of code
+- libs
+  - Contains the d3_color_legend file 
 - data
   - This directory contains both the source data and cleaned data to be used to create my maps and charts. It contains the following subdirectories
   - chart_data
