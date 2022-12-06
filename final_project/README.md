@@ -14,6 +14,10 @@ My final project has two main data sources: historical census data (from the 192
     - This directory contains neighborhood level data on street addresses and race that will serve as the basis for charts
   - map_data
     - This directory contains GeoJSONs for race by census tract, and street address points. This data will serve as the basis for maps
+   - map_topos
+    - This directory contains the GeoJSONs converted to TopoJSONs
+   - neighborhood_polygons
+    - This directory contains the polygons used to assign neighborhood labels to each census tract and street address point
   - sources
     - This directory contains the raw data that is manipulated into chart_data and map_data
     - census_csvs
